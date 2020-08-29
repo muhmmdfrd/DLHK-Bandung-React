@@ -1,11 +1,17 @@
 import React from 'react';
 
 const LogoutModal = () => {
+  const logOut = (event) => {
+    event.preventDefault();
+    window.localStorage.clear();
+    window.location.href = '/#/admin/login';
+  };
+
   return (
     <div
       className='modal fade'
       id='logoutModal'
-      tabindex='-1'
+      tabIndex='-1'
       role='dialog'
       aria-labelledby='exampleModalLabel'
       aria-hidden='true'
@@ -36,9 +42,9 @@ const LogoutModal = () => {
             >
               Cancel
             </button>
-            <a className='btn btn-danger' href='login.html'>
+            <button className='btn btn-danger' onClick={logOut}>
               Logout
-            </a>
+            </button>
           </div>
         </div>
       </div>

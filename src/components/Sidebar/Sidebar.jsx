@@ -1,172 +1,188 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import LogoDLHK from './../../assets/img/logo-dlhk-removebg-preview.png';
 
 const Sidebar = () => {
   return (
-    <ul
-      className='navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
-      id='accordionSidebar'
-    >
-      <a
-        className='sidebar-brand d-flex align-items-center justify-content-center'
-        href='/dashboard'
-      >
-        <div className='sidebar-brand-icon rotate-n-15'>
-          <i className='fas fa-laugh-wink'></i>
-        </div>
-        <div className='sidebar-brand-text mx-3'>
-          SB Admin <sup>2</sup>
-        </div>
-      </a>
+    <WrapperList>
+      <Logo />
 
-      <hr className='sidebar-divider my-0' />
+      <Divider optional={'my-0'} />
 
-      <li
-        className={`nav-item ${
-          window.location.pathname === '/dashboard'
-        } ? 'active' : ''`}
-      >
-        <NavLink className='nav-link' to='/dashboard'>
-          <i className='fas fa-fw fa-tachometer-alt'></i>
-          <span>Dashboard</span>
-        </NavLink>
-      </li>
+      {/* smart Presence */}
+      <div className='mt-2'>
+        <SidebarHeading heading={'Smart Presence'} />
+      </div>
+      <Menu
+        linkTo={'/admin/dashboard'}
+        icon={'fa-tachometer-alt'}
+        menuTitle={'Dashboard'}
+      />
+      <Menu
+        linkTo={'/admin/pegawai'}
+        icon={'fa-users'}
+        menuTitle={'Kepegawaian'}
+      />
 
-      <hr className='sidebar-divider' />
-
-      <div className='sidebar-heading'>Interface</div>
-
-      <li className='nav-item'>
+      <NavItem>
         <a
           className='nav-link collapsed'
           href='/#'
           data-toggle='collapse'
-          data-target='#collapseTwo'
+          data-target='#collapseOne'
           aria-expanded='true'
-          aria-controls='collapseTwo'
+          aria-controls='collapseOne'
         >
-          <i className='fas fa-fw fa-cog'></i>
-          <span>Components</span>
+          <i className='fas fa-fw fa-eye'></i>
+          <span>Live Supervisi</span>
         </a>
         <div
-          id='collapseTwo'
+          id='collapseOne'
           className='collapse'
           aria-labelledby='headingTwo'
           data-parent='#accordionSidebar'
         >
           <div className='bg-white py-2 collapse-inner rounded'>
-            <h6 className='collapse-header'>Custom Components:</h6>
-            <NavLink className='collapse-item' to='/button'>
-              Buttons
+            <h6 className='collapse-header'>Menu Supervisi Live:</h6>
+            <NavLink
+              className='collapse-item'
+              activeClassName='yes-active'
+              to='/admin/absensi-harian-live'
+            >
+              Progress Absen Harian
             </NavLink>
-            <a className='collapse-item' href='cards.html'>
-              Cards
-            </a>
+
+            <NavLink
+              className='collapse-item'
+              activeClassName='yes-active'
+              to='/admin/laporan-harian-live'
+            >
+              Progress Laporan Harian
+            </NavLink>
           </div>
         </div>
-      </li>
+      </NavItem>
 
-      <li className='nav-item'>
+      <NavItem>
         <a
           className='nav-link collapsed'
           href='/#'
           data-toggle='collapse'
-          data-target='#collapseUtilities'
+          data-target='#collapseThree'
           aria-expanded='true'
-          aria-controls='collapseUtilities'
+          aria-controls='collapseThree'
         >
-          <i className='fas fa-fw fa-wrench'></i>
-          <span>Utilities</span>
+          <i className='fa fa-fw fa-bars' aria-hidden='true'></i>
+          <span>Statistik</span>
         </a>
         <div
-          id='collapseUtilities'
+          id='collapseThree'
           className='collapse'
-          aria-labelledby='headingUtilities'
+          aria-labelledby='headingTwo'
           data-parent='#accordionSidebar'
         >
           <div className='bg-white py-2 collapse-inner rounded'>
-            <h6 className='collapse-header'>Custom Utilities:</h6>
-            <a className='collapse-item' href='utilities-color.html'>
-              Colors
-            </a>
-            <a className='collapse-item' href='utilities-border.html'>
-              Borders
-            </a>
-            <a className='collapse-item' href='utilities-animation.html'>
-              Animations
-            </a>
-            <a className='collapse-item' href='utilities-other.html'>
-              Other
-            </a>
+            <h6 className='collapse-header'>Menu Statistik:</h6>
+            <NavLink
+              className='collapse-item'
+              activeClassName='yes-active'
+              to='/admin/statistik-absensi'
+            >
+              Resume Absensi
+            </NavLink>
+            <NavLink
+              className='collapse-item'
+              activeClassName='yes-active'
+              to='/admin/statistik-performa'
+            >
+              Resume Performa
+            </NavLink>
           </div>
         </div>
-      </li>
+      </NavItem>
 
-      <hr className='sidebar-divider' />
+      <Divider />
 
-      <div className='sidebar-heading'>Addons</div>
+      {/* inventory Management */}
+      <SidebarHeading heading={'Inventory Management'} />
+      <Menu linkTo={'/admin/barang'} icon={'fa-archive'} menuTitle={'Barang'} />
+      <Menu
+        linkTo={'/admin/transaksi-barang'}
+        icon={'fa-inbox'}
+        menuTitle={'Transaksi Barang'}
+      />
+      {/* end of inventory Managament */}
 
-      <li className='nav-item'>
-        <a
-          className='nav-link collapsed'
-          href='/#'
-          data-toggle='collapse'
-          data-target='#collapsePages'
-          aria-expanded='true'
-          aria-controls='collapsePages'
-        >
-          <i className='fas fa-fw fa-folder'></i>
-          <span>Pages</span>
-        </a>
-        <div
-          id='collapsePages'
-          className='collapse'
-          aria-labelledby='headingPages'
-          data-parent='#accordionSidebar'
-        >
-          <div className='bg-white py-2 collapse-inner rounded'>
-            <h6 className='collapse-header'>Login Screens:</h6>
-            <a className='collapse-item' href='login.html'>
-              Login
-            </a>
-            <a className='collapse-item' href='register.html'>
-              Register
-            </a>
-            <a className='collapse-item' href='forgot-password.html'>
-              Forgot Password
-            </a>
-            <div className='collapse-divider'></div>
-            <h6 className='collapse-header'>Other Pages:</h6>
-            <a className='collapse-item' href='404.html'>
-              404 Page
-            </a>
-            <a className='collapse-item' href='blank.html'>
-              Blank Page
-            </a>
-          </div>
-        </div>
-      </li>
+      <Divider />
 
-      <li className='nav-item'>
-        <NavLink className='nav-link' to='/charts'>
-          <i className='fas fa-fw fa-chart-area'></i>
-          <span>Charts</span>
-        </NavLink>
-      </li>
+      {/* contract Management */}
+      <SidebarHeading heading={'Contract Management'} />
+      <Menu
+        linkTo={'/admin/kontrak-pegawai'}
+        menuTitle={'Kontrak Pegawai'}
+        icon={'fa-file'}
+      />
+      <Menu
+        linkTo={'/admin/pelamar'}
+        menuTitle={'Pelamar'}
+        icon={'fa-briefcase'}
+      />
+      <Menu
+        linkTo={'/admin/interview'}
+        menuTitle={'Jadwal Interview'}
+        icon={'fa-calendar'}
+      />
+      {/* end of contract Management */}
 
-      <li className='nav-item'>
-        <NavLink className='nav-link' to='/tables'>
-          <i className='fas fa-fw fa-table'></i>
-          <span>Tables</span>
-        </NavLink>
-      </li>
+      <Divider optional={'d-none d-md-block'} />
+    </WrapperList>
+  );
+};
 
-      <hr className='sidebar-divider d-none d-md-block' />
-
-      <div className='text-center d-none d-md-inline'>
-        <button className='rounded-circle border-0' id='sidebarToggle'></button>
-      </div>
+const WrapperList = ({ children }) => {
+  return (
+    <ul
+      className='navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
+      id='accordionSidebar'
+    >
+      {children}
     </ul>
+  );
+};
+
+const SidebarHeading = ({ heading }) => {
+  return <div className='sidebar-heading'>{heading}</div>;
+};
+
+const Divider = ({ optional }) => {
+  return <hr className={`sidebar-divider ${optional}`} />;
+};
+
+const NavItem = ({ children }) => {
+  return <li className='nav-item'>{children}</li>;
+};
+
+const Logo = () => {
+  return (
+    <a
+      className='sidebar-brand bg-primary d-flex align-items-center justify-content-center'
+      href='/dashboard'
+    >
+      <div className='sidebar-brand-icon'>
+        <img src={LogoDLHK} className='img-fluid' alt='logo' />
+      </div>
+    </a>
+  );
+};
+
+const Menu = ({ linkTo, icon, menuTitle }) => {
+  return (
+    <NavItem>
+      <NavLink className='nav-link' activeClassName='yes-active' to={linkTo}>
+        <i className={`fas fa-fw ${icon}`}></i>
+        <span>{menuTitle}</span>
+      </NavLink>
+    </NavItem>
   );
 };
 

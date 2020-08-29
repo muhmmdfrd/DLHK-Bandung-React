@@ -9,15 +9,41 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 // css library
-import 'fontawesome-free/css/all.min.css';
+import './assets/css/fontawesome-free/css/all.min.css';
 import './assets/css/sb-admin-2.css';
 
 // js library
 import 'chart.js';
 
+// provider and context
+import { PersonProvider } from './providers/PersonContext';
+import { PresenceProvider } from './providers/PresenceContext';
+import { ItemProvider } from './providers/ItemContext';
+import { EmployeeProvider } from './providers/EmployeeContext';
+import { ApplicantProvider } from './providers/ApplicantContext';
+import { InterviewProvider } from './providers/InterviewContext';
+
+const AllProvider = ({ children }) => {
+  return (
+    <PersonProvider>
+      <PresenceProvider>
+        <ItemProvider>
+          <EmployeeProvider>
+            <ApplicantProvider>
+              <InterviewProvider>{children}</InterviewProvider>
+            </ApplicantProvider>
+          </EmployeeProvider>
+        </ItemProvider>
+      </PresenceProvider>
+    </PersonProvider>
+  );
+};
+
 ReactDOM.render(
   <StrictMode>
-    <App />
+    <AllProvider>
+      <App />
+    </AllProvider>
   </StrictMode>,
   document.getElementById('root')
 );

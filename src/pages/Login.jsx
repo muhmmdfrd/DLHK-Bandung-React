@@ -1,6 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
+import qs from 'querystring';
+import LoginService from './../Services/LoginService';
 
 const Login = () => {
+  // states
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  // local storage
+  if (window.localStorage.length !== 0) {
+    window.location.href = '/#/admin/dashboard';
+  }
+
+  // methods
+  const handleUsername = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
+  const enabledForm = () => {
+    window.$('#inputUsername').prop('disabled', false);
+    window.$('#inputPassword').prop('disabled', false);
+    window.$('#btnLogin').prop('disabled', false);
+    window.$('#btnLogin').val('Login');
+    window.$('#btnLogin').css('cursor', 'default');
+  };
+
+  const disabledForm = () => {
+    window.$('#inputUsername').prop('disabled', true);
+    window.$('#inputPassword').prop('disabled', true);
+    window.$('#btnLogin').prop('disabled', true);
+    window.$('#btnLogin').val('Loading...');
+    window.$('#btnLogin').css('cursor', 'not-allowed');
+  };
+
+  const validateLogin = (event) => {
+    event.preventDefault();
+
+    if (username.length === 0 || password.length === 0) {
+      alert('Mohon isi semua form!');
+    } else {
+      disabledForm();
+
+      var params = qs.stringify({
+        username: username,
+        password: password,
+        grant_type: 'password',
+      });
+
+      LoginService(params)
+        .then((response) => {
+          if (response.status === 200) {
+            window.localStorage.setItem('_tid', response.data.access_token);
+            window.localStorage.setItem('_uin', username);
+            window.location.href = '/#/admin/dashboard';
+          }
+        })
+        .catch((response) => alert('username atau password salah'))
+        .finally(() => enabledForm());
+    }
+  };
+
   return (
     <div className='container'>
       <div className='row justify-content-center'>
@@ -12,45 +75,46 @@ const Login = () => {
                 <div className='col-lg-6'>
                   <div className='p-5'>
                     <div className='text-center'>
-                      <h1 className='h4 text-gray-900 mb-4'>Welcome Back!</h1>
+                      <h1 className='h4 text-gray-900 mb-3'>
+                        Login Admin DLHK
+                      </h1>
+                      <img
+                        src='https://www.kangpisman.com/wp-content/uploads/2018/11/1.-logo-kangpisman.png'
+                        alt=''
+                        className='img-responsive mb-3'
+                        style={{ width: 150 + 'px', height: 'auto' }}
+                      />
                     </div>
-                    <form className='user'>
+                    <form className='user' onSubmit={validateLogin}>
                       <div className='form-group'>
                         <input
-                          type='email'
+                          id='inputUsername'
+                          type='text'
+                          value={username}
+                          onChange={handleUsername}
                           className='form-control form-control-user'
-                          id='exampleInputEmail'
-                          aria-describedby='emailHelp'
-                          placeholder='Enter Email Address...'
+                          placeholder='Enter username'
+                          autoComplete='false'
                         />
                       </div>
                       <div className='form-group'>
                         <input
+                          id='inputPassword'
                           type='password'
+                          value={password}
+                          onChange={handlePassword}
                           className='form-control form-control-user'
-                          id='exampleInputPassword'
-                          placeholder='Password'
+                          placeholder='Enter Password'
                         />
                       </div>
 
-                      <a
-                        href='/dashboard'
+                      <input
+                        id='btnLogin'
+                        type='submit'
                         className='btn btn-primary btn-user btn-block'
-                      >
-                        Login
-                      </a>
+                        value='Login'
+                      />
                     </form>
-                    <hr />
-                    <div className='text-center'>
-                      <a className='small' href='/forgot-password'>
-                        Forgot Password?
-                      </a>
-                    </div>
-                    <div className='text-center'>
-                      <a className='small' href='/register'>
-                        Create an Account!
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>
