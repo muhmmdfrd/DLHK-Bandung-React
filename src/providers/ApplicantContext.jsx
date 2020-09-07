@@ -50,10 +50,12 @@ const ApplicantProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    GetApplicant()
+    setInterval(() => {
+      GetApplicant()
       .then((response) => setApplicant(response.data.data))
       .finally(() => setLoading(false));
-  }, [applicant]);
+    }, 10000);
+  }, []);
 
   const objectValue = {
     applicant,

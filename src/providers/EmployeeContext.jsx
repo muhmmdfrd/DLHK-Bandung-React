@@ -18,10 +18,13 @@ const EmployeeProvider = ({ children }) => {
   const [personId, setPersonId] = useState(0);
 
   useEffect(() => {
-    GetEmployeeData()
+    setInterval(() => {
+      GetEmployeeData()
       .then((response) => setEmployee(response.data.data))
       .finally(() => setLoading(false));
-  }, [employee]);
+    }, 10000);
+   
+  }, []);
 
   // * method for person
   const hideModal = () => window.$('#employeeModal123').modal('hide');
@@ -55,19 +58,28 @@ const EmployeeProvider = ({ children }) => {
 
     AddEmployee(data)
       .then(() => alert('data berhasil ditambah'))
-      .finally(() => {
+      .then(() => {
         window.$('#employeeModal1234').modal('hide');
         window.$('#btn-submit-modal-person-employee').text('Submit');
         window
           .$('#btn-submit-modal-person-employee-click')
           .prop('disabled', false);
+      }).finally(() => {
+        GetEmployeeData()
+          .then((response) => setEmployee(response.data.data))
+          .finally(() => setLoading(false));
       });
   };
 
   const editEmployee = (data) => {
     EditLocationEmployee(data)
       .then(() => alert('data berhasil diedit'))
-      .finally(() => hideModal());
+      .then(() => hideModal())
+      .finally(() => {
+        GetEmployeeData()
+          .then((response) => setEmployee(response.data.data))
+          .finally(() => setLoading(false));
+      })
   };
 
   const editContract = (data) => {
@@ -75,12 +87,23 @@ const EmployeeProvider = ({ children }) => {
       .then((response) => alert(response.data.message))
       .then(() => window.$('#dateContractModal').modal('hide'))
       .then(() => (window.location.href = '/#/admin/kontrak-pegawai'))
-      .finally(() => setLoading(false));
+      .then(() => setLoading(false))
+      .finally(() => {
+        GetEmployeeData()
+          .then((response) => setEmployee(response.data.data))
+          .finally(() => setLoading(false));
+      })
   };
 
   const handleDelete = (id) => {
     if (window.confirm('Apakah yakin ingin menghapus data tersebut?')) {
-      DeleteEmployee(id).then(() => alert('Data berhasil dihapus'));
+      DeleteEmployee(id)
+        .then(() => alert('Data berhasil dihapus'))
+        .finally(() => {
+          GetEmployeeData()
+            .then((response) => setEmployee(response.data.data))
+            .finally(() => setLoading(false));
+        });
     }
   };
   // * end method for person

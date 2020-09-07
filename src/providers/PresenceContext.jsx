@@ -24,52 +24,68 @@ const PresenceProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    GetPresenceResume()
-      .then((response) => setPresence(response.data.data))
-      .finally(() => setLoading(false));
-  }, [presence]);
+    setInterval(() => {
+      GetPresenceResume()
+        .then((response) => setPresence(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   useEffect(() => {
-    GetPerformLiveZone()
-      .then((response) => setLivePerform(response.data.data))
-      .finally(() => setLoading(false));
-  }, [livePerform]);
+    setInterval(() => {
+      GetPerformLiveZone()
+        .then((response) => setLivePerform(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   useEffect(() => {
-    GetPerformResume()
-      .then((response) => setPerform(response.data.data))
-      .finally(() => setLoading(false));
-  }, [perform]);
+    setInterval(() => {
+      GetPerformResume()
+        .then((response) => setPerform(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   useEffect(() => {
-    GetPresenceZone()
-      .then((response) => setPresenceZone(response.data.data))
-      .finally(() => setLoading(false));
-  }, [presenceZone]);
+    setInterval(() => {
+      GetPresenceZone()
+        .then((response) => setPresenceZone(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   useEffect(() => {
-    GetPresenceRegion()
-      .then((response) => setPresenceRegion(response.data.data))
-      .finally(() => setLoading(false));
-  }, [presenceRegion]);
+    setInterval(() => {
+      GetPresenceRegion()
+        .then((response) => setPresenceRegion(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   useEffect(() => {
-    GetPerformZone()
-      .then((response) => setPerformZone(response.data.data))
-      .finally(() => setLoading(false));
-  }, [performZone]);
+    setInterval(() => {
+      GetPerformZone()
+        .then((response) => setPerformZone(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   useEffect(() => {
+   setInterval(() => {
     GetPerformRegion()
       .then((response) => setPerformRegion(response.data.data))
       .finally(() => setLoading(false));
-  }, [performRegion]);
+   }, 10000);
+  }, []);
 
   useEffect(() => {
-    GetLiveZone()
-      .then((response) => setLiveZone(response.data.data))
-      .finally(() => setLoading(false));
-  }, [liveZone]);
+    setInterval(() => {
+      GetLiveZone()
+        .then((response) => setLiveZone(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   const objectValue = {
     presence,

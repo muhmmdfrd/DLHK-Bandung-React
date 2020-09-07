@@ -18,16 +18,20 @@ const ItemProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    GetItemData()
-      .then((response) => setItem(response.data.data))
-      .finally(() => setLoading(false));
-  }, [item]);
+    setInterval(() => {
+      GetItemData()
+        .then((response) => setItem(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   useEffect(() => {
-    GetTransac()
-      .then((response) => setTransac(response.data.data))
-      .finally(() => setLoading(false));
-  }, [transac]);
+    setInterval(() => {
+      GetTransac()
+        .then((response) => setTransac(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   // * method for person
   const hideModal = () => window.$('#itemModal').modal('hide');
@@ -55,7 +59,12 @@ const ItemProvider = ({ children }) => {
     AddItem(data)
       .then(() => textButton())
       .then(() => alert('data berhasil ditambah'))
-      .finally(() => hideModal());
+      .then(() => hideModal())
+      .finally(() => {
+        GetItemData()
+          .then((response) => setItem(response.data.data))
+          .finally(() => setLoading(false));
+      })
   };
 
   const editItem = (data) => {
@@ -63,12 +72,23 @@ const ItemProvider = ({ children }) => {
       .then((response) => console.log(response))
       .then(() => textButton())
       .then(() => alert('data berhasil diedit'))
-      .finally(() => hideModal());
+      .then(() => hideModal())
+      .finally(() => {
+        GetItemData()
+          .then((response) => setItem(response.data.data))
+          .finally(() => setLoading(false));
+      })
   };
 
   const handleDelete = (id) => {
     if (window.confirm('Apakah yakin ingin menghapus data tersebut?')) {
-      DeleteItem(id).then(() => alert('Data berhasil dihapus'));
+      DeleteItem(id)
+        .then(() => alert('Data berhasil dihapus'))
+        .finally(() => {
+          GetItemData()
+          .then((response) => setItem(response.data.data))
+          .finally(() => setLoading(false));
+        });
     }
   };
   // * end method for person

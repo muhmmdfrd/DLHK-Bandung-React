@@ -13,15 +13,22 @@ const InterviewProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    GetInterviewData()
-      .then((response) => setInterview(response.data.data))
-      .finally(() => setLoading(false));
-  }, [interview]);
+    setInterval(() => {
+      GetInterviewData()
+        .then((response) => setInterview(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   const addInterview = (data) => {
     AddInterview(data)
       .then(() => alert('berhasil membuat jadwal interview'))
-      .finally(() => window.$('#interviewModal').modal('hide'));
+      .then(() => window.$('#interviewModal').modal('hide'))
+      .finally(() => {
+        GetInterviewData()
+          .then((response) => setInterview(response.data.data))
+          .finally(() => setLoading(false));
+      });
   };
 
   const detail = (id) => {

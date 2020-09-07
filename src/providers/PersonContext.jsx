@@ -20,10 +20,12 @@ const PersonProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    GetPersonData()
-      .then((response) => setPerson(response.data.data))
-      .finally(() => setLoading(false));
-  }, [person]);
+    setInterval(() => {
+      GetPersonData()
+        .then((response) => setPerson(response.data.data))
+        .finally(() => setLoading(false));
+    }, 10000);
+  }, []);
 
   // * method for person
   const showModal = () => window.$('#addEmployeeModal').modal('toggle');
@@ -53,12 +55,23 @@ const PersonProvider = ({ children }) => {
   const editPerson = (data) => {
     EditPerson(data)
       .then(() => alert('data berhasil diedit'))
-      .finally(() => window.$('#btnDetailEdit').prop('disabled', false));
+      .then(() => window.$('#btnDetailEdit').prop('disabled', false))
+      .then(() => {
+        GetPersonData()
+          .then((response) => setPerson(response.data.data))
+          .finally(() => setLoading(false));
+      });
   };
 
   const deletePerson = (id) => {
     if (window.confirm('Apakah yakin ingin menghapus data tersebut?'))
-      DeletePersonEmployee(id).then(() => alert('data berhasil dihapus'));
+      DeletePersonEmployee(id)
+        .then(() => alert('data berhasil dihapus'))
+        .finally(() => {
+          GetPersonData()
+            .then((response) => setPerson(response.data.data))
+            .finally(() => setLoading(false));
+        });
   };
 
   const sendEmail = (data) => {
@@ -69,7 +82,12 @@ const PersonProvider = ({ children }) => {
     if (window.confirm('Apakah yakin ingin menghapus data tersebut?')) {
       DeletePerson(id)
         .then(() => alert('Data berhasil dihapus'))
-        .finally(() => (window.location.href = '/#/admin/kontrak-pegawai'));
+        .then(() => (window.location.href = '/#/admin/kontrak-pegawai'))
+        .finally(() => {
+          GetPersonData()
+            .then((response) => setPerson(response.data.data))
+            .finally(() => setLoading(false));
+        });
     }
   };
   // * end method for person
