@@ -91,7 +91,11 @@ const EmployeeProvider = ({ children }) => {
       .finally(() => {
         GetEmployeeData()
           .then((response) => setEmployee(response.data.data))
-          .finally(() => setLoading(false));
+          .finally(() => {
+            window.$('#btn-contract').prop('disabled', false);
+            window.$('#btn-contract').text('Submit');
+            setLoading(false)
+          });
       })
   };
 
