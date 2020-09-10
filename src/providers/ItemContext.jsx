@@ -1,12 +1,12 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { GetTransac } from '../Services/TransacService';
+import React, { createContext, useState, useEffect } from "react";
+import { GetTransacIn, GetTransacOut } from "../Services/TransacService";
 import {
   GetItemData,
   GetItemDataId,
   AddItem,
   EditItem,
   DeleteItem,
-} from '../Services/ItemService';
+} from "../Services/ItemService";
 
 const ItemContext = createContext();
 
@@ -14,8 +14,17 @@ const ItemProvider = ({ children }) => {
   const [item, setItem] = useState([]);
   const [dataItemId, setDataItemId] = useState({});
   const [transac, setTransac] = useState([]);
-  const [modalStatus, setModalStatus] = useState('');
+  const [transacOut, setTransacOut] = useState([]);
+  const [modalStatus, setModalStatus] = useState("");
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setInterval(() => {
+      GetTransacOut().then((response) =>
+        setTransacOut(response.data.data).finally(() => setLoading(false))
+      );
+    }, 10000);
+  }, []);
 
   useEffect(() => {
     setInterval(() => {
@@ -27,29 +36,29 @@ const ItemProvider = ({ children }) => {
 
   useEffect(() => {
     setInterval(() => {
-      GetTransac()
+      GetTransacIn()
         .then((response) => setTransac(response.data.data))
         .finally(() => setLoading(false));
     }, 10000);
   }, []);
 
   // * method for person
-  const hideModal = () => window.$('#itemModal').modal('hide');
-  const showModal = () => window.$('#itemModal').modal('toggle');
-  const textButton = () => window.$('#btn-submit-modal-item').text('Submit');
+  const hideModal = () => window.$("#itemModal").modal("hide");
+  const showModal = () => window.$("#itemModal").modal("toggle");
+  const textButton = () => window.$("#btn-submit-modal-item").text("Submit");
 
   const handleAdd = () => {
-    setModalStatus('Tambah');
+    setModalStatus("Tambah");
     showModal();
   };
 
   const handleEdit = (id) => {
-    window.$(`#span-btn-${id}`).text('Load..');
-    setModalStatus('Edit');
+    window.$(`#span-btn-${id}`).text("Load..");
+    setModalStatus("Edit");
     GetItemDataId(id)
       .then((response) => setDataItemId(response.data.data))
       .finally(() => {
-        window.$(`#span-btn-${id}`).text('Edit');
+        window.$(`#span-btn-${id}`).text("Edit");
         showModal();
       });
   };
@@ -58,36 +67,36 @@ const ItemProvider = ({ children }) => {
   const addItem = (data) => {
     AddItem(data)
       .then(() => textButton())
-      .then(() => alert('data berhasil ditambah'))
+      .then(() => alert("data berhasil ditambah"))
       .then(() => hideModal())
       .finally(() => {
         GetItemData()
           .then((response) => setItem(response.data.data))
           .finally(() => setLoading(false));
-      })
+      });
   };
 
   const editItem = (data) => {
     EditItem(data)
       .then((response) => console.log(response))
       .then(() => textButton())
-      .then(() => alert('data berhasil diedit'))
+      .then(() => alert("data berhasil diedit"))
       .then(() => hideModal())
       .finally(() => {
         GetItemData()
           .then((response) => setItem(response.data.data))
           .finally(() => setLoading(false));
-      })
+      });
   };
 
   const handleDelete = (id) => {
-    if (window.confirm('Apakah yakin ingin menghapus data tersebut?')) {
+    if (window.confirm("Apakah yakin ingin menghapus data tersebut?")) {
       DeleteItem(id)
-        .then(() => alert('Data berhasil dihapus'))
+        .then(() => alert("Data berhasil dihapus"))
         .finally(() => {
           GetItemData()
-          .then((response) => setItem(response.data.data))
-          .finally(() => setLoading(false));
+            .then((response) => setItem(response.data.data))
+            .finally(() => setLoading(false));
         });
     }
   };
@@ -98,6 +107,7 @@ const ItemProvider = ({ children }) => {
     dataItemId,
     modalStatus,
     transac,
+    transacOut,
     addItem,
     editItem,
     loading,

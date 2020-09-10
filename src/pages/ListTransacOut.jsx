@@ -7,9 +7,9 @@ import Pagination from "../components/Pagination/Pagination";
 
 // * context
 import { ItemContext } from "../providers/ItemContext";
-import TransacTable from "../components/Table/TransacTable";
+import TransacOutTable from "../components/Table/TransacOut";
 
-const ListTransac = ({ history }) => {
+const ListTransacOut = ({ history }) => {
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
 
@@ -23,7 +23,7 @@ const ListTransac = ({ history }) => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { transac, loading } = useContext(ItemContext);
+  const { transacOut, loading } = useContext(ItemContext);
 
   // * function or method
   const handleChange = (event) => {
@@ -42,11 +42,11 @@ const ListTransac = ({ history }) => {
   // * end of method
 
   useEffect(() => {
-    const result = transac.filter((item) =>
+    const result = transacOut.filter((item) =>
       item.itemName.toLowerCase().includes(keyword.toLowerCase())
     );
     setData(result);
-  }, [transac, keyword]);
+  }, [transacOut, keyword]);
 
   // * render the HTML
   return loading ? (
@@ -82,22 +82,22 @@ const ListTransac = ({ history }) => {
               <div className="col-md-3">
                 <select
                   className="form-control"
-                  onChange={() => history.push("transaksi-barang-keluar")}
+                  onChange={() => history.push("transaksi-barang")}
                 >
-                  <option>Barang Masuk</option>
                   <option>Barang Keluar</option>
+                  <option>Barang Masuk</option>
                 </select>
               </div>
-              {/* <div className="col-md-5">
+              <div className="col-md-5">
                 <button
                   className="btn btn-success float-right mr-5"
                   onClick={() => window.$("#transacModal").modal("toggle")}
                 >
                   Tambah Transaksi
                 </button>
-              </div> */}
+              </div>
             </div>
-            <TransacTable
+            <TransacOutTable
               response={current}
               currentPage={currentPage}
               postPerPage={postPerPage}
@@ -117,4 +117,4 @@ const ListTransac = ({ history }) => {
   );
 };
 
-export default ListTransac;
+export default ListTransacOut;

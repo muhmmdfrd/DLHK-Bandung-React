@@ -1,7 +1,7 @@
 import React from "react";
 import dateFormat from "../../helpers/dateFormat";
 
-const TransacTable = ({ response, currentPage, postPerPage }) => {
+const TransacOutTable = ({ response, currentPage, postPerPage }) => {
   return (
     <div className="table-responsive">
       <table className="table table-striped table-inverse">
@@ -11,7 +11,6 @@ const TransacTable = ({ response, currentPage, postPerPage }) => {
             <td className="col-3">Tanggal</td>
             <td className="col-3">Jenis Transaksi</td>
             <th className="col-3">Nama Barang</th>
-            {/* <th className='col-3'>Suplier</th> */}
             <th className="col-2 text-center">Qty</th>
           </tr>
         </thead>
@@ -35,7 +34,6 @@ const TransacTable = ({ response, currentPage, postPerPage }) => {
                   {typeOfTransac === "IN" ? "Masuk" : "Keluar"}
                 </td>
                 <td className="col-3">{itemName}</td>
-                {/* <td className='col-3'>{suplierName}</td> */}
                 <td className="col-2 text-center">{qty}</td>
               </tr>
             );
@@ -46,4 +44,4 @@ const TransacTable = ({ response, currentPage, postPerPage }) => {
   );
 };
 
-export default TransacTable;
+export default TransacOutTable;

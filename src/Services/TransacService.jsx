@@ -1,7 +1,7 @@
-import defer from 'deferred';
-import { Get } from './IndexService';
+import defer from "deferred";
+import { Get, Post } from "./IndexService";
 
-const url = 'transac';
+const url = "transac";
 
 const GetTransac = () => {
   const deferred = new defer();
@@ -48,4 +48,19 @@ const GetTransacOut = () => {
   return deferred.promise;
 };
 
-export { GetTransac, GetTransacIn, GetTransacOut };
+const PostTransacOut = (data) => {
+  const deferred = new defer();
+
+  Post(`${url}/out`, data).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+};
+
+export { GetTransac, GetTransacIn, GetTransacOut, PostTransacOut };
