@@ -21,7 +21,7 @@ const TransacTable = ({ response, currentPage, postPerPage }) => {
               itemName,
               qty,
               dataOfTransac,
-              suplierName,
+              // suplierName,
               typeOfTransac,
             } = value;
 
