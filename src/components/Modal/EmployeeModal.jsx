@@ -9,7 +9,7 @@ const EmployeeModal = () => {
   const [dataRegionId, setRegionId] = useState(0);
   const [datazoneId, setZoneId] = useState(0);
   const [dataroleId, setRoleId] = useState("");
-  const [shift, setShift] = useState(1);
+  const [shift, setShift] = useState("");
 
   // * method
   const handleName = (event) => {
