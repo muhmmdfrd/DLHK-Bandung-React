@@ -1,18 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { EmployeeContext } from '../../providers/EmployeeContext';
+import React, { useContext, useState, useEffect } from "react";
+import { EmployeeContext } from "../../providers/EmployeeContext";
 
 const EmployeeModal = () => {
   const { editEmployee, dataEmployeeId } = useContext(EmployeeContext);
 
-  const [id, setId] = useState('');
-  const [name, setName] = useState('');
-  const [region, setRegion] = useState('');
-  const [regionId, setRegionId] = useState(0);
-  const [zone, setZone] = useState('');
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [dataRegionId, setRegionId] = useState(0);
   const [datazoneId, setZoneId] = useState(0);
-  const [role, setRole] = useState('');
-  const [dataroleId, setRoleId] = useState('');
-  const [shift, setShift] = useState('');
+  const [dataroleId, setRoleId] = useState("");
+  const [shift, setShift] = useState(1);
 
   // * method
   const handleName = (event) => {
@@ -20,16 +17,15 @@ const EmployeeModal = () => {
   };
 
   const handleRegion = (event) => {
-    setRegion(Number(event.target.value));
-    setRegionId(event.target.value);
+    setRegionId(Number(event.target.value));
   };
 
   const handleZone = (event) => {
-    setZone(Number(event.target.value));
+    setZoneId(Number(event.target.value));
   };
 
   const handleRole = (event) => {
-    setRole(Number(event.target.value));
+    setRoleId(Number(event.target.value));
   };
 
   const handleShift = (event) => {
@@ -37,22 +33,22 @@ const EmployeeModal = () => {
   };
 
   const load = () => {
-    window.$('#btn-plis-edit').prop('disabled', true);
-    window.$('#btn-submit-employee-modal21').text('loading...');
+    window.$("#btn-plis-edit").prop("disabled", true);
+    window.$("#btn-submit-employee-modal21").text("loading...");
   };
 
   const afterLoad = () => {
-    window.$('#btn-plis-edit').prop('disabled', false);
-    window.$('#btn-submit-employee-modal21').text('Submit');
+    window.$("#btn-plis-edit").prop("disabled", false);
+    window.$("#btn-submit-employee-modal21").text("Submit");
   };
 
   const handleEdit = (id) => {
     load();
 
     let data = {
-      regionId: region,
-      zoneId: zone,
-      roleId: role,
+      regionId: dataRegionId,
+      zoneId: datazoneId,
+      roleId: dataroleId,
       employeeId: id,
       shift: shift,
     };
@@ -64,21 +60,17 @@ const EmployeeModal = () => {
   useEffect(() => {
     const {
       name,
-      region,
-      zone,
+      regionId,
       zoneId,
       employeeId,
-      role,
       roleId,
       shift,
     } = dataEmployeeId;
 
     setName(name);
-    setRole(role);
     setRoleId(roleId);
-    setZone(zone);
+    setRegionId(regionId);
     setZoneId(zoneId);
-    setRegion(region);
     setId(employeeId);
     setShift(shift);
     afterLoad();
@@ -86,36 +78,36 @@ const EmployeeModal = () => {
 
   return (
     <div
-      className='modal fade'
-      id='employeeModal123'
-      tabIndex='-1'
-      role='dialog'
-      aria-labelledby='modelTitleId'
-      aria-hidden='true'
+      className="modal fade"
+      id="employeeModal123"
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby="modelTitleId"
+      aria-hidden="true"
     >
-      <div className='modal-dialog' role='document'>
-        <div className='modal-content'>
-          <div className='modal-header'>
-            <h5 className='modal-title'>Data Pekerja</h5>
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">Data Pekerja</h5>
             <button
-              type='button'
-              className='close'
-              data-dismiss='modal'
-              aria-label='Close'
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
             >
-              <span aria-hidden='true'>&times;</span>
+              <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div className='modal-body'>
-            <div className='container-fluid'>
-              <form id='formEmployee'>
-                <div className='row'>
-                  <div className='col-md-12'>
+          <div className="modal-body">
+            <div className="container-fluid">
+              <form id="formEmployee">
+                <div className="row">
+                  <div className="col-md-12">
                     <label>Nama Pegawai</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Nama'
+                      type="text"
+                      className="form-control"
+                      placeholder="Nama"
                       value={name}
                       onChange={handleName}
                       readOnly
@@ -123,11 +115,11 @@ const EmployeeModal = () => {
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-12'>
+                <div className="row">
+                  <div className="col-md-12">
                     <label>Bagian</label>
                     <select
-                      className='form-control'
+                      className="form-control"
                       onChange={handleRole}
                       value={dataroleId}
                     >
@@ -139,13 +131,13 @@ const EmployeeModal = () => {
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-12'>
+                <div className="row">
+                  <div className="col-md-12">
                     <label>Wilayah</label>
                     <select
-                      className='form-control'
+                      className="form-control"
                       onChange={handleRegion}
-                      value={regionId}
+                      value={dataRegionId}
                     >
                       <option value={0}>Pilih Wilayah</option>
                       <option value={3}>Kordon - Gedebage</option>
@@ -158,16 +150,16 @@ const EmployeeModal = () => {
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-12'>
+                <div className="row">
+                  <div className="col-md-12">
                     <label>Zona</label>
                     <select
-                      className='form-control'
+                      className="form-control"
                       onChange={handleZone}
                       value={datazoneId}
                     >
                       <option>Pilih Zona</option>
-                      {regionId === '4' ? (
+                      {dataRegionId === 4 ? (
                         <>
                           <option value={4}>BO-01</option>
                           <option value={5}>BO-02</option>
@@ -180,7 +172,7 @@ const EmployeeModal = () => {
                           <option value={13}>BO-09</option>
                         </>
                       ) : null}
-                      {regionId === '3' ? (
+                      {dataRegionId === 3 ? (
                         <>
                           <option value={46}>KG-01</option>
                           <option value={47}>KG-02</option>
@@ -188,14 +180,14 @@ const EmployeeModal = () => {
                           <option value={49}>KG-04</option>
                         </>
                       ) : null}
-                      {regionId === '8' ? (
+                      {dataRegionId === 8 ? (
                         <>
                           <option value={43}>AU-01</option>
                           <option value={44}>AU-02</option>
                           <option value={45}>AU-03</option>
                         </>
                       ) : null}
-                      {regionId === '5' ? (
+                      {dataRegionId === 5 ? (
                         <>
                           <option value={14}>TL-01</option>
                           <option value={15}>TL-02</option>
@@ -206,7 +198,7 @@ const EmployeeModal = () => {
                           <option value={21}>TL-07</option>
                         </>
                       ) : null}
-                      {regionId === '7' ? (
+                      {dataRegionId === 7 ? (
                         <>
                           <option value={35}>KA-01</option>
                           <option value={36}>KA-02</option>
@@ -217,7 +209,7 @@ const EmployeeModal = () => {
                           <option value={42}>KA-07</option>
                         </>
                       ) : null}
-                      {regionId === '6' ? (
+                      {dataRegionId === 6 ? (
                         <>
                           <option value={22}>CB-01</option>
                           <option value={23}>CB-02</option>
@@ -238,32 +230,32 @@ const EmployeeModal = () => {
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-12'>
+                <div className="row">
+                  <div className="col-md-12">
                     <label>Shift</label>
                     <select
-                      className='form-control'
+                      className="form-control"
                       onChange={handleShift}
                       value={shift}
                     >
-                      <option value={'1'}>1</option>
-                      <option value={'2'}>2</option>
-                      <option value={'3'}>3</option>
+                      <option value={"1"}>1</option>
+                      <option value={"2"}>2</option>
+                      <option value={"3"}>3</option>
                     </select>
                   </div>
                 </div>
               </form>
             </div>
-            <div className='modal-footer'>
-              <button className='btn btn-secondary' data-dismiss='modal'>
+            <div className="modal-footer">
+              <button className="btn btn-secondary" data-dismiss="modal">
                 Close
               </button>
               <button
-                id='btn-plis-edit'
-                className='btn btn-primary'
+                id="btn-plis-edit"
+                className="btn btn-primary"
                 onClick={() => handleEdit(id)}
               >
-                <span id='btn-submit-employee-modal21'>Submit</span>
+                <span id="btn-submit-employee-modal21">Submit</span>
               </button>
             </div>
           </div>
