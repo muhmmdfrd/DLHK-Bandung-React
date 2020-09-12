@@ -1,17 +1,17 @@
-import React, { useContext, useState, useEffect } from 'react';
-import FadeIn from 'react-fade-in';
+import React, { useContext, useState, useEffect } from "react";
+import FadeIn from "react-fade-in";
 
 // * components
-import LoadingScreen from './LoadingScreen';
-import ApplicantTable from '../components/Table/ApplicantTable';
-import Pagination from '../components/Pagination/Pagination';
+import LoadingScreen from "./LoadingScreen";
+import ApplicantTable from "../components/Table/ApplicantTable";
+import Pagination from "../components/Pagination/Pagination";
 
 // * context
-import { ApplicantContext } from '../providers/ApplicantContext';
+import { ApplicantContext } from "../providers/ApplicantContext";
 
 const ListApplicant = () => {
   const [data, setData] = useState([]);
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState("");
 
   // * variable for pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -58,26 +58,26 @@ const ListApplicant = () => {
     <LoadingScreen />
   ) : (
     <FadeIn>
-      <div className='container-fluid mt-4'>
-        <h1 className='h3 mb-2 text-gray-800'>Pelamar Kerja DLHK</h1>
+      <div className="container-fluid mt-4">
+        <h1 className="h3 mb-2 text-gray-800">Pelamar Kerja DLHK</h1>
 
-        <div className='card shadow mb-4'>
-          <div className='card-header py-3'>
-            <h6 className='m-0 font-weight-bold text-primary'>Tabel Pelamar</h6>
+        <div className="card shadow mb-4">
+          <div className="card-header py-3">
+            <h6 className="m-0 font-weight-bold text-primary">Tabel Pelamar</h6>
           </div>
-          <div className='card-body'>
-            <div className='row mb-3'>
-              <div className='col-md-7'>
-                <form className='mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search'>
-                  <div className='input-group'>
+          <div className="card-body">
+            <div className="row mb-3">
+              <div className="col-md-4">
+                <form className="mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                  <div className="input-group">
                     <input
-                      type='text'
+                      type="text"
                       value={keyword}
                       onChange={handleChange}
-                      className='form-control'
-                      placeholder='Cari berdasarkan nama...'
-                      aria-label='Search'
-                      aria-describedby='basic-addon2'
+                      className="form-control"
+                      placeholder="Cari berdasarkan nama..."
+                      aria-label="Search"
+                      aria-describedby="basic-addon2"
                     />
                   </div>
                 </form>

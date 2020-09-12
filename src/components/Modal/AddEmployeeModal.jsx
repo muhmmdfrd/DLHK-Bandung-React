@@ -1,38 +1,38 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { PersonContext } from '../../providers/PersonContext';
+import React, { useContext, useState, useEffect } from "react";
+import { PersonContext } from "../../providers/PersonContext";
 
 const AddEmployeeModal = () => {
   const { modalStatus, addPerson, editPerson, dataPersonId } = useContext(
     PersonContext
   );
 
-  const [id, setId] = useState('');
-  const [name, setName] = useState('');
-  const [dataPhone, setPhone] = useState('');
-  const [dBirth, setDBirth] = useState('');
-  const [pBirth, setPBirth] = useState('');
-  const [lastJob, setLastJob] = useState('');
-  const [lastSchool, setLastSchool] = useState('');
-  const [nameCouple, setNameCouple] = useState('');
-  const [jobCouple, setJobCouple] = useState('');
-  const [dataAddress, setAddress] = useState('');
-  const [status, setStatus] = useState('');
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [dataPhone, setPhone] = useState("");
+  const [dBirth, setDBirth] = useState("");
+  const [pBirth, setPBirth] = useState("");
+  const [lastJob, setLastJob] = useState("");
+  const [lastSchool, setLastSchool] = useState("");
+  const [nameCouple, setNameCouple] = useState("");
+  const [jobCouple, setJobCouple] = useState("");
+  const [dataAddress, setAddress] = useState("");
+  const [status, setStatus] = useState("");
 
   // * method
   const clear = () => {
-    setName('');
-    setAddress('');
-    setPhone('');
-    setPBirth('');
-    setDBirth('');
-    setLastSchool('');
-    setLastJob('');
-    setNameCouple('');
-    setJobCouple('');
+    setName("");
+    setAddress("");
+    setPhone("");
+    setPBirth("");
+    setDBirth("");
+    setLastSchool("");
+    setLastJob("");
+    setNameCouple("");
+    setJobCouple("");
   };
 
   const loadButton = () => {
-    window.$('#btn-submit-modal').text('Load...');
+    window.$("#btn-submit-modal").text("Load...");
   };
 
   const handleName = (event) => {
@@ -108,7 +108,7 @@ const AddEmployeeModal = () => {
   // * end of method
 
   useEffect(() => {
-    if (status === 'Edit') {
+    if (status === "Edit") {
       const {
         personId,
         address,
@@ -139,7 +139,7 @@ const AddEmployeeModal = () => {
       setNameCouple(nameOfCouple);
       setJobCouple(jobOfCouple);
       setId(personId);
-    } else if (status === 'Tambah') {
+    } else if (status === "Tambah") {
       clear();
     }
   }, [dataPersonId, status]);
@@ -150,128 +150,128 @@ const AddEmployeeModal = () => {
 
   return (
     <div
-      className='modal fade'
-      id='EmployeeModal'
-      tabIndex='-1'
-      role='dialog'
-      aria-labelledby='modelTitleId'
-      aria-hidden='true'
+      className="modal fade"
+      id="EmployeeModal"
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby="modelTitleId"
+      aria-hidden="true"
     >
-      <div className='modal-dialog' role='document'>
-        <div className='modal-content'>
-          <div className='modal-header'>
-            <h5 className='modal-title'>{status} Data Pegawai</h5>
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">{status} Data Pegawai</h5>
             <button
-              type='button'
-              className='close'
-              data-dismiss='modal'
-              aria-label='Close'
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
             >
-              <span aria-hidden='true'>&times;</span>
+              <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div className='modal-body'>
-            <div className='container-fluid'>
-              <form id='formEmployee'>
-                <div className='row'>
-                  <div className='col-md-6'>
+          <div className="modal-body">
+            <div className="container-fluid">
+              <form id="formAddEmployee">
+                <div className="row">
+                  <div className="col-md-6">
                     <label>Nama Pegawai</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Nama'
+                      type="text"
+                      className="form-control"
+                      placeholder="Nama"
                       value={name}
                       onChange={handleName}
                     />
                   </div>
-                  <div className='col-md-6'>
+                  <div className="col-md-6">
                     <label>Nomer Telepon</label>
                     <input
-                      type='number'
-                      className='form-control'
-                      placeholder='Nomer Telepon'
+                      type="number"
+                      className="form-control"
+                      placeholder="Nomer Telepon"
                       value={dataPhone}
                       onChange={handlePhone}
                     />
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-6'>
+                <div className="row">
+                  <div className="col-md-6">
                     <label>Tanggal Lahir</label>
                     <input
-                      type='date'
-                      className='form-control'
-                      placeholder='Tanggal Lahir'
+                      type="date"
+                      className="form-control"
+                      placeholder="Tanggal Lahir"
                       value={dBirth}
                       onChange={handleDBirth}
                     />
                   </div>
-                  <div className='col-md-6'>
+                  <div className="col-md-6">
                     <label>Kota Lahir</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Kota Lahir'
+                      type="text"
+                      className="form-control"
+                      placeholder="Kota Lahir"
                       value={pBirth}
                       onChange={handlePBirth}
                     />
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-6'>
+                <div className="row">
+                  <div className="col-md-6">
                     <label>Pendidikan Terakhir</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Pendidikan Terakhir'
+                      type="text"
+                      className="form-control"
+                      placeholder="Pendidikan Terakhir"
                       value={lastSchool}
                       onChange={handleLastSchool}
                     />
                   </div>
-                  <div className='col-md-6'>
+                  <div className="col-md-6">
                     <label>Pekerjaan Terakhir</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Pekerjaan Terakhir'
+                      type="text"
+                      className="form-control"
+                      placeholder="Pekerjaan Terakhir"
                       value={lastJob}
                       onChange={handleLastJob}
                     />
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-6'>
+                <div className="row">
+                  <div className="col-md-6">
                     <label>Nama Pasangan</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Nama Suami/Istri'
+                      type="text"
+                      className="form-control"
+                      placeholder="Nama Suami/Istri"
                       value={nameCouple}
                       onChange={handleNameCouple}
                     />
                   </div>
-                  <div className='col-md-6'>
+                  <div className="col-md-6">
                     <label>Pekerjaan Pasangan</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Pekerjaan Suami/Istri'
+                      type="text"
+                      className="form-control"
+                      placeholder="Pekerjaan Suami/Istri"
                       value={jobCouple}
                       onChange={handleJobCouple}
                     />
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-12'>
+                <div className="row">
+                  <div className="col-md-12">
                     <textarea
-                      id='textAddress'
-                      className='form-control'
-                      rows='4'
-                      placeholder='Alamat Sesuai KTP'
+                      id="textAddress"
+                      className="form-control"
+                      rows="4"
+                      placeholder="Alamat Sesuai KTP"
                       value={dataAddress}
                       onChange={handleAddress}
                     ></textarea>
@@ -279,17 +279,17 @@ const AddEmployeeModal = () => {
                 </div>
               </form>
             </div>
-            <div className='modal-footer'>
-              <button className='btn btn-secondary' data-dismiss='modal'>
+            <div className="modal-footer">
+              <button className="btn btn-secondary" data-dismiss="modal">
                 Close
               </button>
               <button
-                className='btn btn-primary'
+                className="btn btn-primary"
                 onClick={() =>
-                  status !== 'Edit' ? handleAdd() : handleEdit(id)
+                  status !== "Edit" ? handleAdd() : handleEdit(id)
                 }
               >
-                <span id='btn-submit-modal'>Submit</span>
+                <span id="btn-submit-modal">Submit</span>
               </button>
             </div>
           </div>

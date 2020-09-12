@@ -20,9 +20,9 @@ const ItemProvider = ({ children }) => {
 
   useEffect(() => {
     setInterval(() => {
-      GetTransacOut().then((response) =>
-        setTransacOut(response.data.data).finally(() => setLoading(false))
-      );
+      GetTransacOut()
+        .then((response) => setTransacOut(response.data.data))
+        .finally(() => setLoading(false));
     }, 10000);
   }, []);
 

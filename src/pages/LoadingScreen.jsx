@@ -4,7 +4,7 @@ import ReactLoading from "react-loading";
 const LoadingScreen = () => {
   return (
     <div
-      className="container h-100 pt-4"
+      className="container-fluid h-100 pt-4"
       style={{
         position: "fixed",
         width: 100 + "%",

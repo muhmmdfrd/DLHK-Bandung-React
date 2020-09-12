@@ -20,6 +20,7 @@ import PerformLive from "../pages/PerformLive";
 import ListInterview from "../pages/ListInterview";
 import ListTransac from "../pages/ListTransac";
 import ListTransacOut from "../pages/ListTransacOut";
+import RolePage from "../pages/Role";
 
 const Routes = () => {
   // * provide a path and which component will be rendered
@@ -47,6 +48,10 @@ const Routes = () => {
     {
       path: "/admin/statistik-performa-wilayah",
       render: RegionPerform,
+    },
+    {
+      path: "/admin/posisi-pelamar",
+      render: RolePage,
     },
   ];
 

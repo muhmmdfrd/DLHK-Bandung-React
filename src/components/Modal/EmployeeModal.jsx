@@ -100,7 +100,7 @@ const EmployeeModal = () => {
           </div>
           <div className="modal-body">
             <div className="container-fluid">
-              <form id="formEmployee">
+              <form id="formEmployeeModal">
                 <div className="row">
                   <div className="col-md-12">
                     <label>Nama Pegawai</label>

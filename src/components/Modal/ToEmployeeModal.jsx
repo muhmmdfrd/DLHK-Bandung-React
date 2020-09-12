@@ -1,19 +1,19 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { EmployeeContext } from '../../providers/EmployeeContext';
-import axios from 'axios';
+import React, { useContext, useState, useEffect } from "react";
+import { EmployeeContext } from "../../providers/EmployeeContext";
+import axios from "axios";
 
 const ToEmployeeModal = () => {
-  const [region, setRegion] = useState('');
+  const [region, setRegion] = useState("");
   const [regionId, setRegionId] = useState(0);
-  const [zone, setZone] = useState('');
-  const [role, setRole] = useState('');
+  const [zone, setZone] = useState("");
+  const [role, setRole] = useState("");
   const [person, setPerson] = useState([]);
   const [personId, setPersonId] = useState(0);
-  const [bank, setBank] = useState('');
-  const [nip, setNip] = useState('');
-  const [first, setFirst] = useState('');
-  const [location, setLocation] = useState('');
-  const [shift, setShift] = useState('1');
+  const [bank, setBank] = useState("");
+  const [nip, setNip] = useState("");
+  const [first, setFirst] = useState("");
+  const [location, setLocation] = useState("");
+  const [shift, setShift] = useState("1");
 
   const { addEmployee } = useContext(EmployeeContext);
 
@@ -75,40 +75,40 @@ const ToEmployeeModal = () => {
   useEffect(() => {
     setInterval(() => {
       axios
-        .get('http://api.dlhk.local/api/person/interview')
+        .get("http://api.dlhk.local/api/person/interview")
         .then((response) => setPerson(response.data.data));
     }, 10000);
   }, []);
 
   return (
     <div
-      className='modal fade'
-      id='employeeModal1234'
-      tabIndex='-1'
-      role='dialog'
-      aria-labelledby='modelTitleId'
-      aria-hidden='true'
+      className="modal fade"
+      id="employeeModal1234"
+      tabIndex="-1"
+      role="dialog"
+      aria-labelledby="modelTitleId"
+      aria-hidden="true"
     >
-      <div className='modal-dialog' role='document'>
-        <div className='modal-content'>
-          <div className='modal-header'>
-            <h5 className='modal-title'>Tambah Pekerja</h5>
+      <div className="modal-dialog" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title">Tambah Pekerja</h5>
             <button
-              type='button'
-              className='close'
-              data-dismiss='modal'
-              aria-label='Close'
+              type="button"
+              className="close"
+              data-dismiss="modal"
+              aria-label="Close"
             >
-              <span aria-hidden='true'>&times;</span>
+              <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div className='modal-body'>
-            <div className='container-fluid'>
-              <form id='formEmployee'>
-                <div className='row'>
-                  <div className='col-md-12'>
+          <div className="modal-body">
+            <div className="container-fluid">
+              <form id="formToEmployeeModal">
+                <div className="row">
+                  <div className="col-md-12">
                     <label>Nama Pegawai</label>
-                    <select className='form-control' onChange={handlePerson}>
+                    <select className="form-control" onChange={handlePerson}>
                       <option>Pilih Nama</option>
                       {person.map((value, index) => {
                         return (
@@ -121,19 +121,19 @@ const ToEmployeeModal = () => {
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-6'>
+                <div className="row">
+                  <div className="col-md-6">
                     <label>Nomer Induk Pegawai</label>
                     <input
-                      type='text'
-                      className='form-control'
-                      placeholder='NIP'
+                      type="text"
+                      className="form-control"
+                      placeholder="NIP"
                       onChange={handleNIP}
                     />
                   </div>
-                  <div className='col-md-6'>
+                  <div className="col-md-6">
                     <label>Lokasi Kerja</label>
-                    <select className='form-control' onChange={handleLocation}>
+                    <select className="form-control" onChange={handleLocation}>
                       <option>Pilih Lokasi</option>
                       <option>BU</option>
                       <option>BS</option>
@@ -141,31 +141,31 @@ const ToEmployeeModal = () => {
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-6'>
+                <div className="row">
+                  <div className="col-md-6">
                     <label>Bagian</label>
-                    <select className='form-control' onChange={handleRole}>
+                    <select className="form-control" onChange={handleRole}>
                       <option>Pilih Pekerjaan</option>
                       <option value={4}>Penyapu</option>
                       <option value={5}>Pengangkut Sampah</option>
                       <option value={10}>Drainase</option>
                     </select>
                   </div>
-                  <div className='col-md-6'>
+                  <div className="col-md-6">
                     <label>Akun Bank BJB</label>
                     <input
-                      type='number'
-                      className='form-control'
-                      placeholder='Rekening Pegawai'
+                      type="number"
+                      className="form-control"
+                      placeholder="Rekening Pegawai"
                       onChange={handleBank}
                     />
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-6'>
+                <div className="row">
+                  <div className="col-md-6">
                     <label>Wilayah</label>
-                    <select className='form-control' onChange={handleRegion}>
+                    <select className="form-control" onChange={handleRegion}>
                       <option value={0}>Pilih Wilayah</option>
                       <option value={3}>Kordon - Gedebage</option>
                       <option value={4}>Bojonagara</option>
@@ -175,10 +175,10 @@ const ToEmployeeModal = () => {
                       <option value={8}>Arcamanik - Ujung Berung</option>
                     </select>
                   </div>
-                  <div className='col-md-6'>
+                  <div className="col-md-6">
                     <label>Zona</label>
-                    <select className='form-control' onChange={handleZone}>
-                      {regionId === '4' ? (
+                    <select className="form-control" onChange={handleZone}>
+                      {regionId === "4" ? (
                         <React.Fragment>
                           <option value={4}>BO-01</option>
                           <option value={5}>BO-02</option>
@@ -191,7 +191,7 @@ const ToEmployeeModal = () => {
                           <option value={13}>BO-09</option>
                         </React.Fragment>
                       ) : null}
-                      {regionId === '3' ? (
+                      {regionId === "3" ? (
                         <React.Fragment>
                           <option value={46}>KG-01</option>
                           <option value={47}>KG-02</option>
@@ -199,14 +199,14 @@ const ToEmployeeModal = () => {
                           <option value={49}>KG-04</option>
                         </React.Fragment>
                       ) : null}
-                      {regionId === '8' ? (
+                      {regionId === "8" ? (
                         <React.Fragment>
                           <option value={43}>AU-01</option>
                           <option value={44}>AU-02</option>
                           <option value={45}>AU-03</option>
                         </React.Fragment>
                       ) : null}
-                      {regionId === '5' ? (
+                      {regionId === "5" ? (
                         <React.Fragment>
                           <option value={14}>TL-01</option>
                           <option value={15}>TL-02</option>
@@ -217,7 +217,7 @@ const ToEmployeeModal = () => {
                           <option value={21}>TL-07</option>
                         </React.Fragment>
                       ) : null}
-                      {regionId === '7' ? (
+                      {regionId === "7" ? (
                         <React.Fragment>
                           <option value={35}>KA-01</option>
                           <option value={36}>KA-02</option>
@@ -228,7 +228,7 @@ const ToEmployeeModal = () => {
                           <option value={42}>KA-07</option>
                         </React.Fragment>
                       ) : null}
-                      {regionId === '6' ? (
+                      {regionId === "6" ? (
                         <React.Fragment>
                           <option value={22}>CB-01</option>
                           <option value={23}>CB-02</option>
@@ -249,20 +249,20 @@ const ToEmployeeModal = () => {
                   </div>
                 </div>
                 <br />
-                <div className='row'>
-                  <div className='col-md-4'>
+                <div className="row">
+                  <div className="col-md-4">
                     <label>Shift</label>
-                    <select className='form-control' onChange={handleShift}>
-                      <option value='1'>1</option>
-                      <option value='2'>2</option>
-                      <option value='3'>3</option>
+                    <select className="form-control" onChange={handleShift}>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
                     </select>
                   </div>
-                  <div className='col-md-8'>
+                  <div className="col-md-8">
                     <label>Awal Kontrak</label>
                     <input
-                      type='date'
-                      className='form-control'
+                      type="date"
+                      className="form-control"
                       onChange={handleFirst}
                     />
                   </div>
@@ -270,16 +270,16 @@ const ToEmployeeModal = () => {
                 <br />
               </form>
             </div>
-            <div className='modal-footer'>
-              <button className='btn btn-secondary' data-dismiss='modal'>
+            <div className="modal-footer">
+              <button className="btn btn-secondary" data-dismiss="modal">
                 Close
               </button>
               <button
-                id='btn-submit-modal-person-employee-click'
-                className='btn btn-primary'
+                id="btn-submit-modal-person-employee-click"
+                className="btn btn-primary"
                 onClick={() => handleAdd()}
               >
-                <span id='btn-submit-modal-person-employee'>Submit</span>
+                <span id="btn-submit-modal-person-employee">Submit</span>
               </button>
             </div>
           </div>

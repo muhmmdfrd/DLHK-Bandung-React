@@ -1,27 +1,28 @@
 // react library
-import React, { StrictMode } from 'react';
-import ReactDOM from 'react-dom';
+import React, { StrictMode } from "react";
+import ReactDOM from "react-dom";
 
 // root module
-import App from './App';
+import App from "./App";
 
 // service worker
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from "./serviceWorker";
 
 // css library
-import './assets/css/fontawesome-free/css/all.min.css';
-import './assets/css/sb-admin-2.css';
+import "./assets/css/fontawesome-free/css/all.min.css";
+import "./assets/css/sb-admin-2.css";
 
 // js library
-import 'chart.js';
+import "chart.js";
 
 // provider and context
-import { PersonProvider } from './providers/PersonContext';
-import { PresenceProvider } from './providers/PresenceContext';
-import { ItemProvider } from './providers/ItemContext';
-import { EmployeeProvider } from './providers/EmployeeContext';
-import { ApplicantProvider } from './providers/ApplicantContext';
-import { InterviewProvider } from './providers/InterviewContext';
+import { PersonProvider } from "./providers/PersonContext";
+import { PresenceProvider } from "./providers/PresenceContext";
+import { ItemProvider } from "./providers/ItemContext";
+import { EmployeeProvider } from "./providers/EmployeeContext";
+import { ApplicantProvider } from "./providers/ApplicantContext";
+import { InterviewProvider } from "./providers/InterviewContext";
+import { RoleProvider } from "./providers/RoleContext";
 
 const AllProvider = ({ children }) => {
   return (
@@ -30,7 +31,9 @@ const AllProvider = ({ children }) => {
         <ItemProvider>
           <EmployeeProvider>
             <ApplicantProvider>
-              <InterviewProvider>{children}</InterviewProvider>
+              <InterviewProvider>
+                <RoleProvider>{children}</RoleProvider>
+              </InterviewProvider>
             </ApplicantProvider>
           </EmployeeProvider>
         </ItemProvider>
@@ -45,7 +48,7 @@ ReactDOM.render(
       <App />
     </AllProvider>
   </StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // register or unregister serviceworker

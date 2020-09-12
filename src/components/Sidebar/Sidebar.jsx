@@ -1,61 +1,61 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import LogoDLHK from './../../assets/img/logo-dlhk-removebg-preview.png';
+import React from "react";
+import { NavLink } from "react-router-dom";
+import LogoDLHK from "./../../assets/img/logo-dlhk-removebg-preview.png";
 
 const Sidebar = () => {
   return (
     <WrapperList>
       <Logo />
 
-      <Divider optional={'my-0'} />
+      <Divider optional={"my-0"} />
 
       {/* smart Presence */}
-      <div className='mt-2'>
-        <SidebarHeading heading={'Smart Presence'} />
+      <div className="mt-2">
+        <SidebarHeading heading={"Smart Presence"} />
       </div>
       <Menu
-        linkTo={'/admin/dashboard'}
-        icon={'fa-tachometer-alt'}
-        menuTitle={'Dashboard'}
+        linkTo={"/admin/dashboard"}
+        icon={"fa-tachometer-alt"}
+        menuTitle={"Dashboard"}
       />
       <Menu
-        linkTo={'/admin/pegawai'}
-        icon={'fa-users'}
-        menuTitle={'Kepegawaian'}
+        linkTo={"/admin/pegawai"}
+        icon={"fa-users"}
+        menuTitle={"Kepegawaian"}
       />
 
       <NavItem>
         <a
-          className='nav-link collapsed'
-          href='/#'
-          data-toggle='collapse'
-          data-target='#collapseOne'
-          aria-expanded='true'
-          aria-controls='collapseOne'
+          className="nav-link collapsed"
+          href="/#"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
         >
-          <i className='fas fa-fw fa-eye'></i>
+          <i className="fas fa-fw fa-eye"></i>
           <span>Live Supervisi</span>
         </a>
         <div
-          id='collapseOne'
-          className='collapse'
-          aria-labelledby='headingTwo'
-          data-parent='#accordionSidebar'
+          id="collapseOne"
+          className="collapse"
+          aria-labelledby="headingTwo"
+          data-parent="#accordionSidebar"
         >
-          <div className='bg-white py-2 collapse-inner rounded'>
-            <h6 className='collapse-header'>Menu Supervisi Live:</h6>
+          <div className="bg-white py-2 collapse-inner rounded">
+            <h6 className="collapse-header">Menu Supervisi Live:</h6>
             <NavLink
-              className='collapse-item'
-              activeClassName='yes-active'
-              to='/admin/absensi-harian-live'
+              className="collapse-item"
+              activeClassName="yes-active"
+              to="/admin/absensi-harian-live"
             >
               Progress Absen Harian
             </NavLink>
 
             <NavLink
-              className='collapse-item'
-              activeClassName='yes-active'
-              to='/admin/laporan-harian-live'
+              className="collapse-item"
+              activeClassName="yes-active"
+              to="/admin/laporan-harian-live"
             >
               Progress Laporan Harian
             </NavLink>
@@ -65,35 +65,35 @@ const Sidebar = () => {
 
       <NavItem>
         <a
-          className='nav-link collapsed'
-          href='/#'
-          data-toggle='collapse'
-          data-target='#collapseThree'
-          aria-expanded='true'
-          aria-controls='collapseThree'
+          className="nav-link collapsed"
+          href="/#"
+          data-toggle="collapse"
+          data-target="#collapseThree"
+          aria-expanded="true"
+          aria-controls="collapseThree"
         >
-          <i className='fa fa-fw fa-bars' aria-hidden='true'></i>
+          <i className="fa fa-fw fa-bars" aria-hidden="true"></i>
           <span>Statistik</span>
         </a>
         <div
-          id='collapseThree'
-          className='collapse'
-          aria-labelledby='headingTwo'
-          data-parent='#accordionSidebar'
+          id="collapseThree"
+          className="collapse"
+          aria-labelledby="headingTwo"
+          data-parent="#accordionSidebar"
         >
-          <div className='bg-white py-2 collapse-inner rounded'>
-            <h6 className='collapse-header'>Menu Statistik:</h6>
+          <div className="bg-white py-2 collapse-inner rounded">
+            <h6 className="collapse-header">Menu Statistik:</h6>
             <NavLink
-              className='collapse-item'
-              activeClassName='yes-active'
-              to='/admin/statistik-absensi'
+              className="collapse-item"
+              activeClassName="yes-active"
+              to="/admin/statistik-absensi"
             >
               Resume Absensi
             </NavLink>
             <NavLink
-              className='collapse-item'
-              activeClassName='yes-active'
-              to='/admin/statistik-performa'
+              className="collapse-item"
+              activeClassName="yes-active"
+              to="/admin/statistik-performa"
             >
               Resume Performa
             </NavLink>
@@ -104,37 +104,75 @@ const Sidebar = () => {
       <Divider />
 
       {/* inventory Management */}
-      <SidebarHeading heading={'Inventory Management'} />
-      <Menu linkTo={'/admin/barang'} icon={'fa-archive'} menuTitle={'Barang'} />
-      <Menu
-        linkTo={'/admin/transaksi-barang'}
-        icon={'fa-inbox'}
-        menuTitle={'Transaksi Barang'}
-      />
+      <SidebarHeading heading={"Inventory Management"} />
+      <Menu linkTo={"/admin/barang"} icon={"fa-archive"} menuTitle={"Barang"} />
+      <NavItem>
+        <a
+          className="nav-link collapsed"
+          href="/#"
+          data-toggle="collapse"
+          data-target="#collapseTransac"
+          aria-expanded="true"
+          aria-controls="collapseTransac"
+        >
+          <i className="fas fa-fw fa-inbox"></i>
+          <span>Transaksi Barang</span>
+        </a>
+        <div
+          id="collapseTransac"
+          className="collapse"
+          aria-labelledby="headingTwo"
+          data-parent="#accordionSidebar"
+        >
+          <div className="bg-white py-2 collapse-inner rounded">
+            <h6 className="collapse-header">Jenis Transaksi Barang:</h6>
+            <NavLink
+              className="collapse-item"
+              activeClassName="yes-active"
+              to="/admin/transaksi-barang"
+            >
+              Barang Masuk
+            </NavLink>
+
+            <NavLink
+              className="collapse-item"
+              activeClassName="yes-active"
+              to="/admin/transaksi-barang-keluar"
+            >
+              Barang Keluar
+            </NavLink>
+          </div>
+        </div>
+      </NavItem>
       {/* end of inventory Managament */}
 
       <Divider />
 
       {/* contract Management */}
-      <SidebarHeading heading={'Contract Management'} />
+      <SidebarHeading heading={"Contract Management"} />
       <Menu
-        linkTo={'/admin/kontrak-pegawai'}
-        menuTitle={'Kontrak Pegawai'}
-        icon={'fa-file'}
+        linkTo={"/admin/kontrak-pegawai"}
+        menuTitle={"Kontrak Pegawai"}
+        icon={"fa-file"}
       />
       <Menu
-        linkTo={'/admin/pelamar'}
-        menuTitle={'Pelamar'}
-        icon={'fa-briefcase'}
+        linkTo={"/admin/pelamar"}
+        menuTitle={"Pelamar"}
+        icon={"fa-briefcase"}
       />
       <Menu
-        linkTo={'/admin/interview'}
-        menuTitle={'Jadwal Interview'}
-        icon={'fa-calendar'}
+        linkTo={"/admin/interview"}
+        menuTitle={"Jadwal Interview"}
+        icon={"fa-calendar"}
+      />
+      <Menu
+        linkTo={"/admin/posisi-pelamar"}
+        menuTitle={"Posisi Lamaran"}
+        icon={"fa-user"}
       />
       {/* end of contract Management */}
 
-      <Divider optional={'d-none d-md-block'} />
+      <Divider optional={"d-none d-md-block"} />
     </WrapperList>
   );
 };
@@ -142,8 +180,8 @@ const Sidebar = () => {
 const WrapperList = ({ children }) => {
   return (
     <ul
-      className='navbar-nav bg-gradient-primary sidebar sidebar-dark accordion'
-      id='accordionSidebar'
+      className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+      id="accordionSidebar"
     >
       {children}
     </ul>
@@ -151,7 +189,7 @@ const WrapperList = ({ children }) => {
 };
 
 const SidebarHeading = ({ heading }) => {
-  return <div className='sidebar-heading'>{heading}</div>;
+  return <div className="sidebar-heading">{heading}</div>;
 };
 
 const Divider = ({ optional }) => {
@@ -159,17 +197,17 @@ const Divider = ({ optional }) => {
 };
 
 const NavItem = ({ children }) => {
-  return <li className='nav-item'>{children}</li>;
+  return <li className="nav-item">{children}</li>;
 };
 
 const Logo = () => {
   return (
     <a
-      className='sidebar-brand bg-primary d-flex align-items-center justify-content-center'
-      href='/dashboard'
+      className="sidebar-brand bg-primary d-flex align-items-center justify-content-center"
+      href="/dashboard"
     >
-      <div className='sidebar-brand-icon'>
-        <img src={LogoDLHK} className='img-fluid' alt='logo' />
+      <div className="sidebar-brand-icon">
+        <img src={LogoDLHK} className="img-fluid" alt="logo" />
       </div>
     </a>
   );
@@ -178,7 +216,7 @@ const Logo = () => {
 const Menu = ({ linkTo, icon, menuTitle }) => {
   return (
     <NavItem>
-      <NavLink className='nav-link' activeClassName='yes-active' to={linkTo}>
+      <NavLink className="nav-link" activeClassName="yes-active" to={linkTo}>
         <i className={`fas fa-fw ${icon}`}></i>
         <span>{menuTitle}</span>
       </NavLink>

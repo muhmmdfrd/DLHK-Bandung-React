@@ -1,15 +1,15 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import FadeIn from "react-fade-in";
 
 // * components
 import LoadingScreen from "./LoadingScreen";
-import ContractTable from "../components/Table/ContractTable";
 import Pagination from "../components/Pagination/Pagination";
 
 // * context
-import { EmployeeContext } from "../providers/EmployeeContext";
+import { RoleContext } from "../providers/RoleContext";
+import RoleTable from "../components/Table/RoleTable";
 
-const Contract = () => {
+const RolePage = () => {
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
 
@@ -23,7 +23,7 @@ const Contract = () => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { employee, loading } = useContext(EmployeeContext);
+  const { role, loading, handleEdit } = useContext(RoleContext);
 
   // * function or method
   const handleChange = (event) => {
@@ -42,11 +42,11 @@ const Contract = () => {
   // * end of method
 
   useEffect(() => {
-    const result = employee.filter((employee) =>
-      employee.name.toLowerCase().includes(keyword.toLowerCase())
+    const result = role.filter((val) =>
+      val.roleName.toLowerCase().includes(keyword.toLowerCase())
     );
     setData(result);
-  }, [employee, keyword]);
+  }, [role, keyword]);
 
   // * render the HTML
   return loading ? (
@@ -54,11 +54,13 @@ const Contract = () => {
   ) : (
     <FadeIn>
       <div className="container-fluid mt-4">
-        <h1 className="h3 mb-2 text-gray-800">Pegawai</h1>
+        <h1 className="h3 mb-2 text-gray-800">Posisi Pelamar</h1>
 
         <div className="card shadow mb-4">
           <div className="card-header py-3">
-            <h6 className="m-0 font-weight-bold text-primary">Tabel Pegawai</h6>
+            <h6 className="m-0 font-weight-bold text-primary">
+              Tabel Posisi Pelamar
+            </h6>
           </div>
           <div className="card-body">
             <div className="row mb-3">
@@ -78,8 +80,9 @@ const Contract = () => {
                 </form>
               </div>
             </div>
-            <ContractTable
+            <RoleTable
               response={current}
+              action={{ handleEdit }}
               currentPage={currentPage}
               postPerPage={postPerPage}
             />
@@ -98,4 +101,4 @@ const Contract = () => {
   );
 };
 
-export default Contract;
+export default RolePage;

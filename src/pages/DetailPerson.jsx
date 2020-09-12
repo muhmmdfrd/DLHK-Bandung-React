@@ -1,28 +1,29 @@
-import React, { useContext, useEffect, useState } from 'react';
-import FadeIn from 'react-fade-in';
-import { NavLink } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import FadeIn from "react-fade-in";
+import { NavLink } from "react-router-dom";
 
 // * page
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from "./LoadingScreen";
 
 // * context
-import { PersonContext } from '../providers/PersonContext';
-import { EmployeeContext } from '../providers/EmployeeContext';
+import { PersonContext } from "../providers/PersonContext";
+import { EmployeeContext } from "../providers/EmployeeContext";
 
 const DetailPerson = () => {
-  const [id, setId] = useState('');
-  const [name, setName] = useState('');
-  const [dataPhone, setPhone] = useState('');
-  const [dBirth, setDBirth] = useState('');
-  const [pBirth, setPBirth] = useState('');
-  const [lastJob, setLastJob] = useState('');
-  const [lastSchool, setLastSchool] = useState('');
-  const [nameCouple, setNameCouple] = useState('');
-  const [jobCouple, setJobCouple] = useState('');
-  const [dataAddress, setAddress] = useState('');
-  const [email, setEmail] = useState('');
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [dataPhone, setPhone] = useState("");
+  const [dBirth, setDBirth] = useState("");
+  const [pBirth, setPBirth] = useState("");
+  const [lastJob, setLastJob] = useState("");
+  const [lastSchool, setLastSchool] = useState("");
+  const [nameCouple, setNameCouple] = useState("");
+  const [jobCouple, setJobCouple] = useState("");
+  const [dataAddress, setAddress] = useState("");
+  const [email, setEmail] = useState("");
   const [child, setChild] = useState(0);
   const [status, setStatus] = useState(true);
+  const [nik, setNik] = useState("");
 
   const {
     dataPersonId,
@@ -36,7 +37,11 @@ const DetailPerson = () => {
 
   // * method
   const getIdUri = (url) => {
-    return url.substring(url.lastIndexOf('/') + 1);
+    return url.substring(url.lastIndexOf("/") + 1);
+  };
+
+  const handleNik = (event) => {
+    setNik(event.target.value);
   };
 
   const handleStatus = () => {
@@ -88,7 +93,7 @@ const DetailPerson = () => {
   };
 
   const submitEdit = (id) => {
-    window.$('#btnDetailEdit').prop('disabled', true);
+    window.$("#btnDetailEdit").prop("disabled", true);
 
     let data = {
       personId: id,
@@ -103,6 +108,7 @@ const DetailPerson = () => {
       jobOfCouple: jobCouple,
       totalChild: child,
       email: email,
+      nik: nik,
     };
 
     editPerson(data);
@@ -125,6 +131,7 @@ const DetailPerson = () => {
         jobOfCouple,
         email,
         totalChild,
+        nik,
       } = dataPersonId;
 
       const dateBirth = new Date(dateOfBirth);
@@ -137,6 +144,7 @@ const DetailPerson = () => {
 
       setName(personName);
       setAddress(address);
+      setNik(nik);
       setPhone(phone);
       setPBirth(placeOfBirth);
       setDBirth(resDate);
@@ -154,98 +162,98 @@ const DetailPerson = () => {
     <LoadingScreen />
   ) : (
     <FadeIn>
-      <div className='container-fluid mt-4'>
-        <h1 className='h3 mb-2 text-gray-800'>Kepegawaian</h1>
+      <div className="container-fluid mt-4">
+        <h1 className="h3 mb-2 text-gray-800">Kepegawaian</h1>
 
-        <div className='card shadow mb-4'>
-          <div className='card-header py-3'>
-            <h6 className='m-0 font-weight-bold text-primary'>
-              <NavLink to='/admin/kontrak-pegawai'>Kembali</NavLink>
+        <div className="card shadow mb-4">
+          <div className="card-header py-3">
+            <h6 className="m-0 font-weight-bold text-primary">
+              <NavLink to="/admin/kontrak-pegawai">Kembali</NavLink>
             </h6>
           </div>
-          <div className='card-body'>
+          <div className="card-body">
             <form>
-              <div className='row'>
-                <div className='col-md-3'>
+              <div className="row">
+                <div className="col-md-3">
                   <label>Nama</label>
                   <input
-                    type='text'
-                    className='form-control'
+                    type="text"
+                    className="form-control"
                     value={name}
                     onChange={handleName}
                     readOnly={status}
                   />
                 </div>
-                <div className='col-md-3'>
+                <div className="col-md-3">
                   <label>Tempat Lahir</label>
                   <input
-                    type='text'
-                    className='form-control'
+                    type="text"
+                    className="form-control"
                     value={pBirth}
                     onChange={handlePBirth}
                     readOnly={status}
                   />
                 </div>
-                <div className='col-md-3'>
+                <div className="col-md-3">
                   <label>Tanggal Lahir</label>
                   <input
-                    type='date'
-                    className='form-control'
+                    type="date"
+                    className="form-control"
                     value={dBirth}
                     onChange={handleDBirth}
                     readOnly={status}
                   />
                 </div>
-                <div className='col-md-3'>
+                <div className="col-md-3">
                   <label>Usia</label>
                   <input
-                    type='text'
-                    className='form-control'
+                    type="text"
+                    className="form-control"
                     value={
                       new Date().getFullYear() -
-                      dBirth.substring(0, dBirth.indexOf('-'))
+                      dBirth.substring(0, dBirth.indexOf("-"))
                     }
                     readOnly
                   />
                 </div>
               </div>
               <br />
-              <div className='row'>
-                <div className='col-md-3'>
+              <div className="row">
+                <div className="col-md-3">
                   <label>Pendidikan Terakhir</label>
                   <input
-                    type='text'
-                    className='form-control'
+                    type="text"
+                    className="form-control"
                     value={lastSchool}
                     onChange={handleLastSchool}
                     readOnly={status}
                   />
                 </div>
-                <div className='col-md-3'>
+                <div className="col-md-3">
                   <label>Pengalaman Kerja (Terakhir)</label>
                   <input
-                    type='text'
-                    className='form-control'
+                    type="text"
+                    className="form-control"
                     value={lastJob}
                     onChange={handleLastJob}
                     readOnly={status}
                   />
                 </div>
-                <div className='col-md-3'>
+                <div className="col-md-3">
                   <label>Nama Pasangan</label>
                   <input
-                    type='text'
-                    className='form-control'
+                    type="text"
+                    className="form-control"
                     value={nameCouple}
                     onChange={handleNameCouple}
                     readOnly={status}
                   />
                 </div>
-                <div className='col-md-3'>
+                <div className="col-md-3">
                   <label>Pekerjaan Pasangan</label>
                   <input
-                    type='text'
-                    className='form-control'
+                    type="text"
+                    className="form-control"
                     value={jobCouple}
                     onChange={handleJobCouple}
                     readOnly={status}
@@ -253,44 +261,54 @@ const DetailPerson = () => {
                 </div>
               </div>
               <br />
-              <div className='row'>
-                <div className='col-md-3'>
+              <div className="row">
+                <div className="col-md-3">
                   <label>Nomer Telepon</label>
                   <input
-                    type='number'
-                    className='form-control'
+                    type="number"
+                    className="form-control"
                     value={dataPhone}
                     onChange={handlePhone}
                     readOnly={status}
                   />
                 </div>
-                <div className='col-md-3'>
+                <div className="col-md-3">
                   <label>Email</label>
                   <input
-                    type='email'
-                    className='form-control'
+                    type="email"
+                    className="form-control"
                     value={email}
                     onChange={handleEmail}
                     readOnly={status}
                   />
                 </div>
-                <div className='col-md-3'>
+                <div className="col-md-3">
                   <label>Jumlah Anak</label>
                   <input
-                    type='number'
-                    className='form-control'
+                    type="number"
+                    className="form-control"
                     value={child}
                     onChange={handleChild}
                     readOnly={status}
                   />
                 </div>
+                <div className="col-md-3">
+                  <label>NIK</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={nik}
+                    onChange={handleNik}
+                    readOnly={status}
+                  />
+                </div>
               </div>
               <br />
-              <div className='row'>
-                <div className='col-md-12'>
-                  <label>Alamat</label>{' '}
+              <div className="row">
+                <div className="col-md-12">
+                  <label>Alamat</label>
                   <textarea
-                    className='form-control'
+                    className="form-control"
                     onChange={handleAddress}
                     value={dataAddress}
                     readOnly={status}
@@ -298,26 +316,26 @@ const DetailPerson = () => {
                 </div>
               </div>
               <br />
-              <div className='row'>
-                <div className='col-md-4'>&nbsp;</div>
-                <div className='col-md-4'>&nbsp;</div>
-                <div className='col-md-4'>
-                  <div className='row'>
-                    <div className='col-md-4'>
+              <div className="row">
+                <div className="col-md-4">&nbsp;</div>
+                <div className="col-md-4">&nbsp;</div>
+                <div className="col-md-4">
+                  <div className="row">
+                    <div className="col-md-4">
                       <button
-                        id='btnDetailEdit'
-                        className='btn btn-primary btn-flat btn-block btn-md'
+                        id="btnDetailEdit"
+                        className="btn btn-primary btn-flat btn-block btn-md"
                         onClick={(event) => {
                           event.preventDefault();
                           status ? handleStatus() : submitEdit(id);
                         }}
                       >
-                        {status ? 'Edit' : 'Submit'}
+                        {status ? "Edit" : "Submit"}
                       </button>
                     </div>
-                    <div className='col-md-4'>
+                    <div className="col-md-4">
                       <button
-                        className='btn btn-success btn-flat btn-block btn-md'
+                        className="btn btn-success btn-flat btn-block btn-md"
                         onClick={(event) => {
                           event.preventDefault();
                           getPersonId(id);
@@ -326,9 +344,9 @@ const DetailPerson = () => {
                         Kontrak
                       </button>
                     </div>
-                    <div className='col-md-4'>
+                    <div className="col-md-4">
                       <button
-                        className='btn btn-danger btn-flat btn-block btn-md'
+                        className="btn btn-danger btn-flat btn-block btn-md"
                         onClick={(event) => {
                           event.preventDefault();
                           deletePerson(id);

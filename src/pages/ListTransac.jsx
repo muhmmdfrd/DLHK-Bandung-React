@@ -9,7 +9,7 @@ import Pagination from "../components/Pagination/Pagination";
 import { ItemContext } from "../providers/ItemContext";
 import TransacTable from "../components/Table/TransacTable";
 
-const ListTransac = ({ history }) => {
+const ListTransac = () => {
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
 
@@ -64,7 +64,7 @@ const ListTransac = ({ history }) => {
           </div>
           <div className="card-body">
             <div className="row mb-3">
-              <div className="col-md-3">
+              <div className="col-md-4">
                 <form className="mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                   <div className="input-group">
                     <input
@@ -79,23 +79,6 @@ const ListTransac = ({ history }) => {
                   </div>
                 </form>
               </div>
-              <div className="col-md-3">
-                <select
-                  className="form-control"
-                  onChange={() => history.push("transaksi-barang-keluar")}
-                >
-                  <option>Barang Masuk</option>
-                  <option>Barang Keluar</option>
-                </select>
-              </div>
-              {/* <div className="col-md-5">
-                <button
-                  className="btn btn-success float-right mr-5"
-                  onClick={() => window.$("#transacModal").modal("toggle")}
-                >
-                  Tambah Transaksi
-                </button>
-              </div> */}
             </div>
             <TransacTable
               response={current}
