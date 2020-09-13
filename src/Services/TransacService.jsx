@@ -48,6 +48,38 @@ const GetTransacOut = () => {
   return deferred.promise;
 };
 
+const GetTransacOutDate = (data) => {
+  const deferred = new defer();
+  const { start, end } = data;
+
+  Get(`${url}/out/${start}/${end}`).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+};
+
+const GetTransacInDate = (data) => {
+  const deferred = new defer();
+  const { start, end } = data;
+
+  Get(`${url}/in/${start}/${end}`).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+};
+
 const PostTransacOut = (data) => {
   const deferred = new defer();
 
@@ -63,4 +95,11 @@ const PostTransacOut = (data) => {
   return deferred.promise;
 };
 
-export { GetTransac, GetTransacIn, GetTransacOut, PostTransacOut };
+export {
+  GetTransac,
+  GetTransacIn,
+  GetTransacOut,
+  GetTransacOutDate,
+  GetTransacInDate,
+  PostTransacOut,
+};
