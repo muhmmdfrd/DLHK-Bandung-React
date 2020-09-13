@@ -12,6 +12,8 @@ import TransacOutTable from "../components/Table/TransacOut";
 const ListTransacOut = () => {
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
 
   // * variable for pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,12 +25,29 @@ const ListTransacOut = () => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { transacOut, loading } = useContext(ItemContext);
+  const { transacOut, loading, filterDateOut } = useContext(ItemContext);
 
   // * function or method
   const handleChange = (event) => {
     setKeyword(event.target.value);
     setCurrentPage(1);
+  };
+
+  const handleStart = (event) => {
+    setStart(event.target.value);
+  };
+
+  const handleEnd = (event) => {
+    setEnd(event.target.value);
+  };
+
+  const handleFilter = () => {
+    const data = {
+      start: start,
+      end: end,
+    };
+
+    filterDateOut(data);
   };
 
   const previous = () => {
@@ -54,7 +73,7 @@ const ListTransacOut = () => {
   ) : (
     <FadeIn>
       <div className="container-fluid mt-4">
-        <h1 className="h3 mb-2 text-gray-800">Data Masuk Keluar Barang</h1>
+        <h1 className="h3 mb-2 text-gray-800">Data Keluar Barang</h1>
 
         <div className="card shadow mb-4">
           <div className="card-header py-3">
@@ -64,27 +83,62 @@ const ListTransacOut = () => {
           </div>
           <div className="card-body">
             <div className="row mb-3">
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <form className="mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      value={keyword}
-                      onChange={handleChange}
-                      className="form-control"
-                      placeholder="Cari berdasarkan nama..."
-                      aria-label="Search"
-                      aria-describedby="basic-addon2"
-                    />
-                  </div>
+                  <label>Cari: </label>
+                  <input
+                    type="text"
+                    value={keyword}
+                    onChange={handleChange}
+                    className="form-control"
+                    placeholder="Cari berdasarkan nama..."
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                  />
                 </form>
               </div>
-              <div className="col-md-8">
+              <div className="col-md-2">
+                <label>From: </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  value={start}
+                  onChange={handleStart}
+                />
+              </div>
+              <div className="col-md-2">
+                <label>To: </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  value={end}
+                  onChange={handleEnd}
+                />
+              </div>
+              <div className="col-md-1">
+                <br />
                 <button
-                  className="btn btn-success float-right mr-5"
+                  className="btn btn-primary mt-2"
+                  onClick={() => handleFilter()}
+                >
+                  Filter
+                </button>
+              </div>
+              <div className="col-md-1">
+                <br />
+                <button className="btn btn-success mt-2">Excel</button>
+              </div>
+              <div className="col-md-1">
+                <br />
+                <button className="btn btn-danger mt-2">PDF</button>
+              </div>
+              <div className="col-md-2">
+                <br />
+                <button
+                  className="btn btn-success float-right mr-5 mt-2"
                   onClick={() => window.$("#transacModal").modal("toggle")}
                 >
-                  Tambah Transaksi
+                  Transaksi
                 </button>
               </div>
             </div>

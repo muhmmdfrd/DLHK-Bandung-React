@@ -12,6 +12,8 @@ import TransacTable from "../components/Table/TransacTable";
 const ListTransac = () => {
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
 
   // * variable for pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,12 +25,29 @@ const ListTransac = () => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { transac, loading } = useContext(ItemContext);
+  const { transac, loading, filterDateIn } = useContext(ItemContext);
 
   // * function or method
   const handleChange = (event) => {
     setKeyword(event.target.value);
     setCurrentPage(1);
+  };
+
+  const handleFilter = () => {
+    const data = {
+      start: start,
+      end: end,
+    };
+
+    filterDateIn(data);
+  };
+
+  const handleStart = (event) => {
+    setStart(event.target.value);
+  };
+
+  const handleEnd = (event) => {
+    setEnd(event.target.value);
   };
 
   const previous = () => {
@@ -54,7 +73,7 @@ const ListTransac = () => {
   ) : (
     <FadeIn>
       <div className="container-fluid mt-4">
-        <h1 className="h3 mb-2 text-gray-800">Data Masuk Keluar Barang</h1>
+        <h1 className="h3 mb-2 text-gray-800">Data Masuk Barang</h1>
 
         <div className="card shadow mb-4">
           <div className="card-header py-3">
@@ -64,20 +83,54 @@ const ListTransac = () => {
           </div>
           <div className="card-body">
             <div className="row mb-3">
-              <div className="col-md-4">
+              <div className="col-md-3">
                 <form className="mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                  <div className="input-group">
-                    <input
-                      type="text"
-                      value={keyword}
-                      onChange={handleChange}
-                      className="form-control"
-                      placeholder="Cari berdasarkan nama..."
-                      aria-label="Search"
-                      aria-describedby="basic-addon2"
-                    />
-                  </div>
+                  <label>Cari: </label>
+                  <input
+                    type="text"
+                    value={keyword}
+                    onChange={handleChange}
+                    className="form-control"
+                    placeholder="Cari berdasarkan nama..."
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                  />
                 </form>
+              </div>
+              <div className="col-md-3">
+                <label>From: </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  value={start}
+                  onChange={handleStart}
+                />
+              </div>
+              <div className="col-md-3">
+                <label>To: </label>
+                <input
+                  type="date"
+                  className="form-control"
+                  value={end}
+                  onChange={handleEnd}
+                />
+              </div>
+              <div className="col-md-1">
+                <br />
+                <button
+                  className="btn btn-primary mt-2"
+                  onClick={() => handleFilter()}
+                >
+                  Filter
+                </button>
+              </div>
+              <div className="col-md-1">
+                <br />
+                <button className="btn btn-success mt-2">Excel</button>
+              </div>
+              <div className="col-md-1">
+                <br />
+                <button className="btn btn-danger mt-2">PDF</button>
               </div>
             </div>
             <TransacTable
