@@ -1,5 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
-import { GetTransacIn, GetTransacOut } from "../Services/TransacService";
+import {
+  GetTransacIn,
+  GetTransacInDate,
+  GetTransacOut,
+  GetTransacOutDate,
+} from "../Services/TransacService";
 import {
   GetItemData,
   GetItemDataId,
@@ -19,28 +24,34 @@ const ItemProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setInterval(() => {
-      GetTransacOut()
-        .then((response) => setTransacOut(response.data.data))
-        .finally(() => setLoading(false));
-    }, 10000);
+    GetTransacOut()
+      .then((response) => setTransacOut(response.data.data))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
-    setInterval(() => {
-      GetItemData()
-        .then((response) => setItem(response.data.data))
-        .finally(() => setLoading(false));
-    }, 10000);
+    GetItemData()
+      .then((response) => setItem(response.data.data))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
-    setInterval(() => {
-      GetTransacIn()
-        .then((response) => setTransac(response.data.data))
-        .finally(() => setLoading(false));
-    }, 10000);
+    GetTransacIn()
+      .then((response) => setTransac(response.data.data))
+      .finally(() => setLoading(false));
   }, []);
+
+  const filterDateIn = (data) => {
+    GetTransacInDate(data)
+      .then((response) => setTransac(response.data.data))
+      .finally(() => setLoading(false));
+  };
+
+  const filterDateOut = (data) => {
+    GetTransacOutDate(data)
+      .then((response) => setTransacOut(response.data.data))
+      .finally(() => setLoading(false));
+  };
 
   // * method for person
   const hideModal = () => window.$("#itemModal").modal("hide");
@@ -114,6 +125,8 @@ const ItemProvider = ({ children }) => {
     handleAdd,
     handleEdit,
     handleDelete,
+    filterDateOut,
+    filterDateIn,
   };
 
   return (
