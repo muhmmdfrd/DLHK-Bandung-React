@@ -1,12 +1,27 @@
-import defer from 'deferred';
-import { Get, Post, Put, Delete } from './IndexService';
+import defer from "deferred";
+import { Get, Post, Put, Delete } from "./IndexService";
 
-const url = 'employee';
+const url = "employee";
 
 const GetEmployeeData = () => {
   const deferred = new defer();
 
   Get(url).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+};
+
+const GetEmployeeByName = (name) => {
+  const deferred = new defer();
+
+  Get(`${url}/name/${name}`).then(
     (response) => {
       deferred.resolve(response);
     },
@@ -111,6 +126,7 @@ const DeleteEmployee = (id) => {
 export {
   GetEmployeeData,
   GetEmployeeDataId,
+  GetEmployeeByName,
   AddEmployee,
   EditEmployee,
   EditLocationEmployee,
