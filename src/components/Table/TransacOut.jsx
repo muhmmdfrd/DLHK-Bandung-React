@@ -8,9 +8,11 @@ const TransacOutTable = ({ response, currentPage, postPerPage }) => {
         <thead className="thead-inverse">
           <tr className="d-flex">
             <th className="col-1 text-center">#</th>
-            <td className="col-3">Tanggal</td>
-            <td className="col-3">Jenis Transaksi</td>
-            <th className="col-3">Nama Barang</th>
+            <td className="col-2">Tanggal</td>
+            <th className="col-2">Nama Barang</th>
+            <th className="col-2">Penerima</th>
+            <th className="col-2">Wilayah</th>
+            <th className="col-1">Zona</th>
             <th className="col-2 text-center">Qty</th>
           </tr>
         </thead>
@@ -20,8 +22,9 @@ const TransacOutTable = ({ response, currentPage, postPerPage }) => {
               itemName,
               qty,
               dataOfTransac,
-              // suplierName,
-              typeOfTransac,
+              userRequest,
+              region,
+              zone,
             } = value;
 
             return (
@@ -29,11 +32,11 @@ const TransacOutTable = ({ response, currentPage, postPerPage }) => {
                 <td className="col-1 text-center">
                   {(currentPage - 1) * postPerPage + index + 1}
                 </td>
-                <td className="col-3">{dateFormat(dataOfTransac)}</td>
-                <td className="col-3">
-                  {typeOfTransac === "IN" ? "Masuk" : "Keluar"}
-                </td>
-                <td className="col-3">{itemName}</td>
+                <td className="col-2">{dateFormat(dataOfTransac)}</td>
+                <td className="col-2">{itemName}</td>
+                <td className="col-2">{userRequest}</td>
+                <td className="col-2">{region}</td>
+                <td className="col-1">{zone}</td>
                 <td className="col-2 text-center">{qty}</td>
               </tr>
             );
