@@ -1,12 +1,18 @@
 import React, { useState, useContext } from "react";
 import { ItemContext } from "../../providers/ItemContext";
-import { PostTransacOut, GetTransacOut } from "../../Services/TransacService";
+import { EmployeeContext } from "../../providers/EmployeeContext";
+import { GetEmployeeByName } from "../../Services/EmployeeService";
 
 const AddTransacModal = () => {
+  const textLoading = "loading...";
   const [itemName, setItemName] = useState([]);
   const [qty, setQty] = useState({});
+  const [request, setRequest] = useState("");
+  const [zone, setZone] = useState(textLoading);
+  const [region, setRegion] = useState(textLoading);
 
-  const { item } = useContext(ItemContext);
+  const { item, inputTransacOut } = useContext(ItemContext);
+  const { employee } = useContext(EmployeeContext);
 
   const handleItemName = (event) => {
     setItemName(event.target.value);
@@ -16,23 +22,31 @@ const AddTransacModal = () => {
     setQty(event.target.value);
   };
 
+  const handleRequest = (event) => {
+    setRegion(textLoading);
+    setZone(textLoading);
+    setRequest(event.target.value);
+    GetEmployeeByName(event.target.value.toLowerCase().trim()).then(
+      (response) => {
+        const { zone, region } = response.data.data;
+        setZone(zone);
+        setRegion(region);
+      }
+    );
+  };
+
   const handleSubmit = () => {
     window.$("#btn-submit-modal-transac").text("loading");
     const data = {
       itemName: itemName,
       qty: qty,
-      userRequest: "User Request",
-      userRecorder: "Admin",
+      userRequest: request,
+      userRecorder: window.localStorage.getItem("_uin"),
+      zone: zone,
+      region: region,
     };
 
-    PostTransacOut(data)
-      .then(() => {})
-      .finally(() => {
-        alert("data berhasil ditambah");
-        window.$("#transacModal").modal("hide");
-        window.$("#btn-submit-modal-transac").text("submit");
-        GetTransacOut();
-      });
+    inputTransacOut(data);
   };
 
   return (
@@ -84,6 +98,47 @@ const AddTransacModal = () => {
                       className="form-control"
                       onChange={handleItemQty}
                       placeholder={"Jumlah Barang"}
+                    />
+                  </div>
+                </div>
+                <br />
+                <div className="row">
+                  <div className="col-md-12">
+                    <select
+                      className="form-control"
+                      value={request}
+                      onChange={handleRequest}
+                    >
+                      <option>Pilih Penerima Barang</option>
+                      {employee.map((value, index) => {
+                        const { name } = value;
+                        return (
+                          <option key={index} value={name}>
+                            {name}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                </div>
+                <br />
+                <div className="row">
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={zone}
+                      onChange={(event) => setZone(event.target.value)}
+                      readOnly={true}
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={region}
+                      onChange={(event) => setRegion(event.target.value)}
+                      readOnly={true}
                     />
                   </div>
                 </div>
