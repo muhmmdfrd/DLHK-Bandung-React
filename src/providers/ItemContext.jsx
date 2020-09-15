@@ -4,6 +4,7 @@ import {
   GetTransacInDate,
   GetTransacOut,
   GetTransacOutDate,
+  PostTransacOut,
 } from "../Services/TransacService";
 import {
   GetItemData,
@@ -51,6 +52,20 @@ const ItemProvider = ({ children }) => {
     GetTransacOutDate(data)
       .then((response) => setTransacOut(response.data.data))
       .finally(() => setLoading(false));
+  };
+
+  const inputTransacOut = (data) => {
+    PostTransacOut(data)
+      .then(() => {
+        alert("data berhasil ditambah");
+        window.$("#transacModal").modal("hide");
+        window.$("#btn-submit-modal-transac").text("submit");
+      })
+      .finally(() => {
+        GetTransacOut()
+          .then((response) => setTransacOut(response.data.data))
+          .finally(() => setLoading(false));
+      });
   };
 
   // * method for person
@@ -127,6 +142,7 @@ const ItemProvider = ({ children }) => {
     handleDelete,
     filterDateOut,
     filterDateIn,
+    inputTransacOut,
   };
 
   return (
