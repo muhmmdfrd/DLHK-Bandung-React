@@ -152,7 +152,7 @@ const Sidebar = () => {
       <SidebarHeading heading={"Contract Management"} />
       <Menu
         linkTo={"/admin/kontrak-pegawai"}
-        menuTitle={"Kontrak Pegawai"}
+        menuTitle={"Pegawai"}
         icon={"fa-file"}
       />
       <Menu
