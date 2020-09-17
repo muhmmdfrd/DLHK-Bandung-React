@@ -36,7 +36,9 @@ const ItemTable = ({ response, action, currentPage, postPerPage }) => {
                 <td className="col-1 text-center">
                   {(currentPage - 1) * postPerPage + index + 1}
                 </td>
-                <td className="col-1">{itemCode}</td>
+                <td className="col-1">
+                  <a href={`/#/admin/barang/${itemCode} - ${itemName}`}>{itemCode}</a>
+                </td>
                 <td className="col-1">{itemName}</td>
                 <td className="col-1 text-center">{firstQty}</td>
                 <td className="col-1 text-center">{dataIn}</td>

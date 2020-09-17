@@ -21,6 +21,7 @@ import ListInterview from "../pages/ListInterview";
 import ListTransac from "../pages/ListTransac";
 import ListTransacOut from "../pages/ListTransacOut";
 import RolePage from "../pages/Role";
+import ItemQR from "../pages/ItemQR";
 
 const Routes = () => {
   // * provide a path and which component will be rendered
@@ -34,6 +35,7 @@ const Routes = () => {
     { path: "/admin/absensi-harian-live", render: PresenceLive },
     { path: "/admin/laporan-harian-live", render: PerformLive },
     { path: "/admin/barang", render: Items },
+    { path: "/admin/barang/:id", render: ItemQR },
     { path: "/admin/kontrak-pegawai", render: Contract },
     { path: "/admin/detail-pegawai/:id", render: DetailPerson },
     { path: "/admin/pelamar", render: ListApplicant },
