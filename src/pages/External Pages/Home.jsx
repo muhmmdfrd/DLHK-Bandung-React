@@ -58,17 +58,20 @@ const Nav = () => {
       <NavLink menu={'GALERI'} />
       <NavLink menu={'INFORMASI'} />
       <NavLink menu={'HUBUNGI KAMI'} />
+      <NavLink menu={'ADMIN'} url={'/#/admin/login'} />
+      <NavLink menu={'LOWONGAN KERJA'} url={'/#/pelamar/login'} />
     </ul>
   );
 };
 
-const NavLink = ({ menu, active }) => {
+const NavLink = ({ menu, active, url }) => {
+  const href = url === undefined ? "/#" : url;
   return (
     <li className='nav-item dropdown'>
       <a
         style={{ fontWeight: 'bold' }}
         className={`nav-link ${active} text-dark mr-4`}
-        href='/#'
+        href={href}
       >
         {menu}
       </a>
