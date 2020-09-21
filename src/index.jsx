@@ -23,6 +23,7 @@ import { EmployeeProvider } from "./providers/EmployeeContext";
 import { ApplicantProvider } from "./providers/ApplicantContext";
 import { InterviewProvider } from "./providers/InterviewContext";
 import { RoleProvider } from "./providers/RoleContext";
+import { DashboardProvider } from "./providers/DashboardContext";
 
 const AllProvider = ({ children }) => {
   return (
@@ -32,7 +33,9 @@ const AllProvider = ({ children }) => {
           <EmployeeProvider>
             <ApplicantProvider>
               <InterviewProvider>
-                <RoleProvider>{children}</RoleProvider>
+                <RoleProvider>
+                  <DashboardProvider>{children}</DashboardProvider>
+                </RoleProvider>
               </InterviewProvider>
             </ApplicantProvider>
           </EmployeeProvider>

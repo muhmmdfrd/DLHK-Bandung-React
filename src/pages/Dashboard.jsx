@@ -1,26 +1,61 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Card from '../components/Card/Card';
+import FadeIn from "react-fade-in";
+
+// * components
+import LoadingScreen from "./LoadingScreen";
+import { DashboardContext } from '../providers/DashboardContext';
 
 const Dashboard = () => {
-  return (
-    <div
-      className='container h-100'
-      style={{
-        position: 'fixed',
-        width: 100 + '%',
-        height: 100 + '%'
-      }}
-    >
-      <div className='row h-100 justify-content-center align-items-center'>
-      <img
-        src='https://www.kangpisman.com/wp-content/uploads/2018/11/1.-logo-kangpisman.png'
-        alt=''
-        className='img-responsive mb-3'
-        style={{ width: 150 + 'px', height: 'auto' }}
-      />
-        <h1>Selamat Datang Admin</h1>
-      </div>
-    </div>
-  );
+  const num = [1, 2, 3, 4];
+
+  const { presence, loading } = useContext(DashboardContext);
+
+  return loading ? <LoadingScreen />
+    : (
+      <FadeIn>
+        <div className='container-fluid mt-4'>
+
+          <div className="row">
+            <div className="col-xl-3 col-md-6 mb-4">
+              <Card title={'Jumlah Pegawai'} value={presence.employees} icon={'user'} label={'primary'} />
+            </div>
+            <div className="col-xl-3 col-md-6 mb-4">
+              <Card title={'Kehadiran'} value={presence.presences} icon={'clock'} label={'warning'} />
+            </div>
+            <div className="col-xl-3 col-md-6 mb-4">
+              <Card title={'Performa'} value={presence.performances} icon={'dashboard'} label={'danger'} />
+            </div>
+            <div className="col-xl-3 col-md-6 mb-4">
+              <Card title={'Nilai Keseluruhan'} value={presence.score} icon={'award'} label={'success'} />
+            </div>
+          </div>
+
+          <br />
+
+          <div className="row">
+            {num.map((value) => {
+              return (
+                <div key={value} className="col-xl-3 col-md-6 mb-4">
+                  <Card />
+                </div>)
+            })}
+          </div>
+
+          <br />
+
+          <div className="row">
+            {num.map((value) => {
+              return (
+                <div key={value} className="col-xl-3 col-md-6 mb-4">
+                  <Card />
+                </div>)
+            })}
+          </div>
+
+        </div>
+      </FadeIn>
+    );
 };
 
 export default Dashboard;
