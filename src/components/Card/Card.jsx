@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Card = ({ title, value, label, icon }) => {
-    const res = title === 'Jumlah Pegawai' ? value : `${value}%`
+const Card = ({ title, value, label, icon, percent }) => {
+    const notation = useState(true);
+
+    const res = !percent && notation ? value : `${value}%`
+
     return (<div className={`card border-left-${label} shadow h-100 py-2`}>
         <div className="card-body">
             <div className="row no-gutters align-items-center">

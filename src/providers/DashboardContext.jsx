@@ -1,10 +1,12 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { GetDashboardPresence } from '../Services/DashboardService';
+import { GetDashboardContract, GetDashboardItem, GetDashboardPresence } from '../Services/DashboardService';
 
 const DashboardContext = createContext();
 
 const DashboardProvider = ({ children }) => {
     const [presence, setPresence] = useState([]);
+    const [item, setItem] = useState([]);
+    const [contract, setContract] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -13,8 +15,22 @@ const DashboardProvider = ({ children }) => {
             .finally(() => setLoading(false));
     }, []);
 
+    useEffect(() => {
+        GetDashboardItem()
+            .then((response) => setItem(response.data.data))
+            .finally(() => setLoading(false));
+    }, []);
+
+    useEffect(() => {
+        GetDashboardContract()
+            .then((response) => setContract(response.data.data))
+            .finally(() => setLoading(false));
+    }, []);
+
     const objValue = {
         presence,
+        item,
+        contract,
         loading
     };
 
