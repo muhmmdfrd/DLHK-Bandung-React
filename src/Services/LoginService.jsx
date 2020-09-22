@@ -1,5 +1,5 @@
 import defer from 'deferred';
-import { Login } from './IndexService';
+import { Login, Claim } from './IndexService';
 
 const LoginService = (data) => {
   const deferred = new defer();
@@ -16,4 +16,19 @@ const LoginService = (data) => {
   return deferred.promise;
 };
 
-export default LoginService;
+const UserClaim = (token) => {
+  const deferred = new defer();
+
+  Claim(token).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+}
+
+export { LoginService, UserClaim };
