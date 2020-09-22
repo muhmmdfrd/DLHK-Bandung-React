@@ -23,7 +23,7 @@ const RoleProvider = ({ children }) => {
         .finally(() => {
           setLoading(false);
         });
-    }, 10000);
+    }, 20000);
   }, []);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const RoleProvider = ({ children }) => {
         .finally(() => {
           setLoading(false);
         });
-    }, 10000);
+    }, 20000);
   }, []);
 
   const handleEdit = (id) => {

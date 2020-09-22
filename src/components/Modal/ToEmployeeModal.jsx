@@ -77,7 +77,7 @@ const ToEmployeeModal = () => {
       axios
         .get("http://api.dlhk.local/api/person/interview")
         .then((response) => setPerson(response.data.data));
-    }, 10000);
+    }, 20000);
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from "react";
 import {
   GetPresenceResume,
   GetPresenceZone,
@@ -8,7 +8,7 @@ import {
   GetPerformRegion,
   GetLiveZone,
   GetPerformLiveZone,
-} from '../Services/PresenceService';
+} from "../Services/PresenceService";
 
 const PresenceContext = createContext();
 
@@ -28,7 +28,7 @@ const PresenceProvider = ({ children }) => {
       GetPresenceResume()
         .then((response) => setPresence(response.data.data))
         .finally(() => setLoading(false));
-    }, 10000);
+    }, 20000);
   }, []);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const PresenceProvider = ({ children }) => {
       GetPerformLiveZone()
         .then((response) => setLivePerform(response.data.data))
         .finally(() => setLoading(false));
-    }, 10000);
+    }, 20000);
   }, []);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const PresenceProvider = ({ children }) => {
       GetPerformResume()
         .then((response) => setPerform(response.data.data))
         .finally(() => setLoading(false));
-    }, 10000);
+    }, 20000);
   }, []);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ const PresenceProvider = ({ children }) => {
       GetPresenceZone()
         .then((response) => setPresenceZone(response.data.data))
         .finally(() => setLoading(false));
-    }, 10000);
+    }, 20000);
   }, []);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const PresenceProvider = ({ children }) => {
       GetPresenceRegion()
         .then((response) => setPresenceRegion(response.data.data))
         .finally(() => setLoading(false));
-    }, 10000);
+    }, 20000);
   }, []);
 
   useEffect(() => {
@@ -68,15 +68,15 @@ const PresenceProvider = ({ children }) => {
       GetPerformZone()
         .then((response) => setPerformZone(response.data.data))
         .finally(() => setLoading(false));
-    }, 10000);
+    }, 20000);
   }, []);
 
   useEffect(() => {
-   setInterval(() => {
-    GetPerformRegion()
-      .then((response) => setPerformRegion(response.data.data))
-      .finally(() => setLoading(false));
-   }, 10000);
+    setInterval(() => {
+      GetPerformRegion()
+        .then((response) => setPerformRegion(response.data.data))
+        .finally(() => setLoading(false));
+    }, 20000);
   }, []);
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const PresenceProvider = ({ children }) => {
       GetLiveZone()
         .then((response) => setLiveZone(response.data.data))
         .finally(() => setLoading(false));
-    }, 10000);
+    }, 20000);
   }, []);
 
   const objectValue = {

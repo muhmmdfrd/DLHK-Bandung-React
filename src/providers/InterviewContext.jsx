@@ -1,9 +1,9 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from "react";
 import {
   GetInterviewData,
   GetInterviewDataId,
   AddInterview,
-} from '../Services/InterviewService';
+} from "../Services/InterviewService";
 
 const InterviewContext = createContext();
 
@@ -17,13 +17,13 @@ const InterviewProvider = ({ children }) => {
       GetInterviewData()
         .then((response) => setInterview(response.data.data))
         .finally(() => setLoading(false));
-    }, 10000);
+    }, 20000);
   }, []);
 
   const addInterview = (data) => {
     AddInterview(data)
-      .then(() => alert('berhasil membuat jadwal interview'))
-      .then(() => window.$('#interviewModal').modal('hide'))
+      .then(() => alert("berhasil membuat jadwal interview"))
+      .then(() => window.$("#interviewModal").modal("hide"))
       .finally(() => {
         GetInterviewData()
           .then((response) => setInterview(response.data.data))

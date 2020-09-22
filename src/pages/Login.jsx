@@ -55,17 +55,17 @@ const Login = () => {
         .then(async (response) => {
           const role = await UserClaim(response.data.access_token);
           const roleName = await role.data.data.RoleName;
-          if (roleName.toLowerCase().includes('admin')) {
+          if (roleName.toLowerCase().includes("admin")) {
             window.localStorage.setItem("_tid", response.data.access_token);
             window.localStorage.setItem("_uin", username);
             window.localStorage.setItem("_rln", roleName);
             window.location.href = "/#/admin/dashboard";
           } else {
             // eslint-disable-next-line
-            throw 'err';
+            throw "username atau password salah";
           }
         })
-        .catch((err) => alert("username atau password salah"))
+        .catch((err) => alert(err))
         .finally(() => enabledForm());
     }
   };

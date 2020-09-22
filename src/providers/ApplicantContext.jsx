@@ -60,7 +60,7 @@ const ApplicantProvider = ({ children }) => {
       GetApplicant()
         .then((response) => setApplicant(response.data.data))
         .finally(() => setLoading(false));
-    }, 10000);
+    }, 20000);
   }, []);
 
   const objectValue = {

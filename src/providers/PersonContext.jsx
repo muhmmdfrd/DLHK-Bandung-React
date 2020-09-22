@@ -24,7 +24,7 @@ const PersonProvider = ({ children }) => {
       GetPersonData()
         .then((response) => setPerson(response.data.data))
         .finally(() => setLoading(false));
-    }, 10000);
+    }, 20000);
   }, []);
 
   // * method for person
