@@ -6,173 +6,206 @@ const Sidebar = () => {
   return (
     <WrapperList>
       <Logo />
-
-      <Divider optional={"my-0"} />
+      <div className="mb-2">
+        <Divider optional={"my-0"} />
+      </div>
 
       {/* smart Presence */}
-      <div className="mt-2">
-        <SidebarHeading heading={"Smart Presence"} />
-      </div>
-      <Menu
-        linkTo={"/admin/dashboard"}
-        icon={"fa-tachometer-alt"}
-        menuTitle={"Dashboard"}
-      />
-      <Menu
-        linkTo={"/admin/pegawai"}
-        icon={"fa-users"}
-        menuTitle={"Kepegawaian"}
-      />
-
-      <NavItem>
-        <a
-          className="nav-link collapsed"
-          href="/#"
-          data-toggle="collapse"
-          data-target="#collapseOne"
-          aria-expanded="true"
-          aria-controls="collapseOne"
-        >
-          <i className="fas fa-fw fa-eye"></i>
-          <span>Live Supervisi</span>
-        </a>
-        <div
-          id="collapseOne"
-          className="collapse"
-          aria-labelledby="headingTwo"
-          data-parent="#accordionSidebar"
-        >
-          <div className="bg-white py-2 collapse-inner rounded">
-            <h6 className="collapse-header">Menu Supervisi Live:</h6>
-            <NavLink
-              className="collapse-item"
-              activeClassName="yes-active"
-              to="/admin/absensi-harian-live"
+      {window.localStorage.getItem("_rln") === "Admin Presence" ||
+      window.localStorage.getItem("_rln") === "Admin" ? (
+        <>
+          <SidebarHeading heading={"Smart Presence"} />
+          <Menu
+            linkTo={"/admin/dashboard"}
+            icon={"fa-tachometer-alt"}
+            menuTitle={"Dashboard"}
+          />
+          <Menu
+            linkTo={"/admin/pegawai"}
+            icon={"fa-users"}
+            menuTitle={"Kepegawaian"}
+          />
+          <NavItem>
+            <a
+              className="nav-link collapsed"
+              href="/#"
+              data-toggle="collapse"
+              data-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
             >
-              Progress Absen Harian
-            </NavLink>
-
-            <NavLink
-              className="collapse-item"
-              activeClassName="yes-active"
-              to="/admin/laporan-harian-live"
+              <i className="fas fa-fw fa-eye"></i>
+              <span>Live Supervisi</span>
+            </a>
+            <div
+              id="collapseOne"
+              className="collapse"
+              aria-labelledby="headingTwo"
+              data-parent="#accordionSidebar"
             >
-              Progress Laporan Harian
-            </NavLink>
-          </div>
-        </div>
-      </NavItem>
+              <div className="bg-white py-2 collapse-inner rounded">
+                <h6 className="collapse-header">Menu Supervisi Live:</h6>
+                <NavLink
+                  className="collapse-item"
+                  activeClassName="yes-active"
+                  to="/admin/absensi-harian-live"
+                >
+                  Progress Absen Harian
+                </NavLink>
 
-      <NavItem>
-        <a
-          className="nav-link collapsed"
-          href="/#"
-          data-toggle="collapse"
-          data-target="#collapseThree"
-          aria-expanded="true"
-          aria-controls="collapseThree"
-        >
-          <i className="fa fa-fw fa-bars" aria-hidden="true"></i>
-          <span>Statistik</span>
-        </a>
-        <div
-          id="collapseThree"
-          className="collapse"
-          aria-labelledby="headingTwo"
-          data-parent="#accordionSidebar"
-        >
-          <div className="bg-white py-2 collapse-inner rounded">
-            <h6 className="collapse-header">Menu Statistik:</h6>
-            <NavLink
-              className="collapse-item"
-              activeClassName="yes-active"
-              to="/admin/statistik-absensi"
+                <NavLink
+                  className="collapse-item"
+                  activeClassName="yes-active"
+                  to="/admin/laporan-harian-live"
+                >
+                  Progress Laporan Harian
+                </NavLink>
+              </div>
+            </div>
+          </NavItem>{" "}
+          <NavItem>
+            <a
+              className="nav-link collapsed"
+              href="/#"
+              data-toggle="collapse"
+              data-target="#collapseThree"
+              aria-expanded="true"
+              aria-controls="collapseThree"
             >
-              Resume Absensi
-            </NavLink>
-            <NavLink
-              className="collapse-item"
-              activeClassName="yes-active"
-              to="/admin/statistik-performa"
+              <i className="fa fa-fw fa-bars" aria-hidden="true"></i>
+              <span>Statistik</span>
+            </a>
+            <div
+              id="collapseThree"
+              className="collapse"
+              aria-labelledby="headingTwo"
+              data-parent="#accordionSidebar"
             >
-              Resume Performa
-            </NavLink>
-          </div>
-        </div>
-      </NavItem>
-
-      <Divider />
+              <div className="bg-white py-2 collapse-inner rounded">
+                <h6 className="collapse-header">Menu Statistik:</h6>
+                <NavLink
+                  className="collapse-item"
+                  activeClassName="yes-active"
+                  to="/admin/statistik-absensi"
+                >
+                  Resume Absensi
+                </NavLink>
+                <NavLink
+                  className="collapse-item"
+                  activeClassName="yes-active"
+                  to="/admin/statistik-performa"
+                >
+                  Resume Performa
+                </NavLink>
+              </div>
+            </div>
+          </NavItem>
+          <Divider />
+        </>
+      ) : null}
 
       {/* inventory Management */}
-      <SidebarHeading heading={"Inventory Management"} />
-      <Menu linkTo={"/admin/barang"} icon={"fa-archive"} menuTitle={"Barang"} />
-      <NavItem>
-        <a
-          className="nav-link collapsed"
-          href="/#"
-          data-toggle="collapse"
-          data-target="#collapseTransac"
-          aria-expanded="true"
-          aria-controls="collapseTransac"
-        >
-          <i className="fas fa-fw fa-inbox"></i>
-          <span>Transaksi Barang</span>
-        </a>
-        <div
-          id="collapseTransac"
-          className="collapse"
-          aria-labelledby="headingTwo"
-          data-parent="#accordionSidebar"
-        >
-          <div className="bg-white py-2 collapse-inner rounded">
-            <h6 className="collapse-header">Jenis Transaksi Barang:</h6>
-            <NavLink
-              className="collapse-item"
-              activeClassName="yes-active"
-              to="/admin/transaksi-barang"
-            >
-              Barang Masuk
-            </NavLink>
+      {window.localStorage.getItem("_rln") === "Admin" ||
+      window.localStorage.getItem("_rln") === "Admin Inventory" ? (
+        <>
+          <SidebarHeading heading={"Inventory Management"} />
 
-            <NavLink
-              className="collapse-item"
-              activeClassName="yes-active"
-              to="/admin/transaksi-barang-keluar"
+          {window.localStorage.getItem("_rln") === "Admin" ? null : (
+            <Menu
+              linkTo={"/admin/dashboard"}
+              icon={"fa-tachometer-alt"}
+              menuTitle={"Dashboard"}
+            />
+          )}
+          <Menu
+            linkTo={"/admin/barang"}
+            icon={"fa-archive"}
+            menuTitle={"Barang"}
+          />
+          <NavItem>
+            <a
+              className="nav-link collapsed"
+              href="/#"
+              data-toggle="collapse"
+              data-target="#collapseTransac"
+              aria-expanded="true"
+              aria-controls="collapseTransac"
             >
-              Barang Keluar
-            </NavLink>
-          </div>
-        </div>
-      </NavItem>
-      {/* end of inventory Managament */}
+              <i className="fas fa-fw fa-inbox"></i>
+              <span>Transaksi Barang</span>
+            </a>
+            <div
+              id="collapseTransac"
+              className="collapse"
+              aria-labelledby="headingTwo"
+              data-parent="#accordionSidebar"
+            >
+              <div className="bg-white py-2 collapse-inner rounded">
+                <h6 className="collapse-header">Jenis Transaksi Barang:</h6>
+                <NavLink
+                  className="collapse-item"
+                  activeClassName="yes-active"
+                  to="/admin/transaksi-barang"
+                >
+                  Barang Masuk
+                </NavLink>
 
-      <Divider />
+                <NavLink
+                  className="collapse-item"
+                  activeClassName="yes-active"
+                  to="/admin/transaksi-barang-keluar"
+                >
+                  Barang Keluar
+                </NavLink>
+              </div>
+            </div>
+          </NavItem>
+          {/* end of inventory Managament */}
+
+          <Divider />
+        </>
+      ) : null}
+
+      {window.localStorage.getItem("_rln") === "Admin" ||
+      window.localStorage.getItem("_rln") === "Admin Contract" ? (
+        <>
+          <SidebarHeading heading={"Contract Management"} />
+
+          {window.localStorage.getItem("_rln") === "Admin" ? null : (
+            <Menu
+              linkTo={"/admin/dashboard"}
+              icon={"fa-tachometer-alt"}
+              menuTitle={"Dashboard"}
+            />
+          )}
+
+          <Menu
+            linkTo={"/admin/kontrak-pegawai"}
+            menuTitle={"Pegawai"}
+            icon={"fa-file"}
+          />
+          <Menu
+            linkTo={"/admin/pelamar"}
+            menuTitle={"Pelamar"}
+            icon={"fa-briefcase"}
+          />
+          <Menu
+            linkTo={"/admin/interview"}
+            menuTitle={"Jadwal Interview"}
+            icon={"fa-calendar"}
+          />
+          <Menu
+            linkTo={"/admin/posisi-pelamar"}
+            menuTitle={"Posisi Lamaran"}
+            icon={"fa-user"}
+          />
+          {/* end of contract Management */}
+
+          <Divider optional={"d-none d-md-block"} />
+        </>
+      ) : null}
 
       {/* contract Management */}
-      <SidebarHeading heading={"Contract Management"} />
-      <Menu
-        linkTo={"/admin/kontrak-pegawai"}
-        menuTitle={"Pegawai"}
-        icon={"fa-file"}
-      />
-      <Menu
-        linkTo={"/admin/pelamar"}
-        menuTitle={"Pelamar"}
-        icon={"fa-briefcase"}
-      />
-      <Menu
-        linkTo={"/admin/interview"}
-        menuTitle={"Jadwal Interview"}
-        icon={"fa-calendar"}
-      />
-      <Menu
-        linkTo={"/admin/posisi-pelamar"}
-        menuTitle={"Posisi Lamaran"}
-        icon={"fa-user"}
-      />
-      {/* end of contract Management */}
-
-      <Divider optional={"d-none d-md-block"} />
     </WrapperList>
   );
 };

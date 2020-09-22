@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import qs from "querystring";
-import LoginService from "./../Services/LoginService";
+import { LoginService, UserClaim } from "./../Services/LoginService";
 
 const Login = () => {
   // states
@@ -52,14 +52,20 @@ const Login = () => {
       });
 
       LoginService(params)
-        .then((response) => {
-          if (response.status === 200) {
+        .then(async (response) => {
+          const role = await UserClaim(response.data.access_token);
+          const roleName = await role.data.data.RoleName;
+          if (roleName.toLowerCase().includes('admin')) {
             window.localStorage.setItem("_tid", response.data.access_token);
             window.localStorage.setItem("_uin", username);
+            window.localStorage.setItem("_rln", roleName);
             window.location.href = "/#/admin/dashboard";
+          } else {
+            // eslint-disable-next-line
+            throw 'err';
           }
         })
-        .catch((response) => alert("username atau password salah"))
+        .catch((err) => alert("username atau password salah"))
         .finally(() => enabledForm());
     }
   };
