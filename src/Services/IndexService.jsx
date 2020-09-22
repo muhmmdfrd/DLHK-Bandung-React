@@ -3,6 +3,29 @@ import Axios from 'axios';
 
 const baseurl = 'http://api.dlhk.local/api/';
 
+const Claim = (token) => {
+  const deferred = new defer();
+  const url = baseurl + 'user/claim';
+
+  Axios({
+    method: 'GET',
+    url: url,
+    timeout: deferred.promise,
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+  }).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+}
+
 const Login = (data) => {
   const deferred = new defer();
   const url = baseurl + 'login';
@@ -192,4 +215,4 @@ const Delete = (path) => {
   return deferred.promise;
 };
 
-export { Get, Post, PostMultipart, Put, PutMultipart, Delete, Login };
+export { Get, Post, PostMultipart, Put, PutMultipart, Delete, Login, Claim };
