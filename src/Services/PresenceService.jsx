@@ -1,12 +1,27 @@
-import { Get, Post, Put, Delete } from './IndexService';
-import defer from 'deferred';
+import { Get, Post, Put, Delete } from "./IndexService";
+import defer from "deferred";
 
-const url = 'presence';
+const url = "presence";
 
 const GetPresenceData = () => {
   const deferred = new defer();
 
   Get(url).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+};
+
+const GetPresenceDetail = (status, zone) => {
+  const deferred = new defer();
+
+  Get(`${url}/${zone}/${status}`).then(
     (response) => {
       deferred.resolve(response);
     },
@@ -209,6 +224,7 @@ export {
   GetPerformRegion,
   GetLiveZone,
   GetPerformLiveZone,
+  GetPresenceDetail,
   AddPresence,
   EditPresence,
   DeletePresence,

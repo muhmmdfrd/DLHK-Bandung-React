@@ -9,6 +9,8 @@ import InterviewModal from "./InterviewModal";
 import DateContractModal from "./DateContractModal";
 import AddTransacModal from "./AddTransacModal";
 import RoleModal from "./RoleModal";
+import PresenceDetailModal from "./PresenceDetailModal";
+import ImageDetailModal from "./ImageDetailModal";
 
 const AllModal = () => {
   return (
@@ -23,6 +25,8 @@ const AllModal = () => {
       <DateContractModal />
       <AddTransacModal />
       <RoleModal />
+      <PresenceDetailModal />
+      <ImageDetailModal />
     </>
   );
 };

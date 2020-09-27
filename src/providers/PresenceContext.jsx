@@ -8,12 +8,14 @@ import {
   GetPerformRegion,
   GetLiveZone,
   GetPerformLiveZone,
+  GetPresenceDetail,
 } from "../Services/PresenceService";
 
 const PresenceContext = createContext();
 
 const PresenceProvider = ({ children }) => {
   const [presence, setPresence] = useState([]);
+  const [detail, setDetail] = useState([]);
   const [presenceZone, setPresenceZone] = useState([]);
   const [presenceRegion, setPresenceRegion] = useState([]);
   const [perform, setPerform] = useState([]);
@@ -22,6 +24,11 @@ const PresenceProvider = ({ children }) => {
   const [liveZone, setLiveZone] = useState([]);
   const [livePerform, setLivePerform] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // * additional
+  const [loc, setLoc] = useState("");
+  const [stat, setStat] = useState("");
+  const [file, setFile] = useState("");
 
   useEffect(() => {
     setInterval(() => {
@@ -87,6 +94,18 @@ const PresenceProvider = ({ children }) => {
     }, 20000);
   }, []);
 
+  const handleDetail = (status, zone) => {
+    setLoc(zone);
+    setStat(status);
+    GetPresenceDetail(status, zone)
+      .then((response) => setDetail(response.data.data))
+      .finally(() => window.$("#detailModal").modal("toggle"));
+  };
+
+  const handleFile = (data) => {
+    setFile(data);
+  };
+
   const objectValue = {
     presence,
     presenceZone,
@@ -96,6 +115,12 @@ const PresenceProvider = ({ children }) => {
     performRegion,
     liveZone,
     livePerform,
+    detail,
+    handleDetail,
+    handleFile,
+    loc,
+    stat,
+    file,
     loading,
   };
 
