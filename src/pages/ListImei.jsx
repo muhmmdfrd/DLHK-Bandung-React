@@ -4,12 +4,12 @@ import FadeIn from "react-fade-in";
 // * components
 import LoadingScreen from "./LoadingScreen";
 import Pagination from "../components/Pagination/Pagination";
+import ImeiTable from "../components/Table/ImeiTable";
 
 // * context
-import { UserContext } from "../providers/UserContext";
-import UserTable from "../components/Table/UserTable";
+import { ImeiContext } from "../providers/ImeiContext";
 
-const UserAccount = () => {
+const ListImei = () => {
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
 
@@ -23,8 +23,8 @@ const UserAccount = () => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { user, loading, handleEdit, deleteUser, setStatus } = useContext(
-    UserContext
+  const { imei, loading, handleEdit, deleteImei, setStatus } = useContext(
+    ImeiContext
   );
 
   // * function or method
@@ -44,11 +44,11 @@ const UserAccount = () => {
   // * end of method
 
   useEffect(() => {
-    const result = user.filter((user) =>
-      user.personName.toLowerCase().includes(keyword.toLowerCase())
+    const result = imei.filter((imei) =>
+      imei.imeiName.toLowerCase().includes(keyword.toLowerCase())
     );
     setData(result);
-  }, [user, keyword]);
+  }, [imei, keyword]);
 
   // * render the HTML
   return loading ? (
@@ -72,7 +72,7 @@ const UserAccount = () => {
                       value={keyword}
                       onChange={handleChange}
                       className="form-control"
-                      placeholder="Cari berdasarkan nama..."
+                      placeholder="Cari berdasarkan IMEI..."
                       aria-label="Search"
                       aria-describedby="basic-addon2"
                     />
@@ -84,18 +84,18 @@ const UserAccount = () => {
                   className="btn btn-success float-right mr-5"
                   onClick={() => {
                     setStatus("tambah");
-                    window.$("#userModal").modal("toggle");
+                    window.$("#imeiModal").modal("toggle");
                   }}
                 >
                   Tambah
                 </button>
               </div>
             </div>
-            <UserTable
+            <ImeiTable
               response={current}
               currentPage={currentPage}
               postPerPage={postPerPage}
-              action={{ handleEdit, deleteUser }}
+              action={{ handleEdit, deleteImei }}
             />
           </div>
           <Pagination
@@ -112,4 +112,4 @@ const UserAccount = () => {
   );
 };
 
-export default UserAccount;
+export default ListImei;

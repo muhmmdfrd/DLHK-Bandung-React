@@ -23,7 +23,7 @@ import ListTransacOut from "../pages/ListTransacOut";
 import RolePage from "../pages/Role";
 import ItemQR from "../pages/ItemQR";
 import UserAccount from "../pages/UserAccount";
-import Device from "../pages/Device";
+import ListImei from "../pages/ListImei";
 
 const Routes = () => {
   // * provide a path and which component will be rendered
@@ -63,7 +63,7 @@ const Routes = () => {
     },
     {
       path: "/admin/device",
-      render: Device,
+      render: ListImei,
     },
   ];
 

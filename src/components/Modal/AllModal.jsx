@@ -11,6 +11,8 @@ import AddTransacModal from "./AddTransacModal";
 import RoleModal from "./RoleModal";
 import PresenceDetailModal from "./PresenceDetailModal";
 import ImageDetailModal from "./ImageDetailModal";
+import UserModal from "./UserModal";
+import ImeiModal from "./ImeiModal";
 
 const AllModal = () => {
   return (
@@ -27,6 +29,8 @@ const AllModal = () => {
       <RoleModal />
       <PresenceDetailModal />
       <ImageDetailModal />
+      <UserModal />
+      <ImeiModal />
     </>
   );
 };

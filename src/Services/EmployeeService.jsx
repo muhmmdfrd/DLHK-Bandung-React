@@ -18,6 +18,22 @@ const GetEmployeeData = () => {
   return deferred.promise;
 };
 
+const GetUserEmployee = () => {
+  const deferred = new defer();
+  const path = `${url}/unregister`;
+
+  Get(path).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+};
+
 const GetEmployeeByName = (name) => {
   const deferred = new defer();
 
@@ -127,6 +143,7 @@ export {
   GetEmployeeData,
   GetEmployeeDataId,
   GetEmployeeByName,
+  GetUserEmployee,
   AddEmployee,
   EditEmployee,
   EditLocationEmployee,

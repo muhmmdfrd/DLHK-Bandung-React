@@ -25,6 +25,7 @@ import { InterviewProvider } from "./providers/InterviewContext";
 import { RoleProvider } from "./providers/RoleContext";
 import { DashboardProvider } from "./providers/DashboardContext";
 import { UserProvider } from "./providers/UserContext";
+import { ImeiProvider } from "./providers/ImeiContext";
 
 const AllProvider = ({ children }) => {
   return (
@@ -36,7 +37,9 @@ const AllProvider = ({ children }) => {
               <InterviewProvider>
                 <RoleProvider>
                   <DashboardProvider>
-                    <UserProvider>{children}</UserProvider>
+                    <UserProvider>
+                      <ImeiProvider>{children}</ImeiProvider>
+                    </UserProvider>
                   </DashboardProvider>
                 </RoleProvider>
               </InterviewProvider>

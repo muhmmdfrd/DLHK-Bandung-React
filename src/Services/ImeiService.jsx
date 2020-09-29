@@ -1,9 +1,9 @@
 import defer from "deferred";
 import { Delete, Get, Post, Put } from "./IndexService";
 
-const url = "user";
+const url = "imei";
 
-const GetUser = () => {
+const GetImei = () => {
   const deferred = new defer();
   const path = url;
 
@@ -19,7 +19,7 @@ const GetUser = () => {
   return deferred.promise;
 };
 
-const GetUserId = (id) => {
+const GetImeiId = (id) => {
   const deferred = new defer();
   const path = `${url}/${id}`;
 
@@ -35,7 +35,7 @@ const GetUserId = (id) => {
   return deferred.promise;
 };
 
-const AddUser = (data) => {
+const AddImei = (data) => {
   const deferred = new defer();
   const path = url;
 
@@ -51,7 +51,7 @@ const AddUser = (data) => {
   return deferred.promise;
 };
 
-const UpdateUser = (data) => {
+const UpdateImei = (data) => {
   const deferred = new defer();
   const path = url;
 
@@ -67,7 +67,7 @@ const UpdateUser = (data) => {
   return deferred.promise;
 };
 
-const DeleteUser = (id) => {
+const DeleteImei = (id) => {
   const deferred = new defer();
   const path = `${url}/${id}`;
 
@@ -83,4 +83,4 @@ const DeleteUser = (id) => {
   return deferred.promise;
 };
 
-export { GetUser, GetUserId, AddUser, UpdateUser, DeleteUser };
+export { GetImei, GetImeiId, AddImei, UpdateImei, DeleteImei };

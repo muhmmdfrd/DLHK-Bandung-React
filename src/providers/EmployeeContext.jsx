@@ -6,6 +6,7 @@ import {
   DeleteEmployee,
   EditLocationEmployee,
   EditContract,
+  GetUserEmployee,
 } from "../Services/EmployeeService";
 
 const EmployeeContext = createContext();
@@ -16,11 +17,20 @@ const EmployeeProvider = ({ children }) => {
   const [modalStatus, setModalStatus] = useState("");
   const [loading, setLoading] = useState(true);
   const [personId, setPersonId] = useState(0);
+  const [employeeUser, setEmployeeUser] = useState([]);
 
   useEffect(() => {
     setInterval(() => {
       GetEmployeeData()
         .then((response) => setEmployee(response.data.data))
+        .finally(() => setLoading(false));
+    }, 20000);
+  }, []);
+
+  useEffect(() => {
+    setInterval(() => {
+      GetUserEmployee()
+        .then((response) => setEmployeeUser(response.data.data))
         .finally(() => setLoading(false));
     }, 20000);
   }, []);
@@ -116,6 +126,7 @@ const EmployeeProvider = ({ children }) => {
     employee,
     dataEmployeeId,
     personId,
+    employeeUser,
     modalStatus,
     loading,
     getPersonId,
