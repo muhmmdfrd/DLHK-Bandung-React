@@ -22,6 +22,8 @@ import ListTransac from "../pages/ListTransac";
 import ListTransacOut from "../pages/ListTransacOut";
 import RolePage from "../pages/Role";
 import ItemQR from "../pages/ItemQR";
+import UserAccount from "../pages/UserAccount";
+import Device from "../pages/Device";
 
 const Routes = () => {
   // * provide a path and which component will be rendered
@@ -54,6 +56,14 @@ const Routes = () => {
     {
       path: "/admin/posisi-pelamar",
       render: RolePage,
+    },
+    {
+      path: "/admin/user",
+      render: UserAccount,
+    },
+    {
+      path: "/admin/device",
+      render: Device,
     },
   ];
 

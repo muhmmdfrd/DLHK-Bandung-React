@@ -62,10 +62,16 @@ const Login = () => {
             window.location.href = "/#/admin/dashboard";
           } else {
             // eslint-disable-next-line
-            throw "username atau password salah";
+            throw "Anda tidak punya akses untuk login";
           }
         })
-        .catch((err) => alert(err))
+        .catch((err) =>
+          alert(
+            err === "Error: Request failed with status code 400"
+              ? "username atau password Anda salah!"
+              : "Periksa kembali koneksi Anda"
+          )
+        )
         .finally(() => enabledForm());
     }
   };

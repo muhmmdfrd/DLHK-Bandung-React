@@ -205,7 +205,25 @@ const Sidebar = () => {
         </>
       ) : null}
 
-      {/* contract Management */}
+      {window.localStorage.getItem("_rln") === "Admin" ? (
+        <>
+          <SidebarHeading heading={"Account Management"} />
+
+          <Menu
+            linkTo={"/admin/user"}
+            menuTitle={"Account"}
+            icon={"fa-user-friends"}
+          />
+          <Menu
+            linkTo={"/admin/device"}
+            menuTitle={"IMEI"}
+            icon={"fa-mobile"}
+          />
+          {/* end of contract Management */}
+
+          <Divider optional={"d-none d-md-block"} />
+        </>
+      ) : null}
     </WrapperList>
   );
 };

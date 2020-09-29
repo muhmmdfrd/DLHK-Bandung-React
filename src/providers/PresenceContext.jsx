@@ -9,6 +9,7 @@ import {
   GetLiveZone,
   GetPerformLiveZone,
   GetPresenceDetail,
+  GetPresenceResumeFilter,
 } from "../Services/PresenceService";
 
 const PresenceContext = createContext();
@@ -31,11 +32,9 @@ const PresenceProvider = ({ children }) => {
   const [file, setFile] = useState("");
 
   useEffect(() => {
-    setInterval(() => {
-      GetPresenceResume()
-        .then((response) => setPresence(response.data.data))
-        .finally(() => setLoading(false));
-    }, 20000);
+    GetPresenceResume()
+      .then((response) => setPresence(response.data.data))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -106,6 +105,12 @@ const PresenceProvider = ({ children }) => {
     setFile(data);
   };
 
+  const handleFilter = (start, end) => {
+    GetPresenceResumeFilter(start, end)
+      .then((response) => setPresence(response.data.data))
+      .finally(() => setLoading(false));
+  };
+
   const objectValue = {
     presence,
     presenceZone,
@@ -118,6 +123,7 @@ const PresenceProvider = ({ children }) => {
     detail,
     handleDetail,
     handleFile,
+    handleFilter,
     loc,
     stat,
     file,

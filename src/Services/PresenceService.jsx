@@ -48,6 +48,21 @@ const GetPresenceResume = () => {
   return deferred.promise;
 };
 
+const GetPresenceResumeFilter = (start, end) => {
+  const deferred = new defer();
+
+  Get(`${url}/filter/${start}/${end}`).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+};
+
 const GetPerformResume = () => {
   const deferred = new defer();
 
@@ -222,6 +237,7 @@ export {
   GetPerformResume,
   GetPerformZone,
   GetPerformRegion,
+  GetPresenceResumeFilter,
   GetLiveZone,
   GetPerformLiveZone,
   GetPresenceDetail,
