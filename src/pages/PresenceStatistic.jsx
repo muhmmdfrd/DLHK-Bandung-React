@@ -123,21 +123,35 @@ const PresenceStatistic = ({ history }) => {
                 />
               </div>
               <div className="col-md-3">
-                <label>To: </label>
-                <input
-                  type="date"
-                  className="form-control"
-                  value={end}
-                  onChange={handleEnd}
-                />
+                <form className="mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                  <label>To: </label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    value={end}
+                    onChange={handleEnd}
+                  />
+                </form>
               </div>
-              <div className="col-md-1">
+              <div className="col-md-6">
                 <br />
                 <button
                   className="btn btn-primary mt-2"
                   onClick={() => handleFilter(start, end)}
                 >
                   Filter
+                </button>
+                <button
+                  className="btn btn-danger ml-5 mt-2"
+                  onClick={() => alert("pdf")}
+                >
+                  PDF
+                </button>
+                <button
+                  className="btn btn-success ml-5 mt-2"
+                  onClick={() => alert("excel")}
+                >
+                  Excel
                 </button>
               </div>
             </div>

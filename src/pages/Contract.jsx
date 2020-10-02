@@ -77,6 +77,20 @@ const Contract = () => {
                   </div>
                 </form>
               </div>
+              <div className="col-md-8">
+                <button
+                  className="btn btn-warning ml-5"
+                  onClick={() => alert("excel")}
+                >
+                  Export
+                </button>
+                <button
+                  className="btn btn-primary ml-5"
+                  onClick={() => alert("pdf")}
+                >
+                  Import
+                </button>
+              </div>
             </div>
             <ContractTable
               response={current}

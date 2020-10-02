@@ -83,6 +83,24 @@ const Items = () => {
               </div>
               <div className="col-md-8">
                 <button
+                  className="btn btn-danger ml-5 mt-2"
+                  onClick={() => alert("pdf")}
+                >
+                  PDF
+                </button>
+                <button
+                  className="btn btn-success ml-5 mt-2"
+                  onClick={() => alert("excel")}
+                >
+                  Excel
+                </button>
+                <button
+                  className="btn btn-primary ml-5 mt-2"
+                  onClick={() => alert("pdf")}
+                >
+                  Import
+                </button>
+                <button
                   className="btn btn-success float-right mr-5"
                   onClick={() => handleAdd()}
                 >
