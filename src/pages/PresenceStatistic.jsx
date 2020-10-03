@@ -142,16 +142,10 @@ const PresenceStatistic = ({ history }) => {
                   Filter
                 </button>
                 <button
-                  className="btn btn-danger ml-5 mt-2"
-                  onClick={() => alert("pdf")}
+                  className="btn btn-warning ml-5 mt-2"
+                  onClick={() => (window.location.href = "/#/export/presence")}
                 >
-                  PDF
-                </button>
-                <button
-                  className="btn btn-success ml-5 mt-2"
-                  onClick={() => alert("excel")}
-                >
-                  Excel
+                  Export
                 </button>
               </div>
             </div>

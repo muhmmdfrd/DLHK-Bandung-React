@@ -23,6 +23,9 @@ import NotFound from "./pages/404";
 import SendApplicant from "./pages/External Pages/SendApplicant";
 import SendDocument from "./pages/External Pages/SendDocument";
 import ExportEmployee from "./pages/Export Pages/ExportEmployee";
+import ExportPresence from "./pages/Export Pages/ExportPresence";
+import ExportPerform from "./pages/Export Pages/ExportPerform";
+import ExportPerson from "./pages/Export Pages/ExportPerson";
 
 const App = () => {
   let outputRender = [
@@ -34,6 +37,9 @@ const App = () => {
     { path: "/pelamar/kirim-lamaran", render: SendApplicant },
     { path: "/pelamar/kirim-dokumen", render: SendDocument },
     { path: "/export/employee", render: ExportEmployee },
+    { path: "/export/presence", render: ExportPresence },
+    { path: "/export/perform", render: ExportPerform },
+    { path: "/export/person", render: ExportPerson },
     { path: "/admin/*", render: WrapAllApp },
   ];
 

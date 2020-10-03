@@ -80,7 +80,7 @@ const Contract = () => {
               <div className="col-md-8">
                 <button
                   className="btn btn-warning ml-5"
-                  onClick={() => alert("excel")}
+                  onClick={() => (window.location.href = "/#/export/person")}
                 >
                   Export
                 </button>
