@@ -1,39 +1,38 @@
 import React, { useContext } from "react";
 import FadeIn from "react-fade-in";
-
-// * context
-import { PresenceContext } from "../../providers/PresenceContext";
-
-// * plugin
-import checkNullNum from "../../helpers/checkNullNum";
+import dateFormat from "../../helpers/dateFormat";
 import exportToExcel from "../../helpers/exportToExcel";
 import exportToPdf from "../../helpers/exportToPdf";
+import { ItemContext } from "../../providers/ItemContext";
 
-const ExportPerform = () => {
-  const { perform, loading } = useContext(PresenceContext);
+const ExportTransacOut = () => {
+  const { transacOut, loading } = useContext(ItemContext);
 
   return loading ? (
-    <p>Mohon ditunggu</p>
+    <p>Mohon tunggu</p>
   ) : (
     <FadeIn>
       <div className="row">
         <div className="col-md-12">
           <button className="btn btn-primary mt-5 mb-5 ml-3">
-            <a href="/#/admin/statistik-performa" className="text-white">
+            <a href="/#/admin/transaksi-barang-keluar" className="text-white">
               Kembali
             </a>
           </button>
           <button
             className="btn btn-danger mt-5 mb-5 ml-3"
             onClick={() =>
-              exportToPdf(window.$(".formPerform")[0], "Statistik-Performa")
+              exportToPdf(
+                window.$(".formTransacOut")[0],
+                "Daftar-Barang-Keluar"
+              )
             }
           >
             PDF
           </button>
           <button
             className="btn btn-success mt-5 mb-5 ml-3"
-            onClick={() => exportToExcel("tablePerform")}
+            onClick={() => exportToExcel("transacOutTable")}
           >
             Excel
           </button>
@@ -41,44 +40,42 @@ const ExportPerform = () => {
       </div>
 
       <form
-        class="formPerform"
+        class="formTransacOut"
         style={{ maxWidth: "none", width: 1005 + "px" }}
       >
-        <div id="tablePerform" className="table-responsive">
+        <div id="transacOutTable" className="table-responsive">
           <table className="table table-striped table-inverse">
             <thead className="thead-inverse">
               <tr className="d-flex">
                 <th className="col-1 text-center">#</th>
-                <th className="col-2">NIP</th>
-                <th className="col-2">Nama</th>
-                <th className="col-2">Pekerjaan</th>
+                <td className="col-2">Tanggal</td>
+                <th className="col-2">Nama Barang</th>
+                <th className="col-2">Penerima</th>
                 <th className="col-2">Wilayah</th>
                 <th className="col-1">Zona</th>
-                <th className="col-2 text-center">Persentase Performa</th>
+                <th className="col-2 text-center">Qty</th>
               </tr>
             </thead>
             <tbody>
-              {perform.map((value, index) => {
+              {transacOut.map((value, index) => {
                 const {
-                  employeeNumber,
-                  employeeName,
-                  regionName,
-                  zoneName,
-                  roleName,
-                  percentage,
+                  itemName,
+                  qty,
+                  dataOfTransac,
+                  userRequest,
+                  region,
+                  zone,
                 } = value;
 
                 return (
                   <tr key={index} className="d-flex">
                     <td className="col-1 text-center">{index + 1}</td>
-                    <td className="col-2">{employeeNumber}</td>
-                    <td className="col-2">{employeeName}</td>
-                    <td className="col-2">{roleName}</td>
-                    <td className="col-2">{regionName}</td>
-                    <td className="col-1">{zoneName.toString()}</td>
-                    <td className="col-2 text-center">
-                      {checkNullNum(percentage)}%
-                    </td>
+                    <td className="col-2">{dateFormat(dataOfTransac)}</td>
+                    <td className="col-2">{itemName}</td>
+                    <td className="col-2">{userRequest}</td>
+                    <td className="col-2">{region}</td>
+                    <td className="col-1">{zone}</td>
+                    <td className="col-2 text-center">{qty}</td>
                   </tr>
                 );
               })}
@@ -90,4 +87,4 @@ const ExportPerform = () => {
   );
 };
 
-export default ExportPerform;
+export default ExportTransacOut;

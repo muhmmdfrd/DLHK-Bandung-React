@@ -83,20 +83,14 @@ const Items = () => {
               </div>
               <div className="col-md-8">
                 <button
-                  className="btn btn-danger ml-5 mt-2"
-                  onClick={() => alert("pdf")}
+                  className="btn btn-warning ml-5 mt-2"
+                  onClick={() => (window.location.href = "/#/export/item")}
                 >
-                  PDF
-                </button>
-                <button
-                  className="btn btn-success ml-5 mt-2"
-                  onClick={() => alert("excel")}
-                >
-                  Excel
+                  Export
                 </button>
                 <button
                   className="btn btn-primary ml-5 mt-2"
-                  onClick={() => alert("pdf")}
+                  onClick={() => alert("import")}
                 >
                   Import
                 </button>

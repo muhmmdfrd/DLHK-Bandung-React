@@ -126,11 +126,14 @@ const ListTransacOut = () => {
               </div>
               <div className="col-md-1">
                 <br />
-                <button className="btn btn-success mt-2">Excel</button>
-              </div>
-              <div className="col-md-1">
-                <br />
-                <button className="btn btn-danger mt-2">PDF</button>
+                <button
+                  className="btn btn-warning mt-2"
+                  onClick={() =>
+                    (window.location.href = "/#/export/transac-out")
+                  }
+                >
+                  Export
+                </button>
               </div>
               <div className="col-md-2">
                 <br />

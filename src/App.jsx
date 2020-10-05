@@ -26,6 +26,9 @@ import ExportEmployee from "./pages/Export Pages/ExportEmployee";
 import ExportPresence from "./pages/Export Pages/ExportPresence";
 import ExportPerform from "./pages/Export Pages/ExportPerform";
 import ExportPerson from "./pages/Export Pages/ExportPerson";
+import ExportItem from "./pages/Export Pages/ExportItem";
+import ExportTransacIn from "./pages/Export Pages/ExportTransacIn";
+import ExportTransacOut from "./pages/Export Pages/ExportTransacOut";
 
 const App = () => {
   let outputRender = [
@@ -40,6 +43,9 @@ const App = () => {
     { path: "/export/presence", render: ExportPresence },
     { path: "/export/perform", render: ExportPerform },
     { path: "/export/person", render: ExportPerson },
+    { path: "/export/item", render: ExportItem },
+    { path: "/export/transac-in", render: ExportTransacIn },
+    { path: "/export/transac-out", render: ExportTransacOut },
     { path: "/admin/*", render: WrapAllApp },
   ];
 

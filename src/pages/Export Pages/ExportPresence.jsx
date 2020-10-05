@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import FadeIn from "react-fade-in";
 import exportToExcel from "../../helpers/exportToExcel";
+import exportToPdf from "../../helpers/exportToPdf";
 import roundNumber from "../../helpers/roundNumber";
 import { PresenceContext } from "../../providers/PresenceContext";
 
 const ExportPresence = () => {
   const { presence, loading } = useContext(PresenceContext);
-
-  const exportPdf = () => alert("pdf");
 
   return (
     <FadeIn>
@@ -20,7 +19,9 @@ const ExportPresence = () => {
           </button>
           <button
             className="btn btn-danger mt-5 mb-5 ml-3"
-            onClick={() => exportPdf()}
+            onClick={() =>
+              exportToPdf(window.$(".formPresence")[0], "Statistik-Absen")
+            }
           >
             PDF
           </button>
@@ -33,7 +34,10 @@ const ExportPresence = () => {
         </div>
       </div>
 
-      <form class="form" style={{ maxWidth: "none" }}>
+      <form
+        class="formPresence"
+        style={{ maxWidth: "none", width: 1005 + "px" }}
+      >
         <div id="tablePresence" className="table-responsive">
           <table className="table table-striped table-inverse">
             <thead className="thead-inverse">
