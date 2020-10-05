@@ -5,10 +5,10 @@ import FadeIn from "react-fade-in";
 import { PresenceContext } from "../../providers/PresenceContext";
 
 // * plugin
-import excel from "tableexport";
 import jsPDF from "jspdf";
 import checkNullNum from "../../helpers/checkNullNum";
 import html2canvas from "html2canvas";
+import exportToExcel from "../../helpers/exportToExcel";
 
 const ExportPerform = () => {
   const { perform, loading } = useContext(PresenceContext);
@@ -35,17 +35,6 @@ const ExportPerform = () => {
     }
   };
 
-  const exportExcel = () => {
-    excel.prototype.typeConfig.date.assert = () => {
-      return false;
-    };
-
-    excel(window.$("#tablePerform"), {
-      formats: ["xlsx"],
-      bootstrap: true,
-    });
-  };
-
   return loading ? (
     <p>Mohon ditunggu</p>
   ) : (
@@ -65,7 +54,7 @@ const ExportPerform = () => {
           </button>
           <button
             className="btn btn-success mt-5 mb-5 ml-3"
-            onClick={() => exportExcel()}
+            onClick={() => exportToExcel("tablePerform")}
           >
             Excel
           </button>

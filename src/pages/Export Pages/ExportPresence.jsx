@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import FadeIn from "react-fade-in";
-import exportToExcel from "tableexport";
+import exportToExcel from "../../helpers/exportToExcel";
 import roundNumber from "../../helpers/roundNumber";
 import { PresenceContext } from "../../providers/PresenceContext";
 
@@ -8,24 +8,6 @@ const ExportPresence = () => {
   const { presence, loading } = useContext(PresenceContext);
 
   const exportPdf = () => alert("pdf");
-
-  const exportExcel = () => {
-    const today = new Date();
-    exportToExcel.prototype.typeConfig.date.assert = () => {
-      return false;
-    };
-
-    exportToExcel(window.$("#tablePresence"), {
-      headings: true,
-      footers: true,
-      formats: ["xlsx"],
-      filename: `${today.toDateString()}-Statistik-Absen`,
-      bootstrap: true,
-      position: "well",
-      ignoreRows: null,
-      ignoreCols: null,
-    });
-  };
 
   return (
     <FadeIn>
@@ -44,7 +26,7 @@ const ExportPresence = () => {
           </button>
           <button
             className="btn btn-success mt-5 mb-5 ml-3"
-            onClick={() => exportExcel()}
+            onClick={() => exportToExcel("tablePresence")}
           >
             Excel
           </button>

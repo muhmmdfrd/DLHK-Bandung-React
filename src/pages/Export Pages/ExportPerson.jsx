@@ -3,29 +3,11 @@ import FadeIn from "react-fade-in";
 import checkExpiredDate from "../../helpers/checkExpiredDate";
 import checkNullNum from "../../helpers/checkNullNum";
 import dateFormat from "../../helpers/dateFormat";
-import exportToExcel from "tableexport";
+import exportToExcel from "../../helpers/exportToExcel";
 import { EmployeeContext } from "../../providers/EmployeeContext";
 
 const ExportPerson = () => {
   const { employee, loading } = useContext(EmployeeContext);
-
-  const exportExcel = () => {
-    const today = new Date();
-    exportToExcel.prototype.typeConfig.date.assert = () => {
-      return false;
-    };
-
-    exportToExcel(window.$("#tablePerson"), {
-      headings: true,
-      footers: true,
-      formats: ["xlsx"],
-      filename: `${today.toDateString()}-Resume-Pegawai`,
-      bootstrap: true,
-      position: "well",
-      ignoreRows: null,
-      ignoreCols: null,
-    });
-  };
 
   const exportPdf = () => {};
 
@@ -48,7 +30,7 @@ const ExportPerson = () => {
           </button>
           <button
             className="btn btn-success mt-5 mb-5 ml-3"
-            onClick={() => exportExcel()}
+            onClick={() => exportToExcel("tablePerson")}
           >
             Excel
           </button>
