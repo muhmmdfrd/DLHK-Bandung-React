@@ -29,6 +29,7 @@ import ExportPerson from "./pages/Export Pages/ExportPerson";
 import ExportItem from "./pages/Export Pages/ExportItem";
 import ExportTransacIn from "./pages/Export Pages/ExportTransacIn";
 import ExportTransacOut from "./pages/Export Pages/ExportTransacOut";
+import ExportContract from "./pages/Export Pages/ExportContract";
 
 const App = () => {
   let outputRender = [
@@ -46,6 +47,7 @@ const App = () => {
     { path: "/export/item", render: ExportItem },
     { path: "/export/transac-in", render: ExportTransacIn },
     { path: "/export/transac-out", render: ExportTransacOut },
+    { path: "/export/contract", render: ExportContract },
     { path: "/admin/*", render: WrapAllApp },
   ];
 
