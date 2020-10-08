@@ -1,7 +1,7 @@
-import defer from 'deferred';
-import { Get, Post, Put, Delete } from './IndexService';
+import defer from "deferred";
+import { Get, Post, Put, Delete } from "./IndexService";
 
-const url = 'person';
+const url = "person";
 
 const GetPersonData = () => {
   const deferred = new defer();
@@ -52,6 +52,21 @@ const GetApplicantId = (id) => {
   const deferred = new defer();
 
   Get(`${url}/applicant/${id}`).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+};
+
+const GetPersonByName = (name) => {
+  const deferred = new defer();
+
+  Get(`${url}/search/${name}`).then(
     (response) => {
       deferred.resolve(response);
     },
@@ -203,6 +218,7 @@ export {
   GetPersonDataId,
   GetApplicant,
   GetApplicantId,
+  GetPersonByName,
   AddPerson,
   SendEmail,
   EditPerson,

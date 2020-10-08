@@ -47,7 +47,7 @@ const App = () => {
     { path: "/export/item", render: ExportItem },
     { path: "/export/transac-in", render: ExportTransacIn },
     { path: "/export/transac-out", render: ExportTransacOut },
-    { path: "/export/contract", render: ExportContract },
+    { path: "/export/contract/:id", render: ExportContract },
     { path: "/admin/*", render: WrapAllApp },
   ];
 

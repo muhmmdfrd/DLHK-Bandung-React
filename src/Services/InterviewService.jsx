@@ -1,7 +1,7 @@
-import defer from 'deferred';
-import { Get, Post } from './IndexService';
+import defer from "deferred";
+import { Get, Post, Delete } from "./IndexService";
 
-const url = 'interview';
+const url = "interview";
 
 const GetInterviewData = () => {
   const deferred = new defer();
@@ -48,4 +48,19 @@ const AddInterview = (data) => {
   return deferred.promise;
 };
 
-export { GetInterviewData, GetInterviewDataId, AddInterview };
+const DeleteInterview = (id) => {
+  const deferred = new defer();
+
+  Delete(`${url}/${id}`).then(
+    (response) => {
+      deferred.resolve(response);
+    },
+    (response) => {
+      deferred.reject(response);
+    }
+  );
+
+  return deferred.promise;
+};
+
+export { GetInterviewData, GetInterviewDataId, AddInterview, DeleteInterview };

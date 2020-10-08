@@ -9,12 +9,14 @@ import {
   EditPerson,
   DeletePerson,
   DeletePersonEmployee,
+  GetPersonByName,
 } from "../Services/PersonService";
 
 const PersonContext = createContext();
 
 const PersonProvider = ({ children }) => {
   const [person, setPerson] = useState([]);
+  const [name, setName] = useState({});
   const [dataPersonId, setDataPersonId] = useState({});
   const [modalStatus, setModalStatus] = useState("");
   const [loading, setLoading] = useState(true);
@@ -92,12 +94,20 @@ const PersonProvider = ({ children }) => {
         });
     }
   };
+
+  const handleDataByName = (name) => {
+    GetPersonByName(name)
+      .then((response) => setName(response.data.data))
+      .finally(() => setLoading(false));
+  };
   // * end method for person
 
   const objValue = {
     person,
+    name,
     dataPersonId,
     modalStatus,
+    handleDataByName,
     loading,
     addPerson,
     editPerson,

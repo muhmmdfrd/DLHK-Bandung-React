@@ -3,6 +3,7 @@ import {
   GetInterviewData,
   GetInterviewDataId,
   AddInterview,
+  DeleteInterview,
 } from "../Services/InterviewService";
 
 const InterviewContext = createContext();
@@ -37,7 +38,22 @@ const InterviewProvider = ({ children }) => {
       .finally(() => setLoading(false));
   };
 
-  const objValue = { interview, interviewId, loading, addInterview, detail };
+  const deleteInterview = (id) => {
+    DeleteInterview(id).then(() => {
+      GetInterviewData()
+        .then((response) => setInterview(response.data.data))
+        .finally(() => setLoading(false));
+    });
+  };
+
+  const objValue = {
+    interview,
+    interviewId,
+    loading,
+    addInterview,
+    detail,
+    deleteInterview,
+  };
 
   return (
     <InterviewContext.Provider value={objValue}>

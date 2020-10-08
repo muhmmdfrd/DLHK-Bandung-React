@@ -37,7 +37,7 @@ const InterviewTable = ({ response, currentPage, postPerPage }) => {
                   <button
                     className="btn btn-success btn-block btn-flat"
                     onClick={() =>
-                      (window.location.href = "/#/export/contract")
+                      (window.location.href = `/#/export/contract/${interviewer}`)
                     }
                   >
                     Surat Kontrak

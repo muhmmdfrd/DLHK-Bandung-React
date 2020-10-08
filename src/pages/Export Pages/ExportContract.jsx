@@ -1,9 +1,55 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import FadeIn from "react-fade-in";
+import dateFormat from "../../helpers/dateFormat";
 import PrintContract from "../../helpers/PrintContract";
+import { PersonContext } from "../../providers/PersonContext";
+import capitalize from "../../helpers/capitalize";
 
 const ExportContract = () => {
-  return (
-    <>
+  const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  const now = new Date();
+  const [id, setId] = useState("");
+  const [personName, setPerson] = useState("");
+  const [degree, setDegree] = useState("");
+  const [place, setPlace] = useState("");
+  const [date, setDate] = useState("");
+  const [ktp, setKtp] = useState("");
+  const [numberPhone, setPhone] = useState("");
+  const [job, setJob] = useState("");
+
+  const { handleDataByName, loading, name } = useContext(PersonContext);
+
+  useEffect(() => {
+    handleDataByName(getIdUri(window.location.href).replace(/%20/g, " "));
+    const {
+      personName,
+      lastDegree,
+      placeOfBirth,
+      dateOfBirth,
+      nik,
+      phone,
+      jobDesc,
+      personId,
+    } = name;
+
+    setId(personId);
+    setPerson(personName);
+    setDegree(lastDegree);
+    setPlace(placeOfBirth);
+    setDate(dateOfBirth);
+    setKtp(nik);
+    setPhone(phone);
+    setJob(jobDesc);
+  }, [name]);
+
+  const getIdUri = (url) => {
+    return url.substring(url.lastIndexOf("/") + 1);
+  };
+
+  return loading ? (
+    <p>Mohon tunggu</p>
+  ) : (
+    <FadeIn>
       <button
         className="btn btn-danger ml-5 mt-5 mb-5"
         onClick={() => PrintContract(window.$(".formContract")[0])}
@@ -12,7 +58,7 @@ const ExportContract = () => {
       </button>
       <form
         className="formContract"
-        style={{ maxWidth: "none", width: 900 + "px" }}
+        style={{ maxWidth: "none", width: 750 + "px" }}
       >
         <div className="row">
           <div className="col-md-12 text-center">
@@ -38,12 +84,15 @@ const ExportContract = () => {
                 <u>SURAT&nbsp; PERJANJIAN&nbsp; KONTRAK &nbsp;KERJA</u>
               </b>
             </p>
-            <p>Nomor : KP.03.01/2856.ID-DLHK/VIII/{new Date().getFullYear()}</p>
+            <p>
+              Nomor : KP.03.01/2856.{id}-DLHK/VIII/
+              {now.getFullYear()}
+            </p>
           </div>
           <div className="col-md-12 text-justify ml-5">
             <p>
-              Pada Hari ini Selasa Tanggal Satu Bulan September Tahun Dua Ribu
-              Dua Puluh (01-09-2020), yang bertanda tangan dibawah ini :
+              Pada Hari ini {days[now.getDay()]}, {dateFormat(now)}, yang
+              bertanda tangan dibawah ini :
             </p>
           </div>
           <div className="col-md-12 ml-5">
@@ -81,19 +130,39 @@ const ExportContract = () => {
               <tr>
                 <td width="100px">Nama</td>
                 <td width="25px">:</td>
-                <td className="font-weight-bold">
-                  Hj. Yatty Mulyati Feliana, ST., MT.
+                <td className="font-weight-bold">{capitalize(personName)}</td>
+              </tr>
+              <tr>
+                <td width="100px">Pendidikan</td>
+                <td width="25px">:</td>
+                <td>{degree}</td>
+              </tr>
+              <tr>
+                <td width="100px">TTL</td>
+                <td width="25px">:</td>
+                <td>
+                  {place},&nbsp;{dateFormat(date)}
                 </td>
               </tr>
               <tr>
-                <td width="100px">NIP</td>
+                <td width="100px">Jenis Kelamin</td>
                 <td width="25px">:</td>
-                <td>19700515 199704 2 001</td>
+                <td>Laki-Laki</td>
+              </tr>
+              <tr>
+                <td width="100px">No. KTP</td>
+                <td width="25px">:</td>
+                <td>{ktp}</td>
+              </tr>
+              <tr>
+                <td width="100px">No. Telepon</td>
+                <td width="25px">:</td>
+                <td>{numberPhone}</td>
               </tr>
               <tr>
                 <td width="100px">Jabatan</td>
                 <td width="25px">:</td>
-                <td>Pejabat Pembuat Komitmen (PPK)</td>
+                <td>{job}</td>
               </tr>
             </table>
           </div>
@@ -107,8 +176,9 @@ const ExportContract = () => {
           <div className="col-md-12 ml-5 text-justify">
             <p>
               Dengan ini menerangkan bahwa kedua belah pihak sepakat mengadakan
-              perjanjian kontrak kerja yang selanjutnya disebut Perjanjian
-              dengan ketentuan dan syarat-syarat sebagai terlampir.
+              perjanjian kontrak <br />
+              kerja yang selanjutnya disebut Perjanjian dengan ketentuan dan
+              syarat-syarat sebagai terlampir.
             </p>
           </div>
           <div className="col-md-12 ml-1">
@@ -131,14 +201,14 @@ const ExportContract = () => {
                 <br />
                 <br />
                 <p className="mt-5 font-weight-bold">
-                  Hj. Yatty Mulyati Feliana, ST., MT
+                  {capitalize(personName)}
                 </p>
               </div>
             </div>
           </div>
         </div>
       </form>
-    </>
+    </FadeIn>
   );
 };
 
