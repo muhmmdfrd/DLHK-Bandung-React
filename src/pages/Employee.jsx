@@ -90,7 +90,9 @@ const Employee = () => {
                 </button>
                 <button
                   className="btn btn-primary ml-5"
-                  onClick={() => alert("import")}
+                  onClick={() =>
+                    window.$("#excelEmployeeModal").modal("toggle")
+                  }
                 >
                   Import
                 </button>

@@ -1,12 +1,6 @@
 import React from "react";
 
-const EmployeeTable = ({
-  response,
-  action,
-  currentPage,
-  postPerPage,
-  visibility,
-}) => {
+const EmployeeTable = ({ response, action, currentPage, postPerPage }) => {
   return (
     <div className="table-responsive">
       <table className="table table-striped table-inverse">
@@ -28,9 +22,7 @@ const EmployeeTable = ({
             return (
               <tr key={index} className="d-flex">
                 <td className="col-1 text-center">
-                  {visibility === "visible"
-                    ? index + 1
-                    : (currentPage - 1) * postPerPage + index + 1}
+                  {(currentPage - 1) * postPerPage + index + 1}
                 </td>
                 <td className="col-2">{name}</td>
                 <td className="col-2">{role}</td>

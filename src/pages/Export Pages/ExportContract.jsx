@@ -3,7 +3,6 @@ import FadeIn from "react-fade-in";
 import dateFormat from "../../helpers/dateFormat";
 import PrintContract from "../../helpers/PrintContract";
 import { PersonContext } from "../../providers/PersonContext";
-import capitalize from "../../helpers/capitalize";
 
 const ExportContract = () => {
   const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
@@ -40,7 +39,7 @@ const ExportContract = () => {
     setKtp(nik);
     setPhone(phone);
     setJob(jobDesc);
-  }, [name]);
+  }, [name, handleDataByName]);
 
   const getIdUri = (url) => {
     return url.substring(url.lastIndexOf("/") + 1);
@@ -130,7 +129,7 @@ const ExportContract = () => {
               <tr>
                 <td width="100px">Nama</td>
                 <td width="25px">:</td>
-                <td className="font-weight-bold">{capitalize(personName)}</td>
+                <td className="font-weight-bold">{personName}</td>
               </tr>
               <tr>
                 <td width="100px">Pendidikan</td>
@@ -200,9 +199,7 @@ const ExportContract = () => {
                 <br />
                 <br />
                 <br />
-                <p className="mt-5 font-weight-bold">
-                  {capitalize(personName)}
-                </p>
+                <p className="mt-5 font-weight-bold">{personName}</p>
               </div>
             </div>
           </div>

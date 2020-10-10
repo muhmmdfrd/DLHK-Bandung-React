@@ -90,7 +90,7 @@ const Items = () => {
                 </button>
                 <button
                   className="btn btn-primary ml-5 mt-2"
-                  onClick={() => alert("import")}
+                  onClick={() => window.$("#excelItemModal").modal("toggle")}
                 >
                   Import
                 </button>

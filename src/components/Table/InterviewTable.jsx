@@ -19,33 +19,37 @@ const InterviewTable = ({ response, currentPage, postPerPage }) => {
           </tr>
         </thead>
         <tbody>
-          {response.map((value, index) => {
-            const { interviewer, dateOfInterview, place, phone } = value;
+          {response == null ? (
+            <tr>Tidak Ada Data</tr>
+          ) : (
+            response.map((value, index) => {
+              const { interviewer, dateOfInterview, place, phone } = value;
 
-            return (
-              <tr key={index} className="d-flex">
-                <td className="col-1 text-center">
-                  {(currentPage - 1) * postPerPage + index + 1}
-                </td>
-                <td className="col-2">{interviewer}</td>
-                <td className="col-3">{`${dateFormat(
-                  dateOfInterview
-                )} ${timeFormat(dateOfInterview)}`}</td>
-                <td className="col-2">{place}</td>
-                <td className="col-2">{phone}</td>
-                <td className="col-2 text-center">
-                  <button
-                    className="btn btn-success btn-block btn-flat"
-                    onClick={() =>
-                      (window.location.href = `/#/export/contract/${interviewer}`)
-                    }
-                  >
-                    Surat Kontrak
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+              return (
+                <tr key={index} className="d-flex">
+                  <td className="col-1 text-center">
+                    {(currentPage - 1) * postPerPage + index + 1}
+                  </td>
+                  <td className="col-2">{interviewer}</td>
+                  <td className="col-3">{`${dateFormat(
+                    dateOfInterview
+                  )} ${timeFormat(dateOfInterview)}`}</td>
+                  <td className="col-2">{place}</td>
+                  <td className="col-2">{phone}</td>
+                  <td className="col-2 text-center">
+                    <button
+                      className="btn btn-success btn-block btn-flat"
+                      onClick={() =>
+                        (window.location.href = `/#/export/contract/${interviewer}`)
+                      }
+                    >
+                      Surat Kontrak
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
+          )}
         </tbody>
       </table>
     </div>

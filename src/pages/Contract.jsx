@@ -86,7 +86,7 @@ const Contract = () => {
                 </button>
                 <button
                   className="btn btn-primary ml-5"
-                  onClick={() => alert("pdf")}
+                  onClick={() => window.$("#excelModal").modal("toggle")}
                 >
                   Import
                 </button>

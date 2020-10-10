@@ -13,6 +13,9 @@ import PresenceDetailModal from "./PresenceDetailModal";
 import ImageDetailModal from "./ImageDetailModal";
 import UserModal from "./UserModal";
 import ImeiModal from "./ImeiModal";
+import ImportExcelModal from "./ImportExcelModal";
+import ExcelEmployeeModal from "./ExcelEmployeeModal";
+import ExcelItemModal from "./ExcelItemModal";
 
 const AllModal = () => {
   return (
@@ -31,6 +34,9 @@ const AllModal = () => {
       <ImageDetailModal />
       <UserModal />
       <ImeiModal />
+      <ImportExcelModal />
+      <ExcelEmployeeModal />
+      <ExcelItemModal />
     </>
   );
 };
