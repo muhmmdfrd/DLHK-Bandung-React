@@ -51,7 +51,7 @@ const ExportContract = () => {
     <FadeIn>
       <button
         className="btn btn-danger ml-5 mt-5 mb-5"
-        onClick={() => PrintContract(window.$(".formContract")[0])}
+        onClick={() => PrintContract(window.$(".formContract")[0], personName)}
       >
         PDF
       </button>
