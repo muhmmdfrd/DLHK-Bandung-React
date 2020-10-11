@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { GetEmployeeData } from "../../Services/EmployeeService";
 import addFile from "../../Services/ImportExcel";
+import { EmployeeContext } from "../../providers/EmployeeContext";
 
 const ExcelEmployeeModal = () => {
   const [file, setFile] = useState("");
   const [type, setType] = useState("employee");
+
+  const { setEmployee, setLoading } = useContext(EmployeeContext);
 
   const handleFile = (event) => {
     setFile(event.target.files[0]);
@@ -25,11 +29,16 @@ const ExcelEmployeeModal = () => {
         window.$("#btn-submit-excele-text").text("loading...");
       })
       .then(() => alert("data berhasil di-import"))
-      .finally(() => {
+      .then(() => {
         window.$("#btn-submit-excele").prop("disabled", false);
         window.$("#btn-submit-excele-text").text("Submit");
         window.$("#excelEmployeeModal").modal("hide");
-      });
+      })
+      .finally(() =>
+        GetEmployeeData()
+          .then((response) => setEmployee(response.data.data))
+          .finally(() => setLoading(false))
+      );
   };
 
   return (

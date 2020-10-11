@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import addFile from "../../Services/ImportExcel";
+import { GetItemData } from "../../Services/ItemService";
+import { ItemContext } from "../../providers/ItemContext";
 
 const ExcelItemModal = () => {
   const [file, setFile] = useState("");
   const [type, setType] = useState("item");
+
+  const { setItem, setLoading } = useContext(ItemContext);
 
   const handleFile = (event) => {
     setFile(event.target.files[0]);
@@ -25,11 +29,16 @@ const ExcelItemModal = () => {
         window.$("#btn-submit-exceli-text").text("loading...");
       })
       .then(() => alert("data berhasil di-import"))
-      .finally(() => {
+      .then(() => {
         window.$("#btn-submit-exceli").prop("disabled", false);
         window.$("#btn-submit-exceli-text").text("Submit");
         window.$("#excelItemModal").modal("hide");
-      });
+      })
+      .finally(() =>
+        GetItemData()
+          .then((response) => setItem(response.data.data))
+          .finally(() => setLoading(false))
+      );
   };
 
   return (
