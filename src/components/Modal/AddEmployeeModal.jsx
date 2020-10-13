@@ -20,6 +20,7 @@ const AddEmployeeModal = () => {
 
   // * method
   const clear = () => {
+    setId("");
     setName("");
     setAddress("");
     setPhone("");
@@ -86,6 +87,8 @@ const AddEmployeeModal = () => {
 
     addPerson(data);
     loadButton();
+    window.$("#formAddEmployee").trigger("reset");
+    clear();
   };
 
   const handleEdit = (id) => {
@@ -104,6 +107,8 @@ const AddEmployeeModal = () => {
 
     editPerson(data);
     setStatus(true);
+    window.$("#formAddEmployee").trigger("reset");
+    clear();
   };
   // * end of method
 

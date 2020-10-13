@@ -33,6 +33,7 @@ const ExcelEmployeeModal = () => {
         window.$("#btn-submit-excele").prop("disabled", false);
         window.$("#btn-submit-excele-text").text("Submit");
         window.$("#excelEmployeeModal").modal("hide");
+        setFile("");
       })
       .finally(() =>
         GetEmployeeData()

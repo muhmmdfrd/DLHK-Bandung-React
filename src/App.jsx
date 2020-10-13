@@ -30,6 +30,8 @@ import ExportItem from "./pages/Export Pages/ExportItem";
 import ExportTransacIn from "./pages/Export Pages/ExportTransacIn";
 import ExportTransacOut from "./pages/Export Pages/ExportTransacOut";
 import ExportContract from "./pages/Export Pages/ExportContract";
+import PresenceLive from "./pages/PresenceLive";
+import PerformLive from "./pages/PerformLive";
 
 const App = () => {
   let outputRender = [
@@ -48,6 +50,8 @@ const App = () => {
     { path: "/export/transac-in", render: ExportTransacIn },
     { path: "/export/transac-out", render: ExportTransacOut },
     { path: "/export/contract/:id", render: ExportContract },
+    { path: "/live-supervisi/presence", render: PresenceLive },
+    { path: "/live-supervisi/perform", render: PerformLive },
     { path: "/admin/*", render: WrapAllApp },
   ];
 
