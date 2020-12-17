@@ -1,18 +1,19 @@
-import defer from 'deferred';
-import Axios from 'axios';
+import defer from "deferred";
+import Axios from "axios";
 
-const baseurl = 'http://api.dlhk.local/api/';
+// const baseurl = 'http://api.dlhk.local/api/';
+const baseurl = "http://api.dlhkbandung.com";
 
 const Claim = (token) => {
   const deferred = new defer();
-  const url = baseurl + 'user/claim';
+  const url = baseurl + "user/claim";
 
   Axios({
-    method: 'GET',
+    method: "GET",
     url: url,
     timeout: deferred.promise,
     headers: {
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     },
   }).then(
     (response) => {
@@ -24,19 +25,19 @@ const Claim = (token) => {
   );
 
   return deferred.promise;
-}
+};
 
 const Login = (data) => {
   const deferred = new defer();
-  const url = baseurl + 'login';
+  const url = baseurl + "login";
 
   Axios({
-    method: 'POST',
+    method: "POST",
     url: url,
     data: data,
     timeout: deferred.promise,
     header: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   }).then(
     (response) => {
@@ -55,14 +56,14 @@ const Get = (path) => {
   const url = baseurl + path;
 
   Axios({
-    method: 'GET',
+    method: "GET",
     url: url,
     timeout: deferred.promise,
     header: {
-      'Access-Control-Allow-Credentials': true,
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET',
-      'Access-Control-Allow-Headers': 'application/json',
+      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET",
+      "Access-Control-Allow-Headers": "application/json",
     },
   }).then(
     (response) => {
@@ -81,16 +82,16 @@ const Post = (path, data) => {
   const url = baseurl + path;
 
   Axios({
-    method: 'POST',
+    method: "POST",
     url: url,
     data: data,
     timeout: deferred.promise,
     header: {
-      'Access-Control-Allow-Credentials': true,
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST',
-      'Access-Control-Allow-Headers': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST",
+      "Access-Control-Allow-Headers": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   }).then(
     (response) => {
@@ -109,16 +110,16 @@ const PostMultipart = (path, data) => {
   const url = baseurl + path;
 
   Axios({
-    method: 'POST',
+    method: "POST",
     url: url,
     data: data,
     timeout: deferred.promise,
     header: {
-      'Access-Control-Allow-Credentials': true,
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'POST',
-      'Access-Control-Allow-Headers': 'application/json',
-      'Content-Type': 'multipart/form-data',
+      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "POST",
+      "Access-Control-Allow-Headers": "application/json",
+      "Content-Type": "multipart/form-data",
     },
   }).then(
     (response) => {
@@ -137,16 +138,16 @@ const Put = (path, data) => {
   const url = baseurl + path;
 
   Axios({
-    method: 'PUT',
+    method: "PUT",
     url: url,
     data: data,
     timeout: deferred.promise,
     header: {
-      'Access-Control-Allow-Credentials': true,
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'PUT',
-      'Access-Control-Allow-Headers': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "PUT",
+      "Access-Control-Allow-Headers": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   }).then(
     (response) => {
@@ -165,16 +166,16 @@ const PutMultipart = (path, data) => {
   const url = baseurl + path;
 
   Axios({
-    method: 'PUT',
+    method: "PUT",
     url: url,
     data: data,
     timeout: deferred.promise,
     header: {
-      'Access-Control-Allow-Credentials': true,
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'PUT',
-      'Access-Control-Allow-Headers': 'application/json',
-      'Content-Type': 'multipart/form-data',
+      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "PUT",
+      "Access-Control-Allow-Headers": "application/json",
+      "Content-Type": "multipart/form-data",
     },
   }).then(
     (response) => {
@@ -193,15 +194,15 @@ const Delete = (path) => {
   const url = baseurl + path;
 
   Axios({
-    method: 'DELETE',
+    method: "DELETE",
     url: url,
     timeout: deferred.promise,
     header: {
-      'Access-Control-Allow-Credentials': true,
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'DELETE',
-      'Access-Control-Allow-Headers': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded',
+      "Access-Control-Allow-Credentials": true,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "DELETE",
+      "Access-Control-Allow-Headers": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
   }).then(
     (response) => {
