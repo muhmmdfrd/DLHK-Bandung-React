@@ -73,11 +73,9 @@ const ToEmployeeModal = () => {
   // * end of method
 
   useEffect(() => {
-    setInterval(() => {
       axios
         .get("http://api.dlhk.local/api/person/interview")
         .then((response) => setPerson(response.data.data));
-    }, 20000);
   }, []);
 
   return (

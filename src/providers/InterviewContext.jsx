@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import {
   GetInterviewData,
   GetInterviewDataId,
@@ -12,14 +12,6 @@ const InterviewProvider = ({ children }) => {
   const [interview, setInterview] = useState([]);
   const [interviewId, setInterviewId] = useState({});
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setInterval(() => {
-      GetInterviewData()
-        .then((response) => setInterview(response.data.data))
-        .finally(() => setLoading(false));
-    }, 20000);
-  }, []);
 
   const addInterview = (data) => {
     AddInterview(data)

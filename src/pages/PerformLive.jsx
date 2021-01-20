@@ -1,18 +1,26 @@
-import React, { Fragment, useState, useEffect, useContext } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import FadeIn from 'react-fade-in';
 import LoadingScreen from './LoadingScreen';
-import { PresenceContext } from '../providers/PresenceContext';
+import { GetPerformLiveZone } from '../Services/PresenceService';
 
 const PerformLive = () => {
   const [title, setTitle] = useState('Kordon - Gedebage');
   const [percentage, setPercentage] = useState(0);
   const [zone, setZone] = useState([]);
+  const [livePerform, setLivePerform] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const red = '#D9534F';
   const yellow = '#FFCC2F';
   const green = '#5CB85C';
 
-  // * context
-  const { livePerform, loading } = useContext(PresenceContext);
+  useEffect(() => {
+    setInterval(() => {
+      GetPerformLiveZone()
+        .then((response) => setLivePerform(response.data.data))
+        .finally(() => setLoading(false));
+    }, 20000);
+  }, []);
 
   useEffect(() => {
     // eslint-disable-next-line

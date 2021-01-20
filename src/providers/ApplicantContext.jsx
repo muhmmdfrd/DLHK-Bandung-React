@@ -56,11 +56,9 @@ const ApplicantProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    setInterval(() => {
-      GetApplicant()
-        .then((response) => setApplicant(response.data.data))
-        .finally(() => setLoading(false));
-    }, 20000);
+    GetApplicant()
+      .then((response) => setApplicant(response.data.data))
+      .finally(() => setLoading(false));
   }, []);
 
   const objectValue = {

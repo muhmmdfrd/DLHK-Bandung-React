@@ -12,6 +12,8 @@ import { PersonContext } from '../providers/PersonContext';
 const Table = () => {
   // * states
   const [data, setData] = useState([]);
+  const [person, setPerson] = useState([]);
+  const [loading, setLoading] = useState([]);
   const [keyword, setKeyword] = useState('');
 
   // * variable for pagination
@@ -25,8 +27,6 @@ const Table = () => {
 
   // * data from context
   const {
-    person,
-    loading,
     handleAdd,
     handleEdit,
     handleDelete,
@@ -48,6 +48,12 @@ const Table = () => {
       setCurrentPage(currentPage + 1);
   };
   // * end of method
+
+  useEffect(() => {
+    GetPersonData()
+    .then((response) => setPerson(response.data.data))
+    .finally(() => setLoading(false)); 
+  }, [])
 
   useEffect(() => {
     const result = person.filter((person) =>

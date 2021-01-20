@@ -8,9 +8,12 @@ import Pagination from "../components/Pagination/Pagination";
 // * context
 import { ItemContext } from "../providers/ItemContext";
 import TransacOutTable from "../components/Table/TransacOut";
+import { GetTransacOut } from "../Services/TransacService";
 
 const ListTransacOut = () => {
   const [data, setData] = useState([]);
+  const [transacOut, setTransac] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
@@ -25,7 +28,7 @@ const ListTransacOut = () => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { transacOut, loading, filterDateOut } = useContext(ItemContext);
+  const { filterDateOut } = useContext(ItemContext);
 
   // * function or method
   const handleChange = (event) => {
@@ -66,6 +69,12 @@ const ListTransacOut = () => {
     );
     setData(result);
   }, [transacOut, keyword]);
+
+  useEffect(() => {
+    GetTransacOut()
+      .then((response) => setTransac(response.data.data))
+      .finally(() => setLoading(false));
+  }, [])
 
   // * render the HTML
   return loading ? (

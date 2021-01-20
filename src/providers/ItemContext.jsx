@@ -1,6 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 import {
-  GetTransacIn,
   GetTransacInDate,
   GetTransacOut,
   GetTransacOutDate,
@@ -23,24 +22,6 @@ const ItemProvider = ({ children }) => {
   const [transacOut, setTransacOut] = useState([]);
   const [modalStatus, setModalStatus] = useState("");
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    GetTransacOut()
-      .then((response) => setTransacOut(response.data.data))
-      .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    GetItemData()
-      .then((response) => setItem(response.data.data))
-      .finally(() => setLoading(false));
-  }, []);
-
-  useEffect(() => {
-    GetTransacIn()
-      .then((response) => setTransac(response.data.data))
-      .finally(() => setLoading(false));
-  }, []);
 
   const filterDateIn = (data) => {
     GetTransacInDate(data)

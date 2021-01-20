@@ -8,10 +8,13 @@ import PerformTable from "../components/Table/PerformTable";
 
 // * context
 import { PresenceContext } from "../providers/PresenceContext";
+import { GetPerformResume } from "../Services/PresenceService";
 
 const PerformStatistic = ({ history }) => {
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [perform, setPerform] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // * additional
   const [start, setStart] = useState("");
@@ -27,7 +30,13 @@ const PerformStatistic = ({ history }) => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * context
-  const { loading, perform, handlePerformFilter } = useContext(PresenceContext);
+  const { handlePerformFilter } = useContext(PresenceContext);
+
+  useEffect(() => {
+    GetPerformResume()
+      .then((response) => setPerform(response.data.data))
+      .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     const result = perform.filter((perform) =>

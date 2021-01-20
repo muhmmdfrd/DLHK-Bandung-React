@@ -1,5 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import FadeIn from "react-fade-in";
+import s from "file-saver";
+import { baseurl, devurl } from '../constant/constact';
 
 // * components
 import LoadingScreen from "./LoadingScreen";
@@ -8,6 +10,7 @@ import Pagination from "../components/Pagination/Pagination";
 
 // * context
 import { ApplicantContext } from "../providers/ApplicantContext";
+import Axios from "axios";
 
 const ListApplicant = () => {
   const [data, setData] = useState([]);
@@ -43,6 +46,33 @@ const ListApplicant = () => {
       Math.ceil(data.length / postPerPage) !== 0
     )
       setCurrentPage(currentPage + 1);
+  };
+
+  const base64ToFile = (dataurl, filename) => {
+    var arr = dataurl.split(","),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new File([u8arr], filename, {
+      type: mime,
+    });
+  };
+
+  const exportExcel = () => {
+    const url = baseurl + "person/applicant/export";
+    Axios.post(url).then((response) => {
+      const result = response.data.data;
+      const mime = "data:application/application/vnd.ms-excel;base64," + result;
+      const filename = "Applicant.xlsx";
+      const file = base64ToFile(mime, filename);
+      s.saveAs(file);
+    });
   };
   // * end of method
 
@@ -81,6 +111,14 @@ const ListApplicant = () => {
                     />
                   </div>
                 </form>
+              </div>
+              <div className="col-md-3">
+                <button
+                  className="btn btn-success"
+                  onClick={() => exportExcel()}
+                >
+                  Export Excel
+                </button>
               </div>
             </div>
             <ApplicantTable

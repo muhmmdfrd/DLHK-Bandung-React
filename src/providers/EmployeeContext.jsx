@@ -20,19 +20,9 @@ const EmployeeProvider = ({ children }) => {
   const [employeeUser, setEmployeeUser] = useState([]);
 
   useEffect(() => {
-    setInterval(() => {
-      GetEmployeeData()
-        .then((response) => setEmployee(response.data.data))
-        .finally(() => setLoading(false));
-    }, 20000);
-  }, []);
-
-  useEffect(() => {
-    setInterval(() => {
-      GetUserEmployee()
-        .then((response) => setEmployeeUser(response.data.data))
-        .finally(() => setLoading(false));
-    }, 20000);
+    GetUserEmployee()
+      .then((response) => setEmployeeUser(response.data.data))
+      .finally(() => setLoading(false));
   }, []);
 
   // * method for person

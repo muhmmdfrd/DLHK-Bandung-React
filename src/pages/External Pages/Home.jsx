@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 
-import ImageHome from "../../assets/img/home-cropped.jpg";
+import ImageHome from "../../assets/img/home-banner.jpg";
 import ImageDLHK from "../../assets/img/logo-dlhk-removebg-preview.png";
 import ImageBandung from "../../assets/img/logo-bandung.png";
 
@@ -24,7 +24,15 @@ const Home = () => {
       </Row>
 
       <Row>
-        <Col col={12} value={<Image image={ImageHome} />} />
+        <Col
+          col={12}
+          value={
+            <Image
+              image={ImageHome}
+              css={{ width: 100 + "vw", height: "auto" }}
+            />
+          }
+        />
       </Row>
     </Fragment>
   );

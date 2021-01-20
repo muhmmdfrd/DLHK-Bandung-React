@@ -4,13 +4,16 @@ import FadeIn from "react-fade-in";
 // * components
 import LoadingScreen from "./LoadingScreen";
 import Pagination from "../components/Pagination/Pagination";
+import RoleTable from "../components/Table/RoleTable";
 
 // * context
 import { RoleContext } from "../providers/RoleContext";
-import RoleTable from "../components/Table/RoleTable";
+import { GetRoleData } from "../Services/RoleService";
 
 const RolePage = () => {
   const [data, setData] = useState([]);
+  const [role, setRole] = useState([]);
+  const [loading, setLoading] = useState([]);
   const [keyword, setKeyword] = useState("");
 
   // * variable for pagination
@@ -23,7 +26,7 @@ const RolePage = () => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { role, loading, handleEdit } = useContext(RoleContext);
+  const { handleEdit } = useContext(RoleContext);
 
   // * function or method
   const handleChange = (event) => {
@@ -40,6 +43,14 @@ const RolePage = () => {
       setCurrentPage(currentPage + 1);
   };
   // * end of method
+
+  useEffect(() => {
+    GetRoleData()
+    .then((response) => setRole(response.data.data)
+    )
+    .finally(() => setLoading(false)
+    );
+  }, []);
 
   useEffect(() => {
     const result = role.filter((val) =>

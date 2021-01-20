@@ -1,8 +1,6 @@
 import defer from "deferred";
 import Axios from "axios";
-
-// const baseurl = 'http://api.dlhk.local/api/';
-const baseurl = "http://api.dlhkbandung.com";
+import { baseurl, devurl } from './../constant/constact';
 
 const Claim = (token) => {
   const deferred = new defer();

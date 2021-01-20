@@ -1,17 +1,22 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import FadeIn from 'react-fade-in';
-import { PresenceContext } from '../providers/PresenceContext';
+import { GetPerformZone } from '../Services/PresenceService';
 import LoadingScreen from './LoadingScreen';
 
 const ZonePerform = ({ history }) => {
   const [zone, setZone] = useState([]);
+  const [performZone, setPerform] = useState([]);
+  const [loading, setLoading] = useState([]);
   const [score, setScore] = useState([]);
   const [title, setTitle] = useState('');
   const [keyword, setKeyword] = useState('Kordon - GedeBage');
 
-  // * context
-  const { performZone, loading } = useContext(PresenceContext);
+  useEffect(() => {
+    GetPerformZone()
+    .then((response) => setPerform(response.data.data))
+    .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     // eslint-disable-next-line

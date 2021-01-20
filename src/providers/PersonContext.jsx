@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 
 // * service
 import {
@@ -20,14 +20,6 @@ const PersonProvider = ({ children }) => {
   const [dataPersonId, setDataPersonId] = useState({});
   const [modalStatus, setModalStatus] = useState("");
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setInterval(() => {
-      GetPersonData()
-        .then((response) => setPerson(response.data.data))
-        .finally(() => setLoading(false));
-    }, 20000);
-  }, []);
 
   // * method for person
   const showModal = () => window.$("#addEmployeeModal").modal("toggle");

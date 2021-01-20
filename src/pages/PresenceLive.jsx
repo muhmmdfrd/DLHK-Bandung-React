@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useEffect, useContext } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import FadeIn from "react-fade-in";
 import LoadingScreen from "./LoadingScreen";
 import DoughnutChart from "../components/Chart/DoughnutChart";
-import { PresenceContext } from "../providers/PresenceContext";
+import { GetLiveZone } from "../Services/PresenceService";
 
 const PresenceLive = () => {
   const [title, setTitle] = useState("Kordon - Gedebage");
@@ -12,12 +12,20 @@ const PresenceLive = () => {
   const [late, setLate] = useState("");
   const [percentage, setPercentage] = useState(0);
   const [zone, setZone] = useState([]);
+  const [liveZone, setLiveZone] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const red = "#D9534F";
   const yellow = "#FFCC2F";
   const green = "#5CB85C";
 
-  // * context
-  const { liveZone, loading } = useContext(PresenceContext);
+  useEffect(() => {
+    setInterval(() => {
+      GetLiveZone()
+        .then((response) => setLiveZone(response.data.data))
+        .finally(() => setLoading(false));
+    }, 20000);
+  }, []);
 
   useEffect(() => {
     // eslint-disable-next-line

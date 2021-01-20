@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import {
   GetUser,
   AddUser,
@@ -14,18 +14,6 @@ const UserProvider = ({ children }) => {
   const [userId, setUserId] = useState({});
   const [loading, setLoading] = useState(true);
   const [statusModal, setStatus] = useState("");
-
-  useEffect(() => {
-    setInterval(() => {
-      GetUser()
-        .then((response) => {
-          setUser(response.data.data);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 20000);
-  }, []);
 
   const addUser = (data) => {
     AddUser(data)
@@ -56,7 +44,7 @@ const UserProvider = ({ children }) => {
       .then(() => window.$("#userModal").modal("toggle"))
       .finally(() => {
         window.$(`#btn-edit-user-${id}`).prop("disabled", false);
-        window.$(`#span-btn-${id}`).val("Edit");
+        window.$(`#span-btn-${id}`).text("Edit");
       });
   };
 

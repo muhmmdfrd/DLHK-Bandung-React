@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import FadeIn from "react-fade-in";
 
 // * components
@@ -6,12 +6,14 @@ import LoadingScreen from "./LoadingScreen";
 import ContractTable from "../components/Table/ContractTable";
 import Pagination from "../components/Pagination/Pagination";
 
-// * context
-import { EmployeeContext } from "../providers/EmployeeContext";
+// * service
+import { GetEmployeeData } from "../Services/EmployeeService";
 
 const Contract = () => {
   const [data, setData] = useState([]);
+  const [employee, setEmployee] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [isLoading, setLoading] = useState(true);
 
   // * variable for pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,9 +23,6 @@ const Contract = () => {
   const indexOfLast = currentPage * postPerPage;
   const indexOfFirst = indexOfLast - postPerPage;
   const current = data.slice(indexOfFirst, indexOfLast);
-
-  // * data from context
-  const { employee, loading } = useContext(EmployeeContext);
 
   // * function or method
   const handleChange = (event) => {
@@ -42,14 +41,20 @@ const Contract = () => {
   // * end of method
 
   useEffect(() => {
+    GetEmployeeData()
+    .then((response) => setEmployee(response.data.data))
+    .finally(() => setLoading(false));
+  },[])
+
+  useEffect(() => {
     const result = employee.filter((employee) =>
       employee.name.toLowerCase().includes(keyword.toLowerCase())
     );
     setData(result);
-  }, [employee, keyword]);
+  }, [keyword, employee]);
 
   // * render the HTML
-  return loading ? (
+  return isLoading ? (
     <LoadingScreen />
   ) : (
     <FadeIn>

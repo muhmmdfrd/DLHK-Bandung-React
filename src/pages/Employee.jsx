@@ -8,10 +8,13 @@ import { EmployeeContext } from "../providers/EmployeeContext";
 import EmployeeTable from "../components/Table/EmployeeTable";
 import Pagination from "../components/Pagination/Pagination";
 import LoadingScreen from "./LoadingScreen";
+import { GetEmployeeData } from "../Services/EmployeeService";
 
 const Employee = () => {
   const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [employee, setEmployee] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // * variable for pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,9 +26,7 @@ const Employee = () => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { employee, loading, handleAdd, handleEdit } = useContext(
-    EmployeeContext
-  );
+  const { handleAdd, handleEdit } = useContext(EmployeeContext);
 
   // * function or method
   const handleChange = (event) => {
@@ -42,6 +43,12 @@ const Employee = () => {
       setCurrentPage(currentPage + 1);
   };
   // * end of method
+
+  useEffect(() => {
+    GetEmployeeData()
+      .then((response) => setEmployee(response.data.data))
+      .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     const result = employee.filter((employee) =>

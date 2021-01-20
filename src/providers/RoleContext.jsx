@@ -15,27 +15,9 @@ const RoleProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setInterval(() => {
-      GetRoleData()
-        .then((response) => {
-          setRole(response.data.data);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 20000);
-  }, []);
-
-  useEffect(() => {
-    setInterval(() => {
-      GetRoleApp()
-        .then((response) => {
-          setApp(response.data.data);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 20000);
+    GetRoleApp()
+      .then((response) => setApp(response.data.data))
+      .finally(() => setLoading(false));
   }, []);
 
   const handleEdit = (id) => {

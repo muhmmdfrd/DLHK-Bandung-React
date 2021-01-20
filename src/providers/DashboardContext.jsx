@@ -9,23 +9,23 @@ const DashboardProvider = ({ children }) => {
     const [contract, setContract] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        GetDashboardPresence()
-            .then((response) => setPresence(response.data.data))
-            .finally(() => setLoading(false));
-    }, []);
+    // useEffect(() => {
+    //     GetDashboardPresence()
+    //         .then((response) => setPresence(response.data.data))
+    //         .finally(() => setLoading(false));
+    // }, []);
 
-    useEffect(() => {
-        GetDashboardItem()
-            .then((response) => setItem(response.data.data))
-            .finally(() => setLoading(false));
-    }, []);
+    // useEffect(() => {
+    //     GetDashboardItem()
+    //         .then((response) => setItem(response.data.data))
+    //         .finally(() => setLoading(false));
+    // }, []);
 
-    useEffect(() => {
-        GetDashboardContract()
-            .then((response) => setContract(response.data.data))
-            .finally(() => setLoading(false));
-    }, []);
+    // useEffect(() => {
+    //     GetDashboardContract()
+    //         .then((response) => setContract(response.data.data))
+    //         .finally(() => setLoading(false));
+    // }, []);
 
     const objValue = {
         presence,

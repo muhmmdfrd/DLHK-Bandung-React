@@ -4,14 +4,17 @@ import FadeIn from "react-fade-in";
 // * components
 import LoadingScreen from "./LoadingScreen";
 import Pagination from "../components/Pagination/Pagination";
+import UserTable from "../components/Table/UserTable";
 
 // * context
 import { UserContext } from "../providers/UserContext";
-import UserTable from "../components/Table/UserTable";
+import { GetUser } from "../Services/UserService";
 
 const UserAccount = () => {
   const [data, setData] = useState([]);
+  const [user, setUser] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [loading, setLoading] = useState(true);
 
   // * variable for pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -23,9 +26,13 @@ const UserAccount = () => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { user, loading, handleEdit, deleteUser, setStatus } = useContext(
-    UserContext
-  );
+  const { handleEdit, deleteUser, setStatus } = useContext(UserContext);
+
+  useEffect(() => {
+    GetUser()
+    .then((response) => setUser(response.data.data))
+    .finally(() => setLoading(false));
+  }, []);
 
   // * function or method
   const handleChange = (event) => {

@@ -1,13 +1,40 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../components/Card/Card";
 import FadeIn from "react-fade-in";
 
 // * components
 import LoadingScreen from "./LoadingScreen";
-import { DashboardContext } from "../providers/DashboardContext";
+
+// * service
+import { 
+  GetDashboardContract, 
+  GetDashboardItem, 
+  GetDashboardPresence 
+} from "../Services/DashboardService";
 
 const Dashboard = () => {
-  const { item, presence, contract, loading } = useContext(DashboardContext);
+  const [presence, setPresence] = useState([]);
+  const [item, setItem] = useState([]);
+  const [contract, setContract] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      GetDashboardPresence()
+          .then((response) => setPresence(response.data.data))
+          .finally(() => setLoading(false));
+    }, []);
+
+    useEffect(() => {
+        GetDashboardItem()
+            .then((response) => setItem(response.data.data))
+            .finally(() => setLoading(false));
+    }, []);
+
+    useEffect(() => {
+        GetDashboardContract()
+            .then((response) => setContract(response.data.data))
+            .finally(() => setLoading(false));
+    }, []);
 
   const { employees, presences, performances, score } = presence;
   const { items, transacIn, out } = item;

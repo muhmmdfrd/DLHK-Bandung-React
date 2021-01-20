@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import {
   GetImei,
   AddImei,
@@ -14,18 +14,6 @@ const ImeiProvider = ({ children }) => {
   const [imeiId, setDataId] = useState({});
   const [loading, setLoading] = useState(true);
   const [statusModal, setStatus] = useState("");
-
-  useEffect(() => {
-    setInterval(() => {
-      GetImei()
-        .then((response) => {
-          setData(response.data.data);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }, 20000);
-  }, []);
 
   const addImei = (data) => {
     AddImei(data)

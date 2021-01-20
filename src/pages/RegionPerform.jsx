@@ -1,15 +1,20 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bar } from 'react-chartjs-2';
 import FadeIn from 'react-fade-in';
-import { PresenceContext } from '../providers/PresenceContext';
+import { GetPerformRegion } from '../Services/PresenceService';
 import LoadingScreen from './LoadingScreen';
 
 const RegionPerform = ({ history }) => {
   const [region, setRegion] = useState([]);
+  const [performRegion, setPerformRegion] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [score, setScore] = useState([]);
 
-  // * context
-  const { performRegion, loading } = useContext(PresenceContext);
+  useEffect(() => {
+    GetPerformRegion()
+        .then((response) => setPerformRegion(response.data.data))
+        .finally(() => setLoading(false));
+  }, [])
 
   useEffect(() => {
     setScore(performRegion.map((val) => val.percentage));

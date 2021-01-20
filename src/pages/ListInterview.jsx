@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FadeIn from 'react-fade-in';
 
 // * page
@@ -7,11 +7,13 @@ import Pagination from '../components/Pagination/Pagination';
 import InterviewTable from '../components/Table/InterviewTable';
 
 // * context
-import { InterviewContext } from '../providers/InterviewContext';
+import { GetInterviewData } from '../Services/InterviewService';
 
 const ListInterview = () => {
   // * states
   const [data, setData] = useState([]);
+  const [interview, setInterview] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState('');
 
   // * variable for pagination
@@ -22,9 +24,6 @@ const ListInterview = () => {
   const indexOfLast = currentPage * postPerPage;
   const indexOfFirst = indexOfLast - postPerPage;
   const current = data.slice(indexOfFirst, indexOfLast);
-
-  // * data from context
-  const { interview, loading } = useContext(InterviewContext);
 
   // * function or method
   const handleChange = (event) => {
@@ -41,6 +40,12 @@ const ListInterview = () => {
       setCurrentPage(currentPage + 1);
   };
   // * end of method
+
+  useEffect(() => {
+    GetInterviewData()
+      .then((response) => setInterview(response.data.data))
+      .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     const result = interview.filter((interview) =>

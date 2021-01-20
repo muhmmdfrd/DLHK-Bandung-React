@@ -8,9 +8,12 @@ import ItemTable from "../components/Table/ItemTable";
 
 // * context
 import { ItemContext } from "../providers/ItemContext";
+import { GetItemData } from "../Services/ItemService";
 
 const Items = () => {
   const [data, setData] = useState([]);
+  const [item, setItem] = useState([]);
+  const [loading, setLoading] = useState();
   const [keyword, setKeyword] = useState("");
 
   // * variable for pagination
@@ -23,9 +26,7 @@ const Items = () => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { item, loading, handleAdd, handleEdit, handleDelete } = useContext(
-    ItemContext
-  );
+  const { handleAdd, handleEdit, handleDelete } = useContext(ItemContext);
 
   // * function or method
   const handleChange = (event) => {
@@ -42,6 +43,12 @@ const Items = () => {
       setCurrentPage(currentPage + 1);
   };
   // * end of method
+
+  useEffect(() => {
+    GetItemData()
+      .then((response) => setItem(response.data.data))
+      .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     const result = item.filter((item) =>

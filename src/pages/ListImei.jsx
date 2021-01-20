@@ -8,9 +8,12 @@ import ImeiTable from "../components/Table/ImeiTable";
 
 // * context
 import { ImeiContext } from "../providers/ImeiContext";
+import { GetImei } from "../Services/ImeiService";
 
 const ListImei = () => {
   const [data, setData] = useState([]);
+  const [imei] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
 
   // * variable for pagination
@@ -23,9 +26,7 @@ const ListImei = () => {
   const current = data.slice(indexOfFirst, indexOfLast);
 
   // * data from context
-  const { imei, loading, handleEdit, deleteImei, setStatus } = useContext(
-    ImeiContext
-  );
+  const { handleEdit, deleteImei, setStatus } = useContext(ImeiContext);
 
   // * function or method
   const handleChange = (event) => {
@@ -42,6 +43,12 @@ const ListImei = () => {
       setCurrentPage(currentPage + 1);
   };
   // * end of method
+
+  useEffect(() => {
+    GetImei()
+      .then((response) => setData(response.data.data))
+      .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     const result = imei.filter((imei) =>

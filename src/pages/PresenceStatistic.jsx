@@ -8,9 +8,12 @@ import { PresenceContext } from "../providers/PresenceContext";
 import Pagination from "../components/Pagination/Pagination";
 import LoadingScreen from "./LoadingScreen";
 import PresenceStatisticTable from "../components/Table/PresenceStatisticTable";
+import { GetPresenceResume } from "../Services/PresenceService";
 
 const PresenceStatistic = ({ history }) => {
   const [data, setData] = useState([]);
+  const [presence, setPresence] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [keyword, setKeyword] = useState("");
 
   // * variable for pagination
@@ -26,7 +29,13 @@ const PresenceStatistic = ({ history }) => {
   const [end, setEnd] = useState("");
 
   // * context
-  const { presence, loading, handleFilter } = useContext(PresenceContext);
+  const { handleFilter } = useContext(PresenceContext);
+
+  useEffect(() => {
+    GetPresenceResume()
+    .then((response) => setPresence(response.data.data))
+    .finally(() => setLoading(false));
+  }, []);
 
   useEffect(() => {
     const result = presence.filter((presence) =>

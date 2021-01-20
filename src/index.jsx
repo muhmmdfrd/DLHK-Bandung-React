@@ -23,7 +23,6 @@ import { EmployeeProvider } from "./providers/EmployeeContext";
 import { ApplicantProvider } from "./providers/ApplicantContext";
 import { InterviewProvider } from "./providers/InterviewContext";
 import { RoleProvider } from "./providers/RoleContext";
-import { DashboardProvider } from "./providers/DashboardContext";
 import { UserProvider } from "./providers/UserContext";
 import { ImeiProvider } from "./providers/ImeiContext";
 
@@ -36,11 +35,9 @@ const AllProvider = ({ children }) => {
             <ApplicantProvider>
               <InterviewProvider>
                 <RoleProvider>
-                  <DashboardProvider>
                     <UserProvider>
                       <ImeiProvider>{children}</ImeiProvider>
                     </UserProvider>
-                  </DashboardProvider>
                 </RoleProvider>
               </InterviewProvider>
             </ApplicantProvider>
