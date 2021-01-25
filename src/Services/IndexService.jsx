@@ -1,6 +1,6 @@
 import defer from "deferred";
 import Axios from "axios";
-import { baseurl, devurl } from './../constant/constact';
+import { baseurl } from './../constant/constact';
 
 const Claim = (token) => {
   const deferred = new defer();

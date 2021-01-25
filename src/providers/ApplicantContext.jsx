@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import {
   GetApplicant,
   GetApplicantId,
@@ -54,12 +54,6 @@ const ApplicantProvider = ({ children }) => {
       .then((response) => setAppId(response.data.data))
       .finally(() => showInterview());
   };
-
-  useEffect(() => {
-    GetApplicant()
-      .then((response) => setApplicant(response.data.data))
-      .finally(() => setLoading(false));
-  }, []);
 
   const objectValue = {
     applicant,

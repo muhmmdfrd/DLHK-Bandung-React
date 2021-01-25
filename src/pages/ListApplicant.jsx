@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import FadeIn from "react-fade-in";
 import s from "file-saver";
-import { baseurl, devurl } from '../constant/constact';
+import { baseurl } from "../constant/constact";
 
 // * components
 import LoadingScreen from "./LoadingScreen";
@@ -11,41 +11,45 @@ import Pagination from "../components/Pagination/Pagination";
 // * context
 import { ApplicantContext } from "../providers/ApplicantContext";
 import Axios from "axios";
+import { GetApplicant } from "../Services/PersonService";
 
 const ListApplicant = () => {
-  const [data, setData] = useState([]);
   const [keyword, setKeyword] = useState("");
+  const [applicant, setApplicant] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [len, setTotal] = useState(0);
 
   // * variable for pagination
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(5);
 
-  // * calculate process for pagination
-  const indexOfLast = currentPage * postPerPage;
-  const indexOfFirst = indexOfLast - postPerPage;
-  const current = data.slice(indexOfFirst, indexOfLast);
-
   // * data from context
-  const { loading, applicant, detail, deletePerson } = useContext(
-    ApplicantContext
-  );
+  const { detail, deletePerson } = useContext(ApplicantContext);
 
   // * function or method
   const handleChange = (event) => {
-    setKeyword(event.target.value);
-    setCurrentPage(1);
+    if (event.key === "Enter") {
+      event.preventDefault();
+      setCurrentPage(1);
+      fetchData(currentPage - 1, keyword);
+    }
   };
 
   const previous = () => {
-    if (currentPage !== 1) setCurrentPage(currentPage - 1);
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+      fetchData(currentPage - 1);
+    }
   };
 
   const next = () => {
     if (
-      currentPage !== Math.ceil(data.length / postPerPage) &&
-      Math.ceil(data.length / postPerPage) !== 0
-    )
+      currentPage !== Math.ceil(len / postPerPage) &&
+      Math.ceil(len / postPerPage) !== 0
+    ) {
       setCurrentPage(currentPage + 1);
+      fetchData(currentPage + 1);
+    }
   };
 
   const base64ToFile = (dataurl, filename) => {
@@ -76,12 +80,27 @@ const ListApplicant = () => {
   };
   // * end of method
 
+  const fetchData = (page, key = "") => {
+    setLoading(true);
+    GetApplicant(page, key)
+      .then((response) => {
+        const data =
+          response.data.data.data === undefined
+            ? alert("data tidak ditemukan")
+            : response.data.data.data;
+        setApplicant(data);
+        const length =
+          key === ""
+            ? response.data.data.recordsTotal
+            : response.data.data.recordsFilterred;
+        setTotal(length);
+      })
+      .finally(() => setLoading(false));
+  };
+
   useEffect(() => {
-    const result = applicant.filter((applicant) =>
-      applicant.personName.toLowerCase().includes(keyword)
-    );
-    setData(result);
-  }, [applicant, keyword]);
+    fetchData(currentPage);
+  }, [currentPage]);
 
   // * render the HTML
   return loading ? (
@@ -103,7 +122,8 @@ const ListApplicant = () => {
                     <input
                       type="text"
                       value={keyword}
-                      onChange={handleChange}
+                      onKeyDown={handleChange}
+                      onChange={(e) => setKeyword(e.target.value)}
                       className="form-control"
                       placeholder="Cari berdasarkan nama..."
                       aria-label="Search"
@@ -124,7 +144,7 @@ const ListApplicant = () => {
             <ApplicantTable
               postPerPage={postPerPage}
               currentPage={currentPage}
-              response={current}
+              response={applicant}
               detail={detail}
               deletePerson={deletePerson}
             />
@@ -132,10 +152,10 @@ const ListApplicant = () => {
           <Pagination
             currentPage={currentPage}
             postPerPage={postPerPage}
-            current={current}
+            current={applicant}
             previous={previous}
             next={next}
-            total={data.length}
+            total={len}
           />
         </div>
       </div>

@@ -33,10 +33,10 @@ const GetPersonDataId = (id) => {
   return deferred.promise;
 };
 
-const GetApplicant = () => {
+const GetApplicant = (page, keyword = "") => {
   const deferred = new defer();
 
-  Get(`${url}/applicant`).then(
+  Get(`${url}/applicant?page=${page}&keyword=${keyword}`).then(
     (response) => {
       deferred.resolve(response);
     },

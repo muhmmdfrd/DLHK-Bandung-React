@@ -6090,3 +6090,4 @@
 [0810/123143.000:ERROR:process_memory_win.cc(73)] ReadMemory at 0x7c7838c0 of 512 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
 [0810/123143.000:ERROR:process_memory_win.cc(73)] ReadMemory at 0x7c784ba1 of 512 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
 [0810/123145.391:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[0119/191012.819:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
